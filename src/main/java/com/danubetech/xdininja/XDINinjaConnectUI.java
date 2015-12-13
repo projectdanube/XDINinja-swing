@@ -19,6 +19,10 @@ public class XDINinjaConnectUI extends JFrame {
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
 		// Generated using JFormDesigner Evaluation license - wert wretwert
+		panel5 = new JPanel();
+		label8 = new JLabel();
+		label5 = new JLabel();
+		panel4 = new JPanel();
 		panel1 = new JPanel();
 		label1 = new JLabel();
 		agentXDINumberLabel = new JLabel();
@@ -39,148 +43,187 @@ public class XDINinjaConnectUI extends JFrame {
 		connectButton = new JButton();
 		label4 = new JLabel();
 		linkContractLabel = new JLabel();
+		panel6 = new JPanel();
+		label10 = new JLabel();
+		label11 = new JLabel();
 
 		//======== this ========
 		setTitle("XDI Ninja!");
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout(10, 10));
 
-		//======== panel1 ========
+		//======== panel5 ========
 		{
 
 			// JFormDesigner evaluation mark
-			panel1.setBorder(new javax.swing.border.CompoundBorder(
+			panel5.setBorder(new javax.swing.border.CompoundBorder(
 				new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
 					"JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
 					javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-					java.awt.Color.red), panel1.getBorder())); panel1.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
+					java.awt.Color.red), panel5.getBorder())); panel5.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
-			panel1.setLayout(new GridBagLayout());
-			((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 0, 0};
-			((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 0, 0, 0};
-			((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {1.0, 1.0, 1.0E-4};
-			((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {1.0, 1.0, 1.0, 1.0E-4};
+			panel5.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-			//---- label1 ----
-			label1.setText("Agent XDI Number:");
-			panel1.add(label1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 5), 0, 0));
+			//---- label8 ----
+			label8.setIcon(new ImageIcon(getClass().getResource("/logo.png")));
+			panel5.add(label8);
 
-			//---- agentXDINumberLabel ----
-			agentXDINumberLabel.setText("text");
-			panel1.add(agentXDINumberLabel, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 0), 0, 0));
-
-			//---- label3 ----
-			label3.setText("Agent Private Key:");
-			panel1.add(label3, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 5), 0, 0));
-
-			//---- agentPrivateKeyLabel ----
-			agentPrivateKeyLabel.setText("text");
-			panel1.add(agentPrivateKeyLabel, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 5, 0), 0, 0));
-
-			//---- createButton ----
-			createButton.setText("Create");
-			panel1.add(createButton, new GridBagConstraints(0, 2, 2, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-				new Insets(0, 0, 0, 0), 0, 0));
+			//---- label5 ----
+			label5.setText("XDI Ninja!");
+			label5.setFont(new Font("Cantarell", Font.PLAIN, 26));
+			panel5.add(label5);
 		}
-		contentPane.add(panel1, BorderLayout.NORTH);
+		contentPane.add(panel5, BorderLayout.NORTH);
 
-		//======== panel2 ========
+		//======== panel4 ========
 		{
-			panel2.setLayout(new BorderLayout());
+			panel4.setLayout(new BorderLayout(10, 10));
 
-			//======== panel3 ========
+			//======== panel1 ========
 			{
-				panel3.setLayout(new GridBagLayout());
-				((GridBagLayout)panel3.getLayout()).columnWidths = new int[] {0, 0, 0};
-				((GridBagLayout)panel3.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0};
-				((GridBagLayout)panel3.getLayout()).columnWeights = new double[] {1.0, 1.0, 1.0E-4};
-				((GridBagLayout)panel3.getLayout()).rowWeights = new double[] {1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
+				panel1.setLayout(new GridBagLayout());
+				((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 0, 0};
+				((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 0, 0, 0};
+				((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {1.0, 1.0, 1.0E-4};
+				((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {1.0, 1.0, 1.0, 1.0E-4};
 
-				//---- label6 ----
-				label6.setText("Your XDI Name/Number:");
-				panel3.add(label6, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+				//---- label1 ----
+				label1.setText("Agent XDI Number:");
+				panel1.add(label1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
 					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 					new Insets(0, 0, 5, 5), 0, 0));
 
-				//---- yourXDINameNumberTextField ----
-				yourXDINameNumberTextField.setColumns(60);
-				yourXDINameNumberTextField.setText("=alice");
-				panel3.add(yourXDINameNumberTextField, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+				//---- agentXDINumberLabel ----
+				agentXDINumberLabel.setText("-");
+				agentXDINumberLabel.setDisabledIcon(null);
+				panel1.add(agentXDINumberLabel, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
 					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 					new Insets(0, 0, 5, 0), 0, 0));
 
-				//---- discoverButton ----
-				discoverButton.setText("Discover");
-				panel3.add(discoverButton, new GridBagConstraints(0, 1, 2, 1, 0.0, 0.0,
-					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-					new Insets(0, 0, 5, 0), 0, 0));
-
-				//---- label2 ----
-				label2.setText("Your XDI Number:");
-				panel3.add(label2, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
+				//---- label3 ----
+				label3.setText("Agent Private Key:");
+				panel1.add(label3, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
 					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 					new Insets(0, 0, 5, 5), 0, 0));
 
-				//---- yourXDINumberLabel ----
-				yourXDINumberLabel.setText("text");
-				panel3.add(yourXDINumberLabel, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
+				//---- agentPrivateKeyLabel ----
+				agentPrivateKeyLabel.setText("-");
+				panel1.add(agentPrivateKeyLabel, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
 					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 					new Insets(0, 0, 5, 0), 0, 0));
 
-				//---- label7 ----
-				label7.setText("Your XDI Endpoint:");
-				panel3.add(label7, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,
+				//---- createButton ----
+				createButton.setText("Create");
+				panel1.add(createButton, new GridBagConstraints(0, 2, 2, 1, 0.0, 0.0,
 					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-					new Insets(0, 0, 5, 5), 0, 0));
-
-				//---- yourXDIEndpointLabel ----
-				yourXDIEndpointLabel.setText("text");
-				panel3.add(yourXDIEndpointLabel, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
-					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-					new Insets(0, 0, 5, 0), 0, 0));
-
-				//---- label9 ----
-				label9.setText("Your Connect Endpoint:");
-				panel3.add(label9, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0,
-					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-					new Insets(0, 0, 5, 5), 0, 0));
-
-				//---- yourConnectEndpointLabel ----
-				yourConnectEndpointLabel.setText("text");
-				panel3.add(yourConnectEndpointLabel, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
-					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-					new Insets(0, 0, 5, 0), 0, 0));
-
-				//---- connectButton ----
-				connectButton.setText("Connect");
-				panel3.add(connectButton, new GridBagConstraints(0, 5, 2, 1, 0.0, 0.0,
-					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-					new Insets(0, 0, 5, 0), 0, 0));
-
-				//---- label4 ----
-				label4.setText("Link Contract:");
-				panel3.add(label4, new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0,
-					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-					new Insets(0, 0, 5, 5), 0, 0));
-
-				//---- linkContractLabel ----
-				linkContractLabel.setText("text");
-				panel3.add(linkContractLabel, new GridBagConstraints(1, 6, 1, 1, 0.0, 0.0,
-					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-					new Insets(0, 0, 5, 0), 0, 0));
+					new Insets(0, 0, 0, 0), 0, 0));
 			}
-			panel2.add(panel3, BorderLayout.NORTH);
+			panel4.add(panel1, BorderLayout.NORTH);
+
+			//======== panel2 ========
+			{
+				panel2.setLayout(new BorderLayout(10, 10));
+
+				//======== panel3 ========
+				{
+					panel3.setLayout(new GridBagLayout());
+					((GridBagLayout)panel3.getLayout()).columnWidths = new int[] {0, 0, 0};
+					((GridBagLayout)panel3.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0};
+					((GridBagLayout)panel3.getLayout()).columnWeights = new double[] {1.0, 1.0, 1.0E-4};
+					((GridBagLayout)panel3.getLayout()).rowWeights = new double[] {1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
+
+					//---- label6 ----
+					label6.setText("Your XDI Name/Number:");
+					panel3.add(label6, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+						new Insets(0, 0, 5, 5), 0, 0));
+
+					//---- yourXDINameNumberTextField ----
+					yourXDINameNumberTextField.setColumns(60);
+					yourXDINameNumberTextField.setText("=alice");
+					panel3.add(yourXDINameNumberTextField, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+						new Insets(0, 0, 5, 0), 0, 0));
+
+					//---- discoverButton ----
+					discoverButton.setText("Discover");
+					panel3.add(discoverButton, new GridBagConstraints(0, 1, 2, 1, 0.0, 0.0,
+						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+						new Insets(0, 0, 5, 0), 0, 0));
+
+					//---- label2 ----
+					label2.setText("Your XDI Number:");
+					panel3.add(label2, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
+						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+						new Insets(0, 0, 5, 5), 0, 0));
+
+					//---- yourXDINumberLabel ----
+					yourXDINumberLabel.setText("-");
+					panel3.add(yourXDINumberLabel, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
+						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+						new Insets(0, 0, 5, 0), 0, 0));
+
+					//---- label7 ----
+					label7.setText("Your XDI Endpoint:");
+					panel3.add(label7, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,
+						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+						new Insets(0, 0, 5, 5), 0, 0));
+
+					//---- yourXDIEndpointLabel ----
+					yourXDIEndpointLabel.setText("-");
+					panel3.add(yourXDIEndpointLabel, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
+						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+						new Insets(0, 0, 5, 0), 0, 0));
+
+					//---- label9 ----
+					label9.setText("Your Connect Endpoint:");
+					panel3.add(label9, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0,
+						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+						new Insets(0, 0, 5, 5), 0, 0));
+
+					//---- yourConnectEndpointLabel ----
+					yourConnectEndpointLabel.setText("-");
+					panel3.add(yourConnectEndpointLabel, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
+						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+						new Insets(0, 0, 5, 0), 0, 0));
+
+					//---- connectButton ----
+					connectButton.setText("Connect");
+					panel3.add(connectButton, new GridBagConstraints(0, 5, 2, 1, 0.0, 0.0,
+						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+						new Insets(0, 0, 5, 0), 0, 0));
+
+					//---- label4 ----
+					label4.setText("Link Contract:");
+					panel3.add(label4, new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0,
+						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+						new Insets(0, 0, 5, 5), 0, 0));
+
+					//---- linkContractLabel ----
+					linkContractLabel.setText("-");
+					panel3.add(linkContractLabel, new GridBagConstraints(1, 6, 1, 1, 0.0, 0.0,
+						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+						new Insets(0, 0, 5, 0), 0, 0));
+				}
+				panel2.add(panel3, BorderLayout.NORTH);
+			}
+			panel4.add(panel2, BorderLayout.CENTER);
 		}
-		contentPane.add(panel2, BorderLayout.CENTER);
+		contentPane.add(panel4, BorderLayout.CENTER);
+
+		//======== panel6 ========
+		{
+			panel6.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+			//---- label10 ----
+			label10.setIcon(new ImageIcon(getClass().getResource("/link_connected.png")));
+			panel6.add(label10);
+
+			//---- label11 ----
+			label11.setIcon(new ImageIcon(getClass().getResource("/equalscloud.png")));
+			panel6.add(label11);
+		}
+		contentPane.add(panel6, BorderLayout.SOUTH);
 		pack();
 		setLocationRelativeTo(getOwner());
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -188,6 +231,10 @@ public class XDINinjaConnectUI extends JFrame {
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 	// Generated using JFormDesigner Evaluation license - wert wretwert
+	protected JPanel panel5;
+	protected JLabel label8;
+	protected JLabel label5;
+	protected JPanel panel4;
 	protected JPanel panel1;
 	protected JLabel label1;
 	protected JLabel agentXDINumberLabel;
@@ -208,5 +255,8 @@ public class XDINinjaConnectUI extends JFrame {
 	protected JButton connectButton;
 	protected JLabel label4;
 	protected JLabel linkContractLabel;
+	protected JPanel panel6;
+	protected JLabel label10;
+	protected JLabel label11;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }

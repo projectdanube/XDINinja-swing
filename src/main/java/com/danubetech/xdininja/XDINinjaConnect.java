@@ -11,6 +11,7 @@ import java.net.URLEncoder;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.codec.binary.Hex;
 
@@ -46,8 +47,10 @@ public class XDINinjaConnect extends XDINinjaConnectUI {
 
 	private void initComponents() {
 
-		panel1.removePropertyChangeListener(panel1.getPropertyChangeListeners()[0]);
-		panel1.setBorder(null);
+		panel4.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+		panel5.removePropertyChangeListener(panel5.getPropertyChangeListeners()[0]);
+		panel5.setBorder(null);
 
 		this.createButton.addActionListener(new ActionListener() {
 			@Override
