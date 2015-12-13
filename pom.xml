@@ -19,18 +19,33 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>com.zenjava</groupId>
+				<artifactId>javafx-maven-plugin</artifactId>
+				<version>8.2.0</version>
+				<configuration>
+					<mainClass>com.danubetech.xdininja.XDINinja</mainClass>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
 	<repositories>
-	    <repository>
-	        <id>XDI2</id>
-	        <name>XDI2-snapshots</name>
-	        <url>https://artifactory.xdi2.org/xdi2-snapshot-local</url>
-	    </repository>
+		<repository>
+			<id>XDI2</id>
+			<name>XDI2-snapshots</name>
+			<url>https://artifactory.xdi2.org/xdi2-snapshot-local</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>javafx</artifactId>
+			<version>2.2</version>
+			<systemPath>${java.home}/lib/ext/jfxrt.jar</systemPath>
+			<scope>system</scope>
+		</dependency>
 		<dependency>
 			<groupId>xdi2</groupId>
 			<artifactId>xdi2-client-websocket</artifactId>
