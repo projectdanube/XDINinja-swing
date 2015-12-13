@@ -1,0 +1,7 @@
+log4j.log
+.classpath
+.project
+/.settings/
+/bin/
+/target/
+/tmp/
