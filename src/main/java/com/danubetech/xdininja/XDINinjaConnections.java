@@ -1,83 +1,68 @@
-import java.awt.*;
-import javax.swing.*;
-/*
- * Created by JFormDesigner on Mon Dec 14 19:30:38 CET 2015
- */
+package com.danubetech.xdininja;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.table.DefaultTableModel;
 
-/**
- * @author zezrtaz bjhbkjhbk
- */
-public class XDINinjaConnections extends JFrame {
+import xdi2.core.ContextNode;
+import xdi2.core.features.index.Index;
+import xdi2.core.features.nodetypes.XdiEntity;
+import xdi2.core.features.nodetypes.XdiEntityCollection;
+import xdi2.core.syntax.XDIAddress;
+import xdi2.messaging.Message;
+import xdi2.messaging.response.MessagingResponse;
+
+public class XDINinjaConnections extends XDINinjaConnectionsUI {
+
 	public XDINinjaConnections() {
+
+		super();
 		initComponents();
 	}
 
 	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
-		panel1 = new JPanel();
-		scrollPane2 = new JScrollPane();
-		textArea1 = new JTextArea();
-		scrollPane1 = new JScrollPane();
-		textPane1 = new JTextPane();
-		panel2 = new JPanel();
-		button1 = new JButton();
 
-		//======== this ========
-		setTitle("XDI Ninja!");
-		Container contentPane = getContentPane();
-		contentPane.setLayout(new BorderLayout());
-
-		//======== panel1 ========
-		{
-
-			// JFormDesigner evaluation mark
-			panel1.setBorder(new javax.swing.border.CompoundBorder(
-				new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-					"JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-					javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-					java.awt.Color.red), panel1.getBorder())); panel1.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
-
-			panel1.setLayout(new GridLayout());
-
-			//======== scrollPane2 ========
-			{
-				scrollPane2.setViewportView(textArea1);
-			}
-			panel1.add(scrollPane2);
-
-			//======== scrollPane1 ========
-			{
-				scrollPane1.setViewportView(textPane1);
-			}
-			panel1.add(scrollPane1);
-		}
-		contentPane.add(panel1, BorderLayout.CENTER);
-
-		//======== panel2 ========
-		{
-			panel2.setLayout(new FlowLayout());
-
-			//---- button1 ----
-			button1.setText("text");
-			panel2.add(button1);
-		}
-		contentPane.add(panel2, BorderLayout.SOUTH);
-		pack();
-		setLocationRelativeTo(getOwner());
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
+		this.loadButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					load();
+				} catch (Exception ex) {
+					Util.error(ex);
+				}
+			} });
 	}
 
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
-	private JPanel panel1;
-	private JScrollPane scrollPane2;
-	private JTextArea textArea1;
-	private JScrollPane scrollPane1;
-	private JTextPane textPane1;
-	private JPanel panel2;
-	private JButton button1;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	private void load() throws Exception {
+
+		Message message = Xdi.createMessageToYou();
+		message.createGetOperation(XDIAddress.create("[$do]"));
+		message.createGetOperation(XDIAddress.create("[$msg]"));
+		Xdi.signMessage(message);
+		MessagingResponse response = Xdi.sendMessage(message);
+
+		ContextNode linkContractsContextNode = response.getResultGraph().getDeepContextNode(XDIAddress.create("[$msg]"));
+		ContextNode deferredMessagesContextNode = response.getResultGraph().getDeepContextNode(XDIAddress.create("[$do]"));
+		XdiEntityCollection linkContractsEntityCollection = linkContractsContextNode == null ? null : XdiEntityCollection.fromContextNode(linkContractsContextNode);
+		XdiEntityCollection deferredMessagesEntityCollection = deferredMessagesContextNode == null ? null : XdiEntityCollection.fromContextNode(deferredMessagesContextNode);
+
+		DefaultTableModel linkContractsModel = new DefaultTableModel();
+		DefaultTableModel deferredMessagesModel = new DefaultTableModel();
+		linkContractsModel.addColumn("Link Contract");
+		deferredMessagesModel.addColumn("Message");
+
+		for (XdiEntity linkContractEntity : Index.getEntityIndexAggregations(linkContractsEntityCollection)) {
+
+			linkContractsModel.addRow(new Object[] { linkContractEntity.getXDIAddress() });
+		}
+
+		for (XdiEntity deferredMessageEntity : Index.getEntityIndexAggregations(deferredMessagesEntityCollection)) {
+
+			deferredMessagesModel.addRow(new Object[] { deferredMessageEntity.getXDIAddress() });
+		}
+
+		linkContractsTable.setModel(linkContractsModel);
+		deferredMessagesTable.setModel(deferredMessagesModel);
+	}
 }

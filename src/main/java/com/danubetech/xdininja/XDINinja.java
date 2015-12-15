@@ -11,7 +11,7 @@ public class XDINinja {
 			@Override
 			public void run() {
 
-				XDINinjaConnect frame = new XDINinjaConnect();
+				XDINinjaMain frame = new XDINinjaMain();
 				frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 				frame.setVisible(true);
 			}

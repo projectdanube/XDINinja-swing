@@ -1,18 +1,30 @@
 package com.danubetech.xdininja;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
 /*
- * Created by JFormDesigner on Sun Dec 13 15:58:19 CET 2015
+ * Created by JFormDesigner on Tue Dec 15 11:36:59 CET 2015
  */
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 
 
 /**
  * @author wert wretwert
  */
-public class XDINinjaConnectUI extends JFrame {
-	public XDINinjaConnectUI() {
+public class XDINinjaConnectToCloudUI extends JFrame {
+	public XDINinjaConnectToCloudUI() {
 		initComponents();
 	}
 
@@ -48,7 +60,7 @@ public class XDINinjaConnectUI extends JFrame {
 		label11 = new JLabel();
 
 		//======== this ========
-		setTitle("XDI Ninja!");
+		setTitle("XDI Ninja! - Connect to Cloud");
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout(10, 10));
 
@@ -188,7 +200,7 @@ public class XDINinjaConnectUI extends JFrame {
 						new Insets(0, 0, 5, 0), 0, 0));
 
 					//---- connectButton ----
-					connectButton.setText("Connect");
+					connectButton.setText("Connect To Cloud");
 					panel3.add(connectButton, new GridBagConstraints(0, 5, 2, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 5, 0), 0, 0));

@@ -5,27 +5,31 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
-			"title": "XDI Ninja!"
+			"title": "XDI Ninja! - Profile"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
 				name: "panel1"
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button1"
-					"text": "Connect Agent"
+					name: "loadButton"
+					"text": "Load"
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button2"
-					"text": "Connections"
+					name: "saveButton"
+					"text": "Save"
 				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button3"
-					"text": "WebSocket"
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "South"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "profileTable"
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "Center"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 300 )
+			"size": new java.awt.Dimension( 545, 460 )
 		} )
 	}
 }

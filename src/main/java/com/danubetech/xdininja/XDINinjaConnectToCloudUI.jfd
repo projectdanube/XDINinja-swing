@@ -8,7 +8,7 @@ new FormModel {
 			"vgap": 10
 		} ) {
 			name: "this"
-			"title": "XDI Ninja!"
+			"title": "XDI Ninja! - Connect to Cloud"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) {
 				"alignment": 0
 			} ) {
@@ -146,7 +146,7 @@ new FormModel {
 						} )
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "connectButton"
-							"text": "Connect"
+							"text": "Connect To Cloud"
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 							"gridy": 5
 							"gridwidth": 2
@@ -190,7 +190,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 100, 20 )
-			"size": new java.awt.Dimension( 480, 420 )
+			"size": new java.awt.Dimension( 700, 485 )
 		} )
 	}
 }

@@ -9,7 +9,6 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
@@ -37,9 +36,9 @@ import xdi2.discovery.XDIDiscoveryResult;
 import xdi2.messaging.Message;
 import xdi2.messaging.MessageEnvelope;
 
-public class XDINinjaConnect extends XDINinjaConnectUI {
+public class XDINinjaConnectToCloud extends XDINinjaConnectToCloudUI {
 
-	public XDINinjaConnect() {
+	public XDINinjaConnectToCloud() {
 
 		super();
 		initComponents();
@@ -58,7 +57,7 @@ public class XDINinjaConnect extends XDINinjaConnectUI {
 				try {
 					create();
 				} catch (Exception ex) {
-					error(ex);
+					Util.error(ex);
 				}
 			} });
 
@@ -68,7 +67,7 @@ public class XDINinjaConnect extends XDINinjaConnectUI {
 				try {
 					discover();
 				} catch (Exception ex) {
-					error(ex);
+					Util.error(ex);
 				}
 			} });
 
@@ -78,14 +77,9 @@ public class XDINinjaConnect extends XDINinjaConnectUI {
 				try {
 					connect();
 				} catch (Exception ex) {
-					error(ex);
+					Util.error(ex);
 				}
 			} });
-	}
-
-	private void error(Exception ex) {
-
-		JOptionPane.showMessageDialog(null, ex.getMessage());
 	}
 
 	private void create() throws Exception {
@@ -96,8 +90,11 @@ public class XDINinjaConnect extends XDINinjaConnectUI {
 		EC25519KeyPairGenerator.generateEC25519KeyPair(agentPublicKey, agentPrivateKey);
 		agentCloudNumber = EC25519CloudNumberUtil.createEC25519CloudNumber(XDIConstants.CS_INSTANCE_UNORDERED, agentPublicKey);
 
-		this.agentXDINumberLabel.setText(agentCloudNumber.toString());
-		this.agentPrivateKeyLabel.setText(String.valueOf(Hex.encodeHex(agentPrivateKey)).substring(0, 64) + "...");
+		agentXDINumberLabel.setText(agentCloudNumber.toString());
+		agentPrivateKeyLabel.setText(String.valueOf(Hex.encodeHex(agentPrivateKey)).substring(0, 64) + "...");
+
+		State.agentCloudNumber = agentCloudNumber;
+		State.agentPrivateKey = agentPrivateKey;
 	}
 
 	private void discover() throws Exception {
@@ -108,6 +105,11 @@ public class XDINinjaConnect extends XDINinjaConnectUI {
 		yourXDINumberLabel.setText(result.getCloudNumber().toString());
 		yourXDIEndpointLabel.setText(result.getXdiEndpointUri().toString());
 		yourConnectEndpointLabel.setText(result.getXdiConnectEndpointUri().toString());
+
+		State.yourXDINameNumber = yourXDINameNumber;
+		State.yourCloudNumber = result.getCloudNumber();
+		State.yourXdiEndpointUri = result.getXdiEndpointUri();
+		State.yourConnectEndpointUri = result.getXdiConnectEndpointUri();
 	}
 
 	private static final XDIAddress XDI_ADD_RETURN_URI = XDIAddress.create("<#return><$uri>");
@@ -116,25 +118,20 @@ public class XDINinjaConnect extends XDINinjaConnectUI {
 
 	private void connect() throws Exception {
 
-		String agentXDINumber = agentXDINumberLabel.getText();
-		String yourXDINameNumber = yourXDINameNumberTextField.getText();
-		String yourXDINumber = yourXDINumberLabel.getText();
-		String yourConnectEndpoint = yourConnectEndpointLabel.getText();
-
 		MessageEnvelope me = new MessageEnvelope();
-		Message m = me.createMessage(XDIAddress.create(agentXDINumber));
-		m.setToPeerRootXDIArc(CloudNumber.create(yourXDINumber).getPeerRootXDIArc());
+		Message m = me.createMessage(State.agentCloudNumber.getXDIAddress());
+		m.setToPeerRootXDIArc(State.yourCloudNumber.getPeerRootXDIArc());
 		m.setLinkContractClass(ConnectLinkContract.class);
-		m.setFromPeerRootXDIArc(CloudNumber.create(agentXDINumber).getPeerRootXDIArc());
+		m.setFromPeerRootXDIArc(State.agentCloudNumber.getPeerRootXDIArc());
 		m.setParameter(XDI_ADD_RETURN_URI, CALLBACK);
 		m.setParameter(XDI_ADD_SHORT, Boolean.TRUE);
 		m.createConnectOperation(XDIBootstrap.ALL_LINK_CONTRACT_TEMPLATE_ADDRESS);
 		String connectRequest = URLEncoder.encode(me.getGraph().toString("XDI/JSON/QUAD"), "UTF-8");
 
 		StringBuffer requestUri = new StringBuffer();
-		requestUri.append(yourConnectEndpoint);
+		requestUri.append(State.yourConnectEndpointUri);
 		requestUri.append("?xdi=" + connectRequest);
-		requestUri.append("&key=" + yourXDINameNumber);
+		requestUri.append("&key=" + State.yourXDINameNumber);
 		requestUri.append("&discovery=" + ((XDIHttpClient) XDIDiscoveryClient.DEFAULT_DISCOVERY_CLIENT.getRegistryXdiClient()).getXdiEndpointUri().toString());
 
 		SwingUtilities.invokeLater(new Runnable() {
@@ -142,68 +139,90 @@ public class XDINinjaConnect extends XDINinjaConnectUI {
 			@Override
 			public void run() {
 
-				JFrame frame = new JFrame("Connect");
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				JFrame jframe = new JFrame("Connect To Cloud");
+				jframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				jframe.getContentPane().setLayout(new BorderLayout());
 
-				frame.getContentPane().setLayout(new BorderLayout());
+				JFXPanel jfxPanel = new JFXPanel();
+				jframe.add(jfxPanel, BorderLayout.CENTER);
+				jframe.setVisible(true);
+				jframe.getContentPane().setPreferredSize(new Dimension(800, 600));
+				jframe.pack();
+				jframe.setResizable(true);
 
-				final JFXPanel fxPanel = new JFXPanel();
+				Platform.runLater(new WebViewRunnable(jframe, jfxPanel, requestUri.toString()));
+			}
+		});
+	}
 
-				frame.add(fxPanel, BorderLayout.CENTER);
-				frame.setVisible(true);
+	private class WebViewRunnable implements Runnable {
 
-				frame.getContentPane().setPreferredSize(new Dimension(800, 600));
-				frame.pack();
-				frame.setResizable(true);
+		private JFrame jframe;
+		private JFXPanel jfxPanel;
+		private String requestUri;
+		
+		private WebViewRunnable(JFrame jframe, JFXPanel jfxPanel, String requestUri) {
+			
+			this.jframe = jframe;
+			this.jfxPanel = jfxPanel;
+			this.requestUri = requestUri;
+		}
+		
+		@Override
+		public void run() {
 
-				Platform.runLater(new Runnable() {
+			Group group = new Group();
+			Scene scene = new Scene(group);
+			jfxPanel.setScene(scene);
+
+			WebView webView = new WebView();
+
+			group.getChildren().add(webView);
+
+			WebEngine webEngine = webView.getEngine();
+			webEngine.setOnStatusChanged(new OnStatusChangedHandler(jframe, webEngine));
+			webEngine.load(requestUri);
+		}
+	}
+
+	private class OnStatusChangedHandler implements EventHandler<WebEvent<String>> {
+
+		private JFrame jframe;
+		private WebEngine webEngine;
+		
+		private OnStatusChangedHandler(JFrame jframe, WebEngine webEngine) {
+			
+			this.jframe = jframe;
+			this.webEngine = webEngine;
+		}
+		
+		@Override
+		public void handle(WebEvent<String> ev) {
+
+			String responseUri = webEngine.getLocation();
+			if (responseUri.startsWith(CALLBACK)) {
+
+				String agentLinkContract;
+
+				try {
+
+					agentLinkContract = URLDecoder.decode(responseUri.substring(CALLBACK.length() + "?xdi=".length(), responseUri.indexOf('&')), "UTF-8");
+					State.agentLinkContract = XDIAddress.create(agentLinkContract);
+				} catch (UnsupportedEncodingException e) {
+
+					throw new RuntimeException(e.getMessage(), e);
+				}
+
+				SwingUtilities.invokeLater(new Runnable() {
 
 					@Override
 					public void run() {
 
-						Group group = new Group();
-						Scene scene = new Scene(group);
-						fxPanel.setScene(scene);
-
-						WebView webView = new WebView();
-
-						group.getChildren().add(webView);
-
-						WebEngine webEngine = webView.getEngine();
-						webEngine.setOnStatusChanged(new EventHandler<WebEvent<String>>() {
-
-							@Override
-							public void handle(WebEvent<String> ev) {
-
-								String responseUri = webEngine.getLocation();
-								if (responseUri.startsWith(CALLBACK)) {
-
-									String xdi;
-
-									try {
-
-										xdi = URLDecoder.decode(responseUri.substring(CALLBACK.length() + "?xdi=".length(), responseUri.indexOf('&')), "UTF-8");
-									} catch (UnsupportedEncodingException e) {
-
-										throw new RuntimeException(e.getMessage(), e);
-									}
-
-									SwingUtilities.invokeLater(new Runnable() {
-
-										@Override
-										public void run() {
-
-											linkContractLabel.setText(xdi);
-											frame.dispose();
-										}
-									});
-								}
-							}
-						});
-						webEngine.load(requestUri.toString());
+						linkContractLabel.setText(agentLinkContract);
+						jframe.dispose();
 					}
 				});
 			}
-		});
+		}
 	}
 }

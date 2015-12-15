@@ -1,0 +1,39 @@
+JFDML JFormDesigner: "5.2.2.0.199" Java: "1.8.0_60" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			"title": "XDI Ninja!"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+				name: "panel1"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "connectToCloudButton"
+					"text": "Connect To Cloud"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "connectionsButton"
+					"text": "Connections"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "wallButton"
+					"text": "Wall"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "profileButton"
+					"text": "Profile"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "chatButton"
+					"text": "Chat"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 520, 105 )
+		} )
+	}
+}
