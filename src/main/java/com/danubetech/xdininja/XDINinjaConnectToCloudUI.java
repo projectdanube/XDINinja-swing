@@ -32,8 +32,9 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
 		// Generated using JFormDesigner Evaluation license - wert wretwert
 		panel5 = new JPanel();
-		label8 = new JLabel();
+		label10 = new JLabel();
 		label5 = new JLabel();
+		label11 = new JLabel();
 		panel4 = new JPanel();
 		panel1 = new JPanel();
 		label1 = new JLabel();
@@ -56,8 +57,6 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 		label4 = new JLabel();
 		linkContractLabel = new JLabel();
 		panel6 = new JPanel();
-		label10 = new JLabel();
-		label11 = new JLabel();
 
 		//======== this ========
 		setTitle("XDI Ninja! - Connect to Cloud");
@@ -74,16 +73,20 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 					javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
 					java.awt.Color.red), panel5.getBorder())); panel5.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
-			panel5.setLayout(new FlowLayout(FlowLayout.LEFT));
+			panel5.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-			//---- label8 ----
-			label8.setIcon(new ImageIcon(getClass().getResource("/logo.png")));
-			panel5.add(label8);
+			//---- label10 ----
+			label10.setIcon(new ImageIcon(getClass().getResource("/link_connected.png")));
+			panel5.add(label10);
 
 			//---- label5 ----
-			label5.setText("XDI Ninja!");
+			label5.setText("Connect To Cloud");
 			label5.setFont(new Font("Cantarell", Font.PLAIN, 26));
 			panel5.add(label5);
+
+			//---- label11 ----
+			label11.setIcon(new ImageIcon(getClass().getResource("/equalscloud.png")));
+			panel5.add(label11);
 		}
 		contentPane.add(panel5, BorderLayout.NORTH);
 
@@ -226,14 +229,6 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 		//======== panel6 ========
 		{
 			panel6.setLayout(new FlowLayout(FlowLayout.RIGHT));
-
-			//---- label10 ----
-			label10.setIcon(new ImageIcon(getClass().getResource("/link_connected.png")));
-			panel6.add(label10);
-
-			//---- label11 ----
-			label11.setIcon(new ImageIcon(getClass().getResource("/equalscloud.png")));
-			panel6.add(label11);
 		}
 		contentPane.add(panel6, BorderLayout.SOUTH);
 		pack();
@@ -244,8 +239,9 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 	// Generated using JFormDesigner Evaluation license - wert wretwert
 	protected JPanel panel5;
-	protected JLabel label8;
+	protected JLabel label10;
 	protected JLabel label5;
+	protected JLabel label11;
 	protected JPanel panel4;
 	protected JPanel panel1;
 	protected JLabel label1;
@@ -268,7 +264,5 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 	protected JLabel label4;
 	protected JLabel linkContractLabel;
 	protected JPanel panel6;
-	protected JLabel label10;
-	protected JLabel label11;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }

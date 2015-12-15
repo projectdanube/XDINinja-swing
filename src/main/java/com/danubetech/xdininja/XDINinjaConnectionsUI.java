@@ -47,6 +47,8 @@ public class XDINinjaConnectionsUI extends JFrame {
 		deferredMessagesTable = new JTable();
 		panel5 = new JPanel();
 		loadButton = new JButton();
+		deleteLinkContractButton = new JButton();
+		deleteDeferredMessageButton = new JButton();
 
 		//======== this ========
 		setTitle("XDI Ninja! - Connections");
@@ -145,6 +147,14 @@ public class XDINinjaConnectionsUI extends JFrame {
 			//---- loadButton ----
 			loadButton.setText("Load");
 			panel5.add(loadButton);
+
+			//---- deleteLinkContractButton ----
+			deleteLinkContractButton.setText("Delete Link Contract");
+			panel5.add(deleteLinkContractButton);
+
+			//---- deleteDeferredMessageButton ----
+			deleteDeferredMessageButton.setText("Delete Deferred Message");
+			panel5.add(deleteDeferredMessageButton);
 		}
 		contentPane.add(panel5, BorderLayout.SOUTH);
 		pack();
@@ -175,5 +185,7 @@ public class XDINinjaConnectionsUI extends JFrame {
 	protected JTable deferredMessagesTable;
 	protected JPanel panel5;
 	protected JButton loadButton;
+	protected JButton deleteLinkContractButton;
+	protected JButton deleteDeferredMessageButton;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }

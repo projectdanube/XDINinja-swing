@@ -10,17 +10,21 @@ new FormModel {
 			name: "this"
 			"title": "XDI Ninja! - Connect to Cloud"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) {
-				"alignment": 0
+				"alignment": 2
 			} ) {
 				name: "panel5"
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label8"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/logo.png" )
+					name: "label10"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/link_connected.png" )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label5"
-					"text": "XDI Ninja!"
+					"text": "Connect To Cloud"
 					"font": new java.awt.Font( "Cantarell", 0, 26 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label11"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/equalscloud.png" )
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "North"
@@ -177,14 +181,6 @@ new FormModel {
 				"alignment": 2
 			} ) {
 				name: "panel6"
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label10"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/link_connected.png" )
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label11"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/equalscloud.png" )
-				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "South"
 			} )

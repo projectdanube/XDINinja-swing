@@ -72,6 +72,26 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 					Util.error(ex);
 				}
 			} });
+
+		this.deleteLinkContractButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					deleteLinkContract();
+				} catch (Exception ex) {
+					Util.error(ex);
+				}
+			} });
+
+		this.deleteDeferredMessageButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					deleteDeferredMessage();
+				} catch (Exception ex) {
+					Util.error(ex);
+				}
+			} });
 	}
 
 	private void requestProfile() throws Exception {
@@ -80,7 +100,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		XDIDiscoveryResult result = XDIDiscoveryClient.DEFAULT_DISCOVERY_CLIENT.discoverFromRegistry(XDIAddress.create(otherXDINameNumber));
 		CloudNumber otherCloudNumber = result.getCloudNumber();
 
-		Message messageYouToOther = Xdi.createMessageYouToOther(otherCloudNumber, ConnectLinkContract.class);
+		Message messageYouToOther = Xdi.createMessageYouToOther(otherCloudNumber, null, ConnectLinkContract.class);
 		Operation connectOperation = messageYouToOther.createConnectOperation(XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE_ADDRESS);
 		connectOperation.setVariableValue(XDIArc.create("{$get}"), otherCloudNumber.getXDIAddress());
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
@@ -97,10 +117,10 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		XDIDiscoveryResult result = XDIDiscoveryClient.DEFAULT_DISCOVERY_CLIENT.discoverFromRegistry(XDIAddress.create(otherXDINameNumber));
 		CloudNumber otherCloudNumber = result.getCloudNumber();
 
-		Message messageOtherToYou = Xdi.createMessageOtherToYou(otherCloudNumber, ConnectLinkContract.class);
+		Message messageOtherToYou = Xdi.createMessageOtherToYou(otherCloudNumber, null, ConnectLinkContract.class);
 		Operation connectOperation = messageOtherToYou.createConnectOperation(XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE_ADDRESS);
 		connectOperation.setVariableValue(XDIArc.create("{$get}"), State.yourCloudNumber.getXDIAddress());
-		Message messageYouToOther = Xdi.createMessageYouToOther(otherCloudNumber, SendLinkContract.class);
+		Message messageYouToOther = Xdi.createMessageYouToOther(otherCloudNumber, null, SendLinkContract.class);
 		messageYouToOther.createSendOperation(messageOtherToYou);
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
 		messageAgentToYou.createSendOperation(messageYouToOther);
@@ -150,5 +170,29 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 		linkContractsTable.setModel(linkContractsModel);
 		deferredMessagesTable.setModel(deferredMessagesModel);
+	}
+
+	private void deleteLinkContract() throws Exception {
+
+		XDIAddress linkContractXDIAddress = (XDIAddress) linkContractsTable.getModel().getValueAt(linkContractsTable.getSelectedRow(), linkContractsTable.getSelectedColumn());
+
+		Message messageAgentToYou = Xdi.createMessageAgentToYou();
+		messageAgentToYou.createDelOperation(linkContractXDIAddress);
+		Xdi.signMessage(messageAgentToYou);
+		Xdi.sendMessage(messageAgentToYou);
+
+		Util.info("Link contract " + linkContractXDIAddress + " deleted.");
+	}
+
+	private void deleteDeferredMessage() throws Exception {
+
+		XDIAddress deferredMessageXDIAddress = (XDIAddress) deferredMessagesTable.getModel().getValueAt(deferredMessagesTable.getSelectedRow(), deferredMessagesTable.getSelectedColumn());
+
+		Message messageAgentToYou = Xdi.createMessageAgentToYou();
+		messageAgentToYou.createDelOperation(deferredMessageXDIAddress);
+		Xdi.signMessage(messageAgentToYou);
+		Xdi.sendMessage(messageAgentToYou);
+
+		Util.info("Deferred message " + deferredMessageXDIAddress + " deleted.");
 	}
 }

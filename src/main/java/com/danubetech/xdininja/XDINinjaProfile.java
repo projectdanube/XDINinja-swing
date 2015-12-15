@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import xdi2.core.features.linkcontracts.instance.ConnectLinkContract;
+import xdi2.core.ContextNode;
 import xdi2.core.features.nodetypes.XdiAbstractEntity;
 import xdi2.core.features.nodetypes.XdiAttribute;
 import xdi2.core.features.nodetypes.XdiEntity;
@@ -69,7 +69,9 @@ public class XDINinjaProfile extends XDINinjaProfileUI {
 		Xdi.signMessage(messageAgentToYou);
 		MessagingResponse response = Xdi.sendMessage(messageAgentToYou);
 
-		XdiEntity entity = XdiAbstractEntity.fromContextNode(response.getResultGraph().getDeepContextNode(State.yourCloudNumber.getXDIAddress()));
+		ContextNode contextNode = response.getResultGraph().getDeepContextNode(State.yourCloudNumber.getXDIAddress());
+		if (contextNode == null) throw new RuntimeException("No profile received.");
+		XdiEntity entity = XdiAbstractEntity.fromContextNode(contextNode);
 
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("Attribute");
@@ -115,14 +117,16 @@ public class XDINinjaProfile extends XDINinjaProfileUI {
 		XDIDiscoveryResult result = XDIDiscoveryClient.DEFAULT_DISCOVERY_CLIENT.discoverFromRegistry(XDIAddress.create(otherXDINameNumber));
 		CloudNumber otherCloudNumber = result.getCloudNumber();
 
-		Message messageYouToOther = Xdi.createMessageYouToOther(otherCloudNumber, ConnectLinkContract.class);
+		Message messageYouToOther = Xdi.createMessageYouToOther(otherCloudNumber, Xdi.profileLinkContractAddress(otherCloudNumber.getXDIAddress(), State.yourCloudNumber.getXDIAddress()), null);
 		messageYouToOther.createGetOperation(otherCloudNumber.getXDIAddress());
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
 		messageAgentToYou.createSendOperation(messageYouToOther);
 		Xdi.signMessage(messageAgentToYou);
 		MessagingResponse response = Xdi.sendMessage(messageAgentToYou);
 
-		XdiEntity entity = XdiAbstractEntity.fromContextNode(response.getResultGraph().getDeepContextNode(State.yourCloudNumber.getXDIAddress()));
+		ContextNode contextNode = response.getResultGraph().getDeepContextNode(otherCloudNumber.getXDIAddress());
+		if (contextNode == null) throw new RuntimeException("No profile received.");
+		XdiEntity entity = XdiAbstractEntity.fromContextNode(contextNode);
 
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("Attribute");

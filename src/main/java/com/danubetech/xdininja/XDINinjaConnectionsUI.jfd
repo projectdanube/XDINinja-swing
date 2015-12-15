@@ -102,6 +102,14 @@ new FormModel {
 					name: "loadButton"
 					"text": "Load"
 				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "deleteLinkContractButton"
+					"text": "Delete Link Contract"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "deleteDeferredMessageButton"
+					"text": "Delete Deferred Message"
+				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "South"
 			} )
