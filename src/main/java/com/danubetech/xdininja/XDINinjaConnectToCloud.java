@@ -10,7 +10,6 @@ import java.net.URLEncoder;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.codec.binary.Hex;
 
@@ -46,10 +45,7 @@ public class XDINinjaConnectToCloud extends XDINinjaConnectToCloudUI {
 
 	private void initComponents() {
 
-		panel4.setBorder(new EmptyBorder(10, 10, 10, 10));
-
-		panel5.removePropertyChangeListener(panel5.getPropertyChangeListeners()[0]);
-		panel5.setBorder(null);
+		Util.initJFrame(this);
 
 		this.createButton.addActionListener(new ActionListener() {
 			@Override

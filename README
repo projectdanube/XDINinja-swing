@@ -1,6 +1,0 @@
-XDINinja-swing
-==============
-
-XDI-enabled standalone client application
-
-	apt-get install libhsdis0-fcml libaccess-bridge-java

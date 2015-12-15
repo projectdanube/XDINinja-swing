@@ -7,6 +7,20 @@ new FormModel {
 			name: "this"
 			"title": "XDI Ninja!"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+				name: "panel2"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label8"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/logo.png" )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label5"
+					"text": "XDI Ninja!"
+					"font": new java.awt.Font( "Cantarell", 0, 26 )
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "North"
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
 				name: "panel1"
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "connectToCloudButton"
@@ -33,7 +47,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 520, 105 )
+			"size": new java.awt.Dimension( 550, 175 )
 		} )
 	}
 }

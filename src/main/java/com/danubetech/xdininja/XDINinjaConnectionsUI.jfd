@@ -19,11 +19,11 @@ new FormModel {
 					"text": "Request Connection to Profile"
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "textField1"
+					name: "requestProfileTextField"
 					"columns": 20
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button1"
+					name: "requestProfileButton"
 					"text": "Go"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
@@ -31,11 +31,11 @@ new FormModel {
 					"text": "Invite Connection to Profile"
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "textField2"
+					name: "inviteProfileTextField"
 					"columns": 20
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button2"
+					name: "inviteProfileButton"
 					"text": "Go"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
@@ -43,10 +43,10 @@ new FormModel {
 					"text": "Request Bi-Directional Chat"
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "textField3"
+					name: "requestInviteChatTextField"
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button3"
+					name: "requestInviteChatButton"
 					"text": "Go"
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {

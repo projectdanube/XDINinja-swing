@@ -28,14 +28,14 @@ public class XDINinjaConnectionsUI extends JFrame {
 		// Generated using JFormDesigner Evaluation license - wert wretwert
 		panel1 = new JPanel();
 		label1 = new JLabel();
-		textField1 = new JTextField();
-		button1 = new JButton();
+		requestProfileTextField = new JTextField();
+		requestProfileButton = new JButton();
 		label2 = new JLabel();
-		textField2 = new JTextField();
-		button2 = new JButton();
+		inviteProfileTextField = new JTextField();
+		inviteProfileButton = new JButton();
 		label3 = new JLabel();
-		textField3 = new JTextField();
-		button3 = new JButton();
+		requestInviteChatTextField = new JTextField();
+		requestInviteChatButton = new JButton();
 		panel2 = new JPanel();
 		panel4 = new JPanel();
 		label4 = new JLabel();
@@ -69,34 +69,34 @@ public class XDINinjaConnectionsUI extends JFrame {
 			label1.setText("Request Connection to Profile");
 			panel1.add(label1);
 
-			//---- textField1 ----
-			textField1.setColumns(20);
-			panel1.add(textField1);
+			//---- requestProfileTextField ----
+			requestProfileTextField.setColumns(20);
+			panel1.add(requestProfileTextField);
 
-			//---- button1 ----
-			button1.setText("Go");
-			panel1.add(button1);
+			//---- requestProfileButton ----
+			requestProfileButton.setText("Go");
+			panel1.add(requestProfileButton);
 
 			//---- label2 ----
 			label2.setText("Invite Connection to Profile");
 			panel1.add(label2);
 
-			//---- textField2 ----
-			textField2.setColumns(20);
-			panel1.add(textField2);
+			//---- inviteProfileTextField ----
+			inviteProfileTextField.setColumns(20);
+			panel1.add(inviteProfileTextField);
 
-			//---- button2 ----
-			button2.setText("Go");
-			panel1.add(button2);
+			//---- inviteProfileButton ----
+			inviteProfileButton.setText("Go");
+			panel1.add(inviteProfileButton);
 
 			//---- label3 ----
 			label3.setText("Request Bi-Directional Chat");
 			panel1.add(label3);
-			panel1.add(textField3);
+			panel1.add(requestInviteChatTextField);
 
-			//---- button3 ----
-			button3.setText("Go");
-			panel1.add(button3);
+			//---- requestInviteChatButton ----
+			requestInviteChatButton.setText("Go");
+			panel1.add(requestInviteChatButton);
 		}
 		contentPane.add(panel1, BorderLayout.NORTH);
 
@@ -156,14 +156,14 @@ public class XDINinjaConnectionsUI extends JFrame {
 	// Generated using JFormDesigner Evaluation license - wert wretwert
 	protected JPanel panel1;
 	protected JLabel label1;
-	protected JTextField textField1;
-	protected JButton button1;
+	protected JTextField requestProfileTextField;
+	protected JButton requestProfileButton;
 	protected JLabel label2;
-	protected JTextField textField2;
-	protected JButton button2;
+	protected JTextField inviteProfileTextField;
+	protected JButton inviteProfileButton;
 	protected JLabel label3;
-	protected JTextField textField3;
-	protected JButton button3;
+	protected JTextField requestInviteChatTextField;
+	protected JButton requestInviteChatButton;
 	protected JPanel panel2;
 	protected JPanel panel4;
 	protected JLabel label4;

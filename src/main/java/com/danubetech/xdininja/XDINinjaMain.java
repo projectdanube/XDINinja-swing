@@ -17,6 +17,8 @@ public class XDINinjaMain extends XDINinjaMainUI {
 
 	private void initComponents() {
 
+		Util.initJFrame(this);
+
 		this.connectToCloudButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

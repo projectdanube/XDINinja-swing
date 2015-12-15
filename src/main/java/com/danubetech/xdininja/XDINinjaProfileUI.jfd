@@ -6,19 +6,6 @@ new FormModel {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
 			"title": "XDI Ninja! - Profile"
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
-				name: "panel1"
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "loadButton"
-					"text": "Load"
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "saveButton"
-					"text": "Save"
-				} )
-			}, new FormLayoutConstraints( class java.lang.String ) {
-				"value": "South"
-			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTable" ) {
@@ -27,9 +14,31 @@ new FormModel {
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "Center"
 			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+				name: "panel1"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "loadButton"
+					"text": "Load Your Profile"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "saveButton"
+					"text": "Save Your Profile"
+					"enabled": false
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "loadConnectionButton"
+					"text": "Load Friend Profile:"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "loadConnectionTextField"
+					"columns": 10
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "South"
+			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 545, 460 )
+			"size": new java.awt.Dimension( 735, 490 )
 		} )
 	}
 }

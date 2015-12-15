@@ -9,5 +9,7 @@ public class XDINinjaWall extends XDINinjaWallUI {
 	}
 
 	private void initComponents() {
+
+		Util.initJFrame(this);
 	}
 }
