@@ -25,7 +25,7 @@ public class XDINinjaConnectionsUI extends JFrame {
 
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - wert wretwert
+		// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
 		panel1 = new JPanel();
 		label1 = new JLabel();
 		requestProfileTextField = new JTextField();
@@ -46,9 +46,15 @@ public class XDINinjaConnectionsUI extends JFrame {
 		scrollPane2 = new JScrollPane();
 		deferredMessagesTable = new JTable();
 		panel5 = new JPanel();
-		loadButton = new JButton();
+		panel7 = new JPanel();
 		deleteLinkContractButton = new JButton();
+		viewLinkContractButton = new JButton();
+		panel8 = new JPanel();
 		deleteDeferredMessageButton = new JButton();
+		viewDeferredMessageButton = new JButton();
+		approveDeferredMessageButton = new JButton();
+		panel6 = new JPanel();
+		loadButton = new JButton();
 
 		//======== this ========
 		setTitle("XDI Ninja! - Connections");
@@ -137,33 +143,63 @@ public class XDINinjaConnectionsUI extends JFrame {
 				panel3.add(scrollPane2);
 			}
 			panel2.add(panel3, BorderLayout.CENTER);
+
+			//======== panel5 ========
+			{
+				panel5.setLayout(new GridLayout());
+
+				//======== panel7 ========
+				{
+					panel7.setLayout(new FlowLayout());
+
+					//---- deleteLinkContractButton ----
+					deleteLinkContractButton.setText("Delete");
+					panel7.add(deleteLinkContractButton);
+
+					//---- viewLinkContractButton ----
+					viewLinkContractButton.setText("View");
+					panel7.add(viewLinkContractButton);
+				}
+				panel5.add(panel7);
+
+				//======== panel8 ========
+				{
+					panel8.setLayout(new FlowLayout());
+
+					//---- deleteDeferredMessageButton ----
+					deleteDeferredMessageButton.setText("Delete");
+					panel8.add(deleteDeferredMessageButton);
+
+					//---- viewDeferredMessageButton ----
+					viewDeferredMessageButton.setText("View");
+					panel8.add(viewDeferredMessageButton);
+
+					//---- approveDeferredMessageButton ----
+					approveDeferredMessageButton.setText("Approve");
+					panel8.add(approveDeferredMessageButton);
+				}
+				panel5.add(panel8);
+			}
+			panel2.add(panel5, BorderLayout.SOUTH);
 		}
 		contentPane.add(panel2, BorderLayout.CENTER);
 
-		//======== panel5 ========
+		//======== panel6 ========
 		{
-			panel5.setLayout(new FlowLayout());
+			panel6.setLayout(new FlowLayout());
 
 			//---- loadButton ----
 			loadButton.setText("Load");
-			panel5.add(loadButton);
-
-			//---- deleteLinkContractButton ----
-			deleteLinkContractButton.setText("Delete Link Contract");
-			panel5.add(deleteLinkContractButton);
-
-			//---- deleteDeferredMessageButton ----
-			deleteDeferredMessageButton.setText("Delete Deferred Message");
-			panel5.add(deleteDeferredMessageButton);
+			panel6.add(loadButton);
 		}
-		contentPane.add(panel5, BorderLayout.SOUTH);
+		contentPane.add(panel6, BorderLayout.SOUTH);
 		pack();
 		setLocationRelativeTo(getOwner());
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - wert wretwert
+	// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
 	protected JPanel panel1;
 	protected JLabel label1;
 	protected JTextField requestProfileTextField;
@@ -184,8 +220,14 @@ public class XDINinjaConnectionsUI extends JFrame {
 	protected JScrollPane scrollPane2;
 	protected JTable deferredMessagesTable;
 	protected JPanel panel5;
-	protected JButton loadButton;
+	protected JPanel panel7;
 	protected JButton deleteLinkContractButton;
+	protected JButton viewLinkContractButton;
+	protected JPanel panel8;
 	protected JButton deleteDeferredMessageButton;
+	protected JButton viewDeferredMessageButton;
+	protected JButton approveDeferredMessageButton;
+	protected JPanel panel6;
+	protected JButton loadButton;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }

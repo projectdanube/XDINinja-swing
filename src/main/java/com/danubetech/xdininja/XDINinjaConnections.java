@@ -9,12 +9,14 @@ import xdi2.core.ContextNode;
 import xdi2.core.bootstrap.XDIBootstrap;
 import xdi2.core.features.index.Index;
 import xdi2.core.features.linkcontracts.instance.ConnectLinkContract;
+import xdi2.core.features.linkcontracts.instance.GenericLinkContract;
 import xdi2.core.features.linkcontracts.instance.SendLinkContract;
 import xdi2.core.features.nodetypes.XdiEntity;
 import xdi2.core.features.nodetypes.XdiEntityCollection;
 import xdi2.core.syntax.CloudNumber;
 import xdi2.core.syntax.XDIAddress;
 import xdi2.core.syntax.XDIArc;
+import xdi2.core.util.iterators.IteratorListMaker;
 import xdi2.discovery.XDIDiscoveryClient;
 import xdi2.discovery.XDIDiscoveryResult;
 import xdi2.messaging.Message;
@@ -83,11 +85,41 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 				}
 			} });
 
+		this.viewLinkContractButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					viewLinkContract();
+				} catch (Exception ex) {
+					Util.error(ex);
+				}
+			} });
+
 		this.deleteDeferredMessageButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					deleteDeferredMessage();
+				} catch (Exception ex) {
+					Util.error(ex);
+				}
+			} });
+
+		this.viewDeferredMessageButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					viewDeferredMessage();
+				} catch (Exception ex) {
+					Util.error(ex);
+				}
+			} });
+
+		this.approveDeferredMessageButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					approveDeferredMessage();
 				} catch (Exception ex) {
 					Util.error(ex);
 				}
@@ -156,7 +188,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 			for (XdiEntity linkContractEntity : Index.getEntityIndexAggregations(linkContractsEntityCollection)) {
 
-				linkContractsModel.addRow(new Object[] { linkContractEntity == null ? null : linkContractEntity.getXDIAddress() });
+				linkContractsModel.addRow(new Object[] { linkContractEntity == null ? null : linkContractEntity });
 			}
 		}
 
@@ -164,7 +196,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 			for (XdiEntity deferredMessageEntity : Index.getEntityIndexAggregations(deferredMessagesEntityCollection)) {
 
-				deferredMessagesModel.addRow(new Object[] { deferredMessageEntity == null ? null : deferredMessageEntity.getXDIAddress() });
+				deferredMessagesModel.addRow(new Object[] { deferredMessageEntity == null ? null : deferredMessageEntity });
 			}
 		}
 
@@ -174,25 +206,61 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 	private void deleteLinkContract() throws Exception {
 
-		XDIAddress linkContractXDIAddress = (XDIAddress) linkContractsTable.getModel().getValueAt(linkContractsTable.getSelectedRow(), linkContractsTable.getSelectedColumn());
+		XdiEntity linkContractXdiEntity = (XdiEntity) linkContractsTable.getModel().getValueAt(linkContractsTable.getSelectedRow(), linkContractsTable.getSelectedColumn());
 
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
-		messageAgentToYou.createDelOperation(linkContractXDIAddress);
+		messageAgentToYou.createDelOperation(linkContractXdiEntity.getXDIAddress());
 		Xdi.signMessage(messageAgentToYou);
 		Xdi.sendMessage(messageAgentToYou);
 
-		Util.info("Link contract " + linkContractXDIAddress + " deleted.");
+		Util.info("Link contract " + linkContractXdiEntity + " deleted.");
+	}
+
+	private void viewLinkContract() throws Exception {
+
+		XdiEntity linkContractXdiEntity = (XdiEntity) linkContractsTable.getModel().getValueAt(linkContractsTable.getSelectedRow(), linkContractsTable.getSelectedColumn());
+		GenericLinkContract linkContract = GenericLinkContract.fromXdiEntity(linkContractXdiEntity);
+
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("Link contract: " + linkContract.getXdiEntity().getXDIAddress() + "\n");
+		buffer.append("Link contract type: " + linkContract.getClass().getSimpleName() + "\n");
+		buffer.append("Requesting authority: " + linkContract.getRequestingAuthority() + "\n");
+		buffer.append("Authorizing authority: " + linkContract.getAuthorizingAuthority() + "\n");
+		buffer.append("Template: " + linkContract.getTemplateAuthorityAndId() + "\n");
+		buffer.append("Push: " + linkContract.getPushToPeerRootXDIArcs() + "\n");
+
+		Util.info(buffer.toString());
 	}
 
 	private void deleteDeferredMessage() throws Exception {
 
-		XDIAddress deferredMessageXDIAddress = (XDIAddress) deferredMessagesTable.getModel().getValueAt(deferredMessagesTable.getSelectedRow(), deferredMessagesTable.getSelectedColumn());
+		XdiEntity deferredMessageXdiEntity = (XdiEntity) deferredMessagesTable.getModel().getValueAt(deferredMessagesTable.getSelectedRow(), deferredMessagesTable.getSelectedColumn());
 
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
-		messageAgentToYou.createDelOperation(deferredMessageXDIAddress);
+		messageAgentToYou.createDelOperation(deferredMessageXdiEntity.getXDIAddress());
 		Xdi.signMessage(messageAgentToYou);
 		Xdi.sendMessage(messageAgentToYou);
 
-		Util.info("Deferred message " + deferredMessageXDIAddress + " deleted.");
+		Util.info("Deferred message " + deferredMessageXdiEntity + " deleted.");
+	}
+
+	private void viewDeferredMessage() throws Exception {
+
+		XdiEntity deferredMessageXdiEntity = (XdiEntity) deferredMessagesTable.getModel().getValueAt(deferredMessagesTable.getSelectedRow(), deferredMessagesTable.getSelectedColumn());
+		Message deferredMessage = Message.fromXdiEntity(deferredMessageXdiEntity);
+
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("Sender: " + deferredMessage.getSender() + "\n");
+		buffer.append("From Peer: " + deferredMessage.getFromPeerRootXDIArc() + "\n");
+		buffer.append("To Peer: " + deferredMessage.getToPeerRootXDIArc() + "\n");
+		buffer.append("Link Contract: " + deferredMessage.getLinkContractXDIAddress() + "\n");
+		buffer.append("Operations: " + new IteratorListMaker<Operation> (deferredMessage.getOperations()).list() + "\n");
+
+		Util.info(buffer.toString());
+	}
+
+	private void approveDeferredMessage() throws Exception {
+
+		Util.error(new RuntimeException("Not implemented."));
 	}
 }
