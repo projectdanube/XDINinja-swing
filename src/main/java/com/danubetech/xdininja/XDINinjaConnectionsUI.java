@@ -25,7 +25,7 @@ public class XDINinjaConnectionsUI extends JFrame {
 
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
+		// Generated using JFormDesigner Evaluation license - wert wretwert
 		panel1 = new JPanel();
 		label1 = new JLabel();
 		requestProfileTextField = new JTextField();
@@ -199,7 +199,7 @@ public class XDINinjaConnectionsUI extends JFrame {
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
+	// Generated using JFormDesigner Evaluation license - wert wretwert
 	protected JPanel panel1;
 	protected JLabel label1;
 	protected JTextField requestProfileTextField;

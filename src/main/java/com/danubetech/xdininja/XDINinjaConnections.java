@@ -227,7 +227,9 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		buffer.append("Requesting authority: " + linkContract.getRequestingAuthority() + "\n");
 		buffer.append("Authorizing authority: " + linkContract.getAuthorizingAuthority() + "\n");
 		buffer.append("Template: " + linkContract.getTemplateAuthorityAndId() + "\n");
-		buffer.append("Push: " + linkContract.getPushToPeerRootXDIArcs() + "\n");
+		buffer.append("Permissions (addresses): " + linkContract.getAllPermissionTargetXDIAddresses() + "\n");
+		buffer.append("Permissions (statements): " + linkContract.getAllPermissionTargetXDIStatements() + "\n");
+		buffer.append("Push: " + new IteratorListMaker<XDIArc> (linkContract.getPushToPeerRootXDIArcs()).list() + "\n");
 
 		Util.info(buffer.toString());
 	}
@@ -261,6 +263,14 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 	private void approveDeferredMessage() throws Exception {
 
-		Util.error(new RuntimeException("Not implemented."));
+		XdiEntity deferredMessageXdiEntity = (XdiEntity) deferredMessagesTable.getModel().getValueAt(deferredMessagesTable.getSelectedRow(), deferredMessagesTable.getSelectedColumn());
+		Message deferredMessage = Message.fromXdiEntity(deferredMessageXdiEntity);
+
+		Message messageAgentToYou = Xdi.createMessageAgentToYou();
+		messageAgentToYou.createSendOperation(deferredMessage);
+		Xdi.signMessage(messageAgentToYou);
+		Xdi.sendMessage(messageAgentToYou);
+
+		Util.info("Deferred message " + deferredMessageXdiEntity + " approved.");
 	}
 }

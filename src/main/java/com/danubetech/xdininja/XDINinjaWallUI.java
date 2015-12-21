@@ -32,13 +32,10 @@ public class XDINinjaWallUI extends JFrame {
 		// Generated using JFormDesigner Evaluation license - wert wretwert
 		panel3 = new JPanel();
 		label1 = new JLabel();
-		panel1 = new JPanel();
-		scrollPane2 = new JScrollPane();
-		textArea1 = new JTextArea();
 		scrollPane1 = new JScrollPane();
-		textPane1 = new JTextPane();
+		wallTextPane = new JTextPane();
 		panel2 = new JPanel();
-		button1 = new JButton();
+		subscribeButton = new JButton();
 
 		//======== this ========
 		setTitle("XDI Ninja! - Wall");
@@ -64,34 +61,22 @@ public class XDINinjaWallUI extends JFrame {
 		}
 		contentPane.add(panel3, BorderLayout.NORTH);
 
-		//======== panel1 ========
+		//======== scrollPane1 ========
 		{
-			panel1.setLayout(new GridLayout());
-
-			//======== scrollPane2 ========
-			{
-				scrollPane2.setViewportView(textArea1);
-			}
-			panel1.add(scrollPane2);
-
-			//======== scrollPane1 ========
-			{
-				scrollPane1.setViewportView(textPane1);
-			}
-			panel1.add(scrollPane1);
+			scrollPane1.setViewportView(wallTextPane);
 		}
-		contentPane.add(panel1, BorderLayout.CENTER);
+		contentPane.add(scrollPane1, BorderLayout.CENTER);
 
 		//======== panel2 ========
 		{
 			panel2.setLayout(new FlowLayout());
 
-			//---- button1 ----
-			button1.setText("text");
-			panel2.add(button1);
+			//---- subscribeButton ----
+			subscribeButton.setText("Subscribe");
+			panel2.add(subscribeButton);
 		}
 		contentPane.add(panel2, BorderLayout.SOUTH);
-		pack();
+		setSize(530, 435);
 		setLocationRelativeTo(getOwner());
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}
@@ -100,12 +85,9 @@ public class XDINinjaWallUI extends JFrame {
 	// Generated using JFormDesigner Evaluation license - wert wretwert
 	protected JPanel panel3;
 	protected JLabel label1;
-	protected JPanel panel1;
-	protected JScrollPane scrollPane2;
-	protected JTextArea textArea1;
 	protected JScrollPane scrollPane1;
-	protected JTextPane textPane1;
+	protected JTextPane wallTextPane;
 	protected JPanel panel2;
-	protected JButton button1;
+	protected JButton subscribeButton;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }
