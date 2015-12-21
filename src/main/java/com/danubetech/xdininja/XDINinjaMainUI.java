@@ -89,7 +89,7 @@ public class XDINinjaMainUI extends JFrame {
 			panel1.add(chatButton);
 		}
 		contentPane.add(panel1, BorderLayout.CENTER);
-		pack();
+		setSize(700, 175);
 		setLocationRelativeTo(getOwner());
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}

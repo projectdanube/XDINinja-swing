@@ -76,7 +76,7 @@ public class XDINinjaProfileUI extends JFrame {
 			panel1.add(loadConnectionTextField);
 		}
 		contentPane.add(panel1, BorderLayout.SOUTH);
-		pack();
+		setSize(850, 490);
 		setLocationRelativeTo(getOwner());
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}
