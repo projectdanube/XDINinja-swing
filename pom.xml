@@ -23,8 +23,46 @@
 				<groupId>com.zenjava</groupId>
 				<artifactId>javafx-maven-plugin</artifactId>
 				<version>8.2.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
 					<mainClass>com.danubetech.xdininja.XDINinja</mainClass>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>webstart-maven-plugin</artifactId>
+				<version>1.0-beta-6</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jnlp</goal> <!-- use jnlp, jnlp-inline or jnlp-single as appropriate -->
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>keytool-api-1.7</artifactId>
+						<version>1.5</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<excludeTransitive>false</excludeTransitive>
+					<libPath>lib</libPath>
+					<jnlp>
+						<outputFile>app.jnlp</outputFile> <!-- defaults to launch.jnlp -->
+						<mainClass>com.danubetech.xdininja.XDINinja</mainClass>
+					</jnlp>
+					<pack200><enabled>false</enabled></pack200>
+					<gzip>true</gzip> <!-- default force when pack200 false, true when pack200 selected ?? -->
+					<outputJarVersions>true</outputJarVersions>
+					<verbose>true</verbose>
 				</configuration>
 			</plugin>
 		</plugins>
