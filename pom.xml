@@ -41,7 +41,7 @@
 				<executions>
 					<execution>
 						<goals>
-							<goal>jnlp</goal> <!-- use jnlp, jnlp-inline or jnlp-single as appropriate -->
+							<goal>jnlp</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -55,12 +55,32 @@
 				<configuration>
 					<excludeTransitive>false</excludeTransitive>
 					<libPath>lib</libPath>
+					<codebase>http://192.168.1.101/XDINinja-swing-jnlp/</codebase>
 					<jnlp>
-						<outputFile>app.jnlp</outputFile> <!-- defaults to launch.jnlp -->
+						<outputFile>app.jnlp</outputFile>
 						<mainClass>com.danubetech.xdininja.XDINinja</mainClass>
 					</jnlp>
-					<pack200><enabled>false</enabled></pack200>
-					<gzip>true</gzip> <!-- default force when pack200 false, true when pack200 selected ?? -->
+					<sign>
+						<keystore>${basedir}/keystore</keystore>
+						<keypass>password</keypass>
+						<storepass>password</storepass>
+						<alias>EmbeddedTomcatWebstart</alias>
+						<dnameCn>CN</dnameCn>
+						<dnameOu>OU</dnameOu>
+						<dnameO>O</dnameO>
+						<dnameL>L</dnameL>
+						<dnameSt>S</dnameSt>
+						<dnameC>C</dnameC>
+						<verify>true</verify>
+						<keystoreConfig>
+							<delete>true</delete>
+							<gen>true</gen>
+						</keystoreConfig>
+					</sign>
+					<pack200>
+						<enabled>false</enabled>
+					</pack200>
+					<gzip>true</gzip>
 					<outputJarVersions>true</outputJarVersions>
 					<verbose>true</verbose>
 				</configuration>
