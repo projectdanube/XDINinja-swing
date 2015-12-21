@@ -93,22 +93,45 @@ new FormModel {
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "Center"
 				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) ) {
+					name: "panel5"
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+						name: "panel7"
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "deleteLinkContractButton"
+							"text": "Delete"
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "viewLinkContractButton"
+							"text": "View"
+						} )
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+						name: "panel8"
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "deleteDeferredMessageButton"
+							"text": "Delete"
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "viewDeferredMessageButton"
+							"text": "View"
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "approveDeferredMessageButton"
+							"text": "Approve"
+						} )
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "South"
+				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "Center"
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
-				name: "panel5"
+				name: "panel6"
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "loadButton"
 					"text": "Load"
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "deleteLinkContractButton"
-					"text": "Delete Link Contract"
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "deleteDeferredMessageButton"
-					"text": "Delete Deferred Message"
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "South"

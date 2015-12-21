@@ -16,4 +16,5 @@ public class XDINinja {
 				frame.setVisible(true);
 			}
 		});
-	}}
+	}
+}
