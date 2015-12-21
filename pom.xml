@@ -71,7 +71,7 @@
 						<dnameL>L</dnameL>
 						<dnameSt>S</dnameSt>
 						<dnameC>C</dnameC>
-						<verify>true</verify>
+						<verify>false</verify>
 						<keystoreConfig>
 							<delete>true</delete>
 							<gen>true</gen>
