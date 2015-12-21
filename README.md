@@ -9,7 +9,7 @@ Requirements:
 
 Build:
 
-	mvn clean install jfx:jar
+	mvn clean install package
 
 Run:
 
