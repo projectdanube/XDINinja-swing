@@ -1,6 +1,8 @@
 log4j.log
 .classpath
 .project
+keystore
+velocity.log
 /.settings/
 /bin/
 /target/
