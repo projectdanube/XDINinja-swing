@@ -17,22 +17,22 @@ new FormModel {
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "North"
 			} )
-			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-				name: "scrollPane1"
-				add( new FormComponent( "javax.swing.JTextPane" ) {
-					name: "wallTextPane"
-				} )
-			}, new FormLayoutConstraints( class java.lang.String ) {
-				"value": "Center"
-			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
 				name: "panel2"
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "subscribeButton"
-					"text": "Subscribe"
+					name: "connectButton"
+					"text": "Connect"
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "South"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JList" ) {
+					name: "wallList"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

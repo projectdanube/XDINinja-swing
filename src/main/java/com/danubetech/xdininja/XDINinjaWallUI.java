@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import javax.swing.*;
 
 /*
  * Created by JFormDesigner on Tue Dec 15 11:37:01 CET 2015
@@ -29,13 +30,13 @@ public class XDINinjaWallUI extends JFrame {
 
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - wert wretwert
+		// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
 		panel3 = new JPanel();
 		label1 = new JLabel();
-		scrollPane1 = new JScrollPane();
-		wallTextPane = new JTextPane();
 		panel2 = new JPanel();
-		subscribeButton = new JButton();
+		connectButton = new JButton();
+		scrollPane1 = new JScrollPane();
+		wallList = new JList();
 
 		//======== this ========
 		setTitle("XDI Ninja! - Wall");
@@ -61,33 +62,33 @@ public class XDINinjaWallUI extends JFrame {
 		}
 		contentPane.add(panel3, BorderLayout.NORTH);
 
-		//======== scrollPane1 ========
-		{
-			scrollPane1.setViewportView(wallTextPane);
-		}
-		contentPane.add(scrollPane1, BorderLayout.CENTER);
-
 		//======== panel2 ========
 		{
 			panel2.setLayout(new FlowLayout());
 
-			//---- subscribeButton ----
-			subscribeButton.setText("Subscribe");
-			panel2.add(subscribeButton);
+			//---- connectButton ----
+			connectButton.setText("Connect");
+			panel2.add(connectButton);
 		}
 		contentPane.add(panel2, BorderLayout.SOUTH);
+
+		//======== scrollPane1 ========
+		{
+			scrollPane1.setViewportView(wallList);
+		}
+		contentPane.add(scrollPane1, BorderLayout.CENTER);
 		setSize(530, 435);
 		setLocationRelativeTo(getOwner());
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - wert wretwert
+	// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
 	protected JPanel panel3;
 	protected JLabel label1;
-	protected JScrollPane scrollPane1;
-	protected JTextPane wallTextPane;
 	protected JPanel panel2;
-	protected JButton subscribeButton;
+	protected JButton connectButton;
+	protected JScrollPane scrollPane1;
+	protected JList wallList;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }

@@ -5,18 +5,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
 
-import xdi2.client.impl.websocket.XDIWebSocketClient;
-import xdi2.core.bootstrap.XDIBootstrap;
-import xdi2.core.features.linkcontracts.instance.ConnectLinkContract;
-import xdi2.core.syntax.CloudNumber;
-import xdi2.core.syntax.XDIAddress;
-import xdi2.core.syntax.XDIArc;
-import xdi2.discovery.XDIDiscoveryClient;
-import xdi2.discovery.XDIDiscoveryResult;
-import xdi2.messaging.Message;
-import xdi2.messaging.operations.Operation;
+import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
 
-public class XDINinjaWall extends XDINinjaWallUI {
+import xdi2.client.impl.websocket.XDIWebSocketClient;
+import xdi2.client.impl.websocket.XDIWebSocketClient.Callback;
+import xdi2.core.bootstrap.XDIBootstrap;
+import xdi2.core.constants.XDIConstants;
+import xdi2.core.syntax.XDIArc;
+import xdi2.messaging.Message;
+import xdi2.messaging.MessageEnvelope;
+import xdi2.messaging.operations.Operation;
+import xdi2.messaging.response.TransportMessagingResponse;
+
+public class XDINinjaWall extends XDINinjaWallUI implements Callback {
 
 	private XDIWebSocketClient xdiWebSocketClient;
 
@@ -40,11 +42,11 @@ public class XDINinjaWall extends XDINinjaWallUI {
 				}
 			} });
 
-		this.subscribeButton.addActionListener(new ActionListener() {
+		this.connectButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					subscribe();
+					connect();
 				} catch (Exception ex) {
 					Util.error(ex);
 				}
@@ -53,23 +55,43 @@ public class XDINinjaWall extends XDINinjaWallUI {
 
 	private void windowClosed() throws Exception {
 
+		if (xdiWebSocketClient != null) {
 
+			xdiWebSocketClient.close();
+			xdiWebSocketClient = null;
+		}
 	}
 
-	private void subscribe() throws Exception {
+	private void connect() throws Exception {
 
-		String otherXDINameNumber = this.requestProfileTextField.getText();
-		XDIDiscoveryResult result = XDIDiscoveryClient.DEFAULT_DISCOVERY_CLIENT.discoverFromRegistry(XDIAddress.create(otherXDINameNumber));
-		CloudNumber otherCloudNumber = result.getCloudNumber();
+		xdiWebSocketClient = Xdi.xdiWebSocketClientToYou();
 
-		Message messageYouToOther = Xdi.createMessageYouToOther(otherCloudNumber, null, ConnectLinkContract.class);
-		Operation connectOperation = messageYouToOther.createConnectOperation(XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE_ADDRESS);
-		connectOperation.setVariableValue(XDIArc.create("{$get}"), otherCloudNumber.getXDIAddress());
+		xdiWebSocketClient.setCallback(this);
+
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
-		messageAgentToYou.createSendOperation(messageYouToOther);
+		Operation connectOperation = messageAgentToYou.createConnectOperation(XDIBootstrap.PUSH_LINK_CONTRACT_TEMPLATE_ADDRESS);
+		connectOperation.setVariableValue(XDIArc.create("{$push}"), XDIConstants.XDI_ADD_ROOT);
 		Xdi.signMessage(messageAgentToYou);
 		Xdi.sendMessage(messageAgentToYou);
 
-		Util.info("Request has been sent.");
+		connectButton.setEnabled(false);
+
+		Util.info("Successfully connected.");
+	}
+
+	@Override
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void onMessageEnvelope(MessageEnvelope messageEnvelope) {
+
+		DefaultListModel listModel = (DefaultListModel) wallList.getModel();
+		listModel.addElement(messageEnvelope);
+	}
+
+	@Override
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void onMessagingResponse(TransportMessagingResponse messagingResponse) {
+
+		DefaultListModel listModel = (DefaultListModel) wallList.getModel();
+		listModel.addElement(messagingResponse);
 	}
 }

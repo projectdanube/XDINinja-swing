@@ -3,8 +3,10 @@ package com.danubetech.xdininja;
 import java.security.GeneralSecurityException;
 import java.util.Date;
 
+import xdi2.client.XDIClient;
 import xdi2.client.exceptions.Xdi2ClientException;
 import xdi2.client.impl.http.XDIHttpClient;
+import xdi2.client.impl.websocket.XDIWebSocketClient;
 import xdi2.core.bootstrap.XDIBootstrap;
 import xdi2.core.features.linkcontracts.instance.GenericLinkContract;
 import xdi2.core.features.linkcontracts.instance.LinkContract;
@@ -96,6 +98,26 @@ public class Xdi {
 		} finally {
 
 			if (client != null) client.close();
+		}
+	}
+
+	public static XDIWebSocketClient xdiWebSocketClientToYou() {
+
+		return new XDIWebSocketClient(State.yourXdiEndpointUri);
+	}
+
+	public static MessagingResponse sendMessage(XDIClient<?> client, Message message) {
+
+		System.out.println(">>>> " + message.getMessageEnvelope().getGraph());
+
+		try {
+
+			MessagingResponse messagingResponse = client.send(message.getMessageEnvelope());
+			System.out.println("<<<< " + messagingResponse.getGraph());
+			return messagingResponse;
+		} catch (Xdi2ClientException ex) {
+
+			throw new RuntimeException(ex.getMessage(), ex);
 		}
 	}
 }
