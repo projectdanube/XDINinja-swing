@@ -6,7 +6,6 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
 
 import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
 
 import xdi2.client.impl.websocket.XDIWebSocketClient;
 import xdi2.client.impl.websocket.XDIWebSocketClient.Callback;
@@ -31,6 +30,8 @@ public class XDINinjaWall extends XDINinjaWallUI implements Callback {
 	private void initComponents() {
 
 		Util.initJFrame(this);
+
+		wallList.setModel(new DefaultListModel());
 
 		this.addWindowStateListener(new WindowStateListener() {
 			@Override

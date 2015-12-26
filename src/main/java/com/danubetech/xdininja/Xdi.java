@@ -1,6 +1,5 @@
 package com.danubetech.xdininja;
 
-import java.net.URI;
 import java.security.GeneralSecurityException;
 import java.util.Date;
 
@@ -83,15 +82,12 @@ public class Xdi {
 
 	public static MessagingResponse sendMessage(Message message) {
 
-		System.out.println(">>>> " + message.getMessageEnvelope().getGraph());
-
 		XDIHttpClient client = null;
 
 		try {
 
 			client = new XDIHttpClient(State.yourXdiEndpointUri);
 			MessagingResponse messagingResponse = client.send(message.getMessageEnvelope());
-			System.out.println("<<<< " + messagingResponse.getGraph());
 			return messagingResponse;
 		} catch (Xdi2ClientException ex) {
 
@@ -104,18 +100,14 @@ public class Xdi {
 
 	public static XDIWebSocketClient xdiWebSocketClientToYou() {
 
-		return new XDIWebSocketClient(URI.create(State.yourXdiWebSocketEndpointUri.toString().replace("wss", "ws")));
-//		return new XDIWebSocketClient(State.yourXdiWebSocketEndpointUri);
+		return new XDIWebSocketClient(State.yourXdiWebSocketEndpointUri);
 	}
 
 	public static MessagingResponse sendMessage(XDIClient<?> client, Message message) {
 
-		System.out.println(">>>> " + message.getMessageEnvelope().getGraph());
-
 		try {
 
 			MessagingResponse messagingResponse = client.send(message.getMessageEnvelope());
-			System.out.println("<<<< " + messagingResponse.getGraph());
 			return messagingResponse;
 		} catch (Xdi2ClientException ex) {
 
@@ -123,3 +115,25 @@ public class Xdi {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
