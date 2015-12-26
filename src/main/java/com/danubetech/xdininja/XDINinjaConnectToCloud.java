@@ -97,15 +97,17 @@ public class XDINinjaConnectToCloud extends XDINinjaConnectToCloudUI {
 
 		String yourXDINameNumber = yourXDINameNumberTextField.getText();
 
-		XDIDiscoveryResult result = XDIDiscoveryClient.DEFAULT_DISCOVERY_CLIENT.discover(XDIAddress.create(yourXDINameNumber), XDIClientConstants.CONNECT_ENDPOINT_URI_TYPE);
+		XDIDiscoveryResult result = XDIDiscoveryClient.DEFAULT_DISCOVERY_CLIENT.discover(XDIAddress.create(yourXDINameNumber), new XDIAddress[] { XDIClientConstants.WEBSOCKET_ENDPOINT_URI_TYPE, XDIClientConstants.CONNECT_ENDPOINT_URI_TYPE });
 		yourXDINumberLabel.setText(result.getCloudNumber().toString());
 		yourXDIEndpointLabel.setText(result.getXdiEndpointUri().toString());
-		yourConnectEndpointLabel.setText(result.getXdiConnectEndpointUri().toString());
+		yourXDIWebSocketEndpointLabel.setText(result.getXdiWebSocketEndpointUri().toString());
+		yourXDIConnectEndpointLabel.setText(result.getXdiConnectEndpointUri().toString());
 
 		State.yourXDINameNumber = yourXDINameNumber;
 		State.yourCloudNumber = result.getCloudNumber();
 		State.yourXdiEndpointUri = result.getXdiEndpointUri();
-		State.yourConnectEndpointUri = result.getXdiConnectEndpointUri();
+		State.yourXdiWebSocketEndpointUri = result.getXdiWebSocketEndpointUri();
+		State.yourXdiConnectEndpointUri = result.getXdiConnectEndpointUri();
 	}
 
 	private static final XDIAddress XDI_ADD_RETURN_URI = XDIAddress.create("<#return><$uri>");
@@ -125,7 +127,7 @@ public class XDINinjaConnectToCloud extends XDINinjaConnectToCloudUI {
 		String connectRequest = URLEncoder.encode(me.getGraph().toString("XDI/JSON/QUAD"), "UTF-8");
 
 		StringBuffer requestUri = new StringBuffer();
-		requestUri.append(State.yourConnectEndpointUri);
+		requestUri.append(State.yourXdiConnectEndpointUri);
 		requestUri.append("?xdi=" + connectRequest);
 		requestUri.append("&key=" + State.yourXDINameNumber);
 		requestUri.append("&discovery=" + ((XDIHttpClient) XDIDiscoveryClient.DEFAULT_DISCOVERY_CLIENT.getRegistryXdiClient()).getXdiEndpointUri().toString());

@@ -72,7 +72,7 @@ public class XDINinjaWall extends XDINinjaWallUI implements Callback {
 		Operation connectOperation = messageAgentToYou.createConnectOperation(XDIBootstrap.PUSH_LINK_CONTRACT_TEMPLATE_ADDRESS);
 		connectOperation.setVariableValue(XDIArc.create("{$push}"), XDIConstants.XDI_ADD_ROOT);
 		Xdi.signMessage(messageAgentToYou);
-		Xdi.sendMessage(messageAgentToYou);
+		Xdi.sendMessage(xdiWebSocketClient, messageAgentToYou);
 
 		connectButton.setEnabled(false);
 

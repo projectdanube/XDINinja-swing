@@ -1,5 +1,6 @@
 package com.danubetech.xdininja;
 
+import java.net.URI;
 import java.security.GeneralSecurityException;
 import java.util.Date;
 
@@ -103,7 +104,8 @@ public class Xdi {
 
 	public static XDIWebSocketClient xdiWebSocketClientToYou() {
 
-		return new XDIWebSocketClient(State.yourXdiEndpointUri);
+		return new XDIWebSocketClient(URI.create(State.yourXdiWebSocketEndpointUri.toString().replace("wss", "ws")));
+//		return new XDIWebSocketClient(State.yourXdiWebSocketEndpointUri);
 	}
 
 	public static MessagingResponse sendMessage(XDIClient<?> client, Message message) {

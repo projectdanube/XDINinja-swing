@@ -13,7 +13,8 @@ public class State {
 	public static String yourXDINameNumber;
 	public static CloudNumber yourCloudNumber;
 	public static URI yourXdiEndpointUri;
-	public static URI yourConnectEndpointUri;
+	public static URI yourXdiWebSocketEndpointUri;
+	public static URI yourXdiConnectEndpointUri;
 
 	public static XDIAddress agentLinkContract;
 
@@ -24,7 +25,8 @@ public class State {
 		if (yourXDINameNumber == null) return false;
 		if (yourCloudNumber == null) return false;
 		if (yourXdiEndpointUri == null) return false;
-		if (yourConnectEndpointUri == null) return false;
+		if (yourXdiWebSocketEndpointUri == null) return false;
+		if (yourXdiConnectEndpointUri == null) return false;
 		if (agentLinkContract == null) return false;
 
 		return true;

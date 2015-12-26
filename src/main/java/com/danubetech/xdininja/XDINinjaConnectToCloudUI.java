@@ -30,7 +30,7 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - wert wretwert
+		// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
 		panel5 = new JPanel();
 		label10 = new JLabel();
 		label5 = new JLabel();
@@ -51,8 +51,10 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 		yourXDINumberLabel = new JLabel();
 		label7 = new JLabel();
 		yourXDIEndpointLabel = new JLabel();
+		label12 = new JLabel();
+		yourXDIWebSocketEndpointLabel = new JLabel();
 		label9 = new JLabel();
-		yourConnectEndpointLabel = new JLabel();
+		yourXDIConnectEndpointLabel = new JLabel();
 		connectButton = new JButton();
 		label4 = new JLabel();
 		linkContractLabel = new JLabel();
@@ -190,35 +192,47 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 5, 0), 0, 0));
 
-					//---- label9 ----
-					label9.setText("Your Connect Endpoint:");
-					panel3.add(label9, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0,
+					//---- label12 ----
+					label12.setText("Your XDI WebSocket Endpoint:");
+					panel3.add(label12, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 5, 5), 0, 0));
 
-					//---- yourConnectEndpointLabel ----
-					yourConnectEndpointLabel.setText("-");
-					panel3.add(yourConnectEndpointLabel, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
+					//---- yourXDIWebSocketEndpointLabel ----
+					yourXDIWebSocketEndpointLabel.setText("-");
+					panel3.add(yourXDIWebSocketEndpointLabel, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
+						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+						new Insets(0, 0, 5, 0), 0, 0));
+
+					//---- label9 ----
+					label9.setText("Your XDI Connect Endpoint:");
+					panel3.add(label9, new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0,
+						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+						new Insets(0, 0, 5, 5), 0, 0));
+
+					//---- yourXDIConnectEndpointLabel ----
+					yourXDIConnectEndpointLabel.setText("-");
+					panel3.add(yourXDIConnectEndpointLabel, new GridBagConstraints(1, 5, 1, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 5, 0), 0, 0));
 
 					//---- connectButton ----
 					connectButton.setText("Connect To Cloud");
-					panel3.add(connectButton, new GridBagConstraints(0, 5, 2, 1, 0.0, 0.0,
+					panel3.add(connectButton, new GridBagConstraints(0, 6, 2, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 5, 0), 0, 0));
 
 					//---- label4 ----
 					label4.setText("Link Contract:");
-					panel3.add(label4, new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0,
+					panel3.add(label4, new GridBagConstraints(0, 7, 1, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-						new Insets(0, 0, 5, 5), 0, 0));
+						new Insets(0, 0, 0, 5), 0, 0));
 
 					//---- linkContractLabel ----
 					linkContractLabel.setText("-");
-					panel3.add(linkContractLabel, new GridBagConstraints(1, 6, 1, 1, 0.0, 0.0,
+					panel3.add(linkContractLabel, new GridBagConstraints(1, 7, 1, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-						new Insets(0, 0, 5, 0), 0, 0));
+						new Insets(0, 0, 0, 0), 0, 0));
 				}
 				panel2.add(panel3, BorderLayout.NORTH);
 			}
@@ -237,7 +251,7 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - wert wretwert
+	// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
 	protected JPanel panel5;
 	protected JLabel label10;
 	protected JLabel label5;
@@ -258,8 +272,10 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 	protected JLabel yourXDINumberLabel;
 	protected JLabel label7;
 	protected JLabel yourXDIEndpointLabel;
+	protected JLabel label12;
+	protected JLabel yourXDIWebSocketEndpointLabel;
 	protected JLabel label9;
-	protected JLabel yourConnectEndpointLabel;
+	protected JLabel yourXDIConnectEndpointLabel;
 	protected JButton connectButton;
 	protected JLabel label4;
 	protected JLabel linkContractLabel;

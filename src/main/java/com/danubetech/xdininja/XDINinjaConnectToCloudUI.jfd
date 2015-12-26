@@ -136,36 +136,49 @@ new FormModel {
 							"gridx": 1
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "label9"
-							"text": "Your Connect Endpoint:"
+							name: "label12"
+							"text": "Your XDI WebSocket Endpoint:"
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 							"gridy": 4
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "yourConnectEndpointLabel"
+							name: "yourXDIWebSocketEndpointLabel"
 							"text": "-"
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 							"gridy": 4
+							"gridx": 1
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label9"
+							"text": "Your XDI Connect Endpoint:"
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"gridy": 5
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "yourXDIConnectEndpointLabel"
+							"text": "-"
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"gridy": 5
 							"gridx": 1
 						} )
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "connectButton"
 							"text": "Connect To Cloud"
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-							"gridy": 5
+							"gridy": 6
 							"gridwidth": 2
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "label4"
 							"text": "Link Contract:"
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-							"gridy": 6
+							"gridy": 7
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "linkContractLabel"
 							"text": "-"
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-							"gridy": 6
+							"gridy": 7
 							"gridx": 1
 						} )
 					}, new FormLayoutConstraints( class java.lang.String ) {
