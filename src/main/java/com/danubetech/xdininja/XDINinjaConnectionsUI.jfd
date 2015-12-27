@@ -133,6 +133,10 @@ new FormModel {
 					name: "loadButton"
 					"text": "Load"
 				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "deleteAllButton"
+					"text": "Delete All"
+				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "South"
 			} )

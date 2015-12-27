@@ -23,14 +23,14 @@ import javax.swing.JTextPane;
 /**
  * @author wert wretwert
  */
-public class XDINinjaWallUI extends JFrame {
-	public XDINinjaWallUI() {
+public class XDINinjaWebSocketUI extends JFrame {
+	public XDINinjaWebSocketUI() {
 		initComponents();
 	}
 
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
+		// Generated using JFormDesigner Evaluation license - wert wretwert
 		panel3 = new JPanel();
 		label1 = new JLabel();
 		panel2 = new JPanel();
@@ -39,7 +39,7 @@ public class XDINinjaWallUI extends JFrame {
 		wallList = new JList();
 
 		//======== this ========
-		setTitle("XDI Ninja! - Wall");
+		setTitle("XDI Ninja! - WebSocket");
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
 
@@ -56,7 +56,7 @@ public class XDINinjaWallUI extends JFrame {
 			panel3.setLayout(new FlowLayout());
 
 			//---- label1 ----
-			label1.setText("Wall");
+			label1.setText("WebSocket");
 			label1.setFont(new Font("Cantarell", Font.PLAIN, 36));
 			panel3.add(label1);
 		}
@@ -83,7 +83,7 @@ public class XDINinjaWallUI extends JFrame {
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
+	// Generated using JFormDesigner Evaluation license - wert wretwert
 	protected JPanel panel3;
 	protected JLabel label1;
 	protected JPanel panel2;

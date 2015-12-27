@@ -5,13 +5,13 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
-			"title": "XDI Ninja! - Wall"
+			"title": "XDI Ninja! - WebSocket"
 			"$sizePolicy": 1
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
 				name: "panel3"
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
-					"text": "Wall"
+					"text": "WebSocket"
 					"font": new java.awt.Font( "Cantarell", 0, 36 )
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {

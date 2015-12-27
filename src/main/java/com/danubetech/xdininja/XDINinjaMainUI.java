@@ -31,10 +31,9 @@ public class XDINinjaMainUI extends JFrame {
 		label5 = new JLabel();
 		panel1 = new JPanel();
 		connectToCloudButton = new JButton();
+		webSocketButton = new JButton();
 		connectionsButton = new JButton();
-		wallButton = new JButton();
 		profileButton = new JButton();
-		chatButton = new JButton();
 
 		//======== this ========
 		setTitle("XDI Ninja!");
@@ -72,21 +71,17 @@ public class XDINinjaMainUI extends JFrame {
 			connectToCloudButton.setText("Connect To Cloud");
 			panel1.add(connectToCloudButton);
 
+			//---- webSocketButton ----
+			webSocketButton.setText("WebSocket");
+			panel1.add(webSocketButton);
+
 			//---- connectionsButton ----
 			connectionsButton.setText("Connections");
 			panel1.add(connectionsButton);
 
-			//---- wallButton ----
-			wallButton.setText("Wall");
-			panel1.add(wallButton);
-
 			//---- profileButton ----
 			profileButton.setText("Profile");
 			panel1.add(profileButton);
-
-			//---- chatButton ----
-			chatButton.setText("Chat");
-			panel1.add(chatButton);
 		}
 		contentPane.add(panel1, BorderLayout.CENTER);
 		setSize(700, 175);
@@ -101,9 +96,8 @@ public class XDINinjaMainUI extends JFrame {
 	protected JLabel label5;
 	protected JPanel panel1;
 	protected JButton connectToCloudButton;
+	protected JButton webSocketButton;
 	protected JButton connectionsButton;
-	protected JButton wallButton;
 	protected JButton profileButton;
-	protected JButton chatButton;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }

@@ -28,20 +28,16 @@ new FormModel {
 					"text": "Connect To Cloud"
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "webSocketButton"
+					"text": "WebSocket"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "connectionsButton"
 					"text": "Connections"
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "wallButton"
-					"text": "Wall"
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "profileButton"
 					"text": "Profile"
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "chatButton"
-					"text": "Chat"
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "Center"

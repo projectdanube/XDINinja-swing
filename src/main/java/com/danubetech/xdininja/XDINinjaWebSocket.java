@@ -17,11 +17,11 @@ import xdi2.messaging.MessageEnvelope;
 import xdi2.messaging.operations.Operation;
 import xdi2.messaging.response.TransportMessagingResponse;
 
-public class XDINinjaWall extends XDINinjaWallUI implements Callback {
+public class XDINinjaWebSocket extends XDINinjaWebSocketUI implements Callback {
 
 	private XDIWebSocketClient xdiWebSocketClient;
 
-	public XDINinjaWall() {
+	public XDINinjaWebSocket() {
 
 		super();
 		initComponents();

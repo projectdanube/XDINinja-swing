@@ -75,6 +75,16 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 				}
 			} });
 
+		this.deleteAllButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					deleteAll();
+				} catch (Exception ex) {
+					Util.error(ex);
+				}
+			} });
+
 		this.deleteLinkContractButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -145,7 +155,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 	private void inviteProfile() throws Exception {
 
-		String otherXDINameNumber = this.requestProfileTextField.getText();
+		String otherXDINameNumber = this.inviteProfileTextField.getText();
 		XDIDiscoveryResult result = XDIDiscoveryClient.DEFAULT_DISCOVERY_CLIENT.discoverFromRegistry(XDIAddress.create(otherXDINameNumber));
 		CloudNumber otherCloudNumber = result.getCloudNumber();
 
@@ -204,9 +214,32 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		deferredMessagesTable.setModel(deferredMessagesModel);
 	}
 
+	private void deleteAll() throws Exception {
+
+		Message messageAgentToYou = Xdi.createMessageAgentToYou();
+
+		for (int i=0; i<deferredMessagesTable.getModel().getRowCount(); i++) {
+
+			XdiEntity deferredMessageXdiEntity = (XdiEntity) deferredMessagesTable.getModel().getValueAt(i, 0);
+			messageAgentToYou.createDelOperation(deferredMessageXdiEntity.getXDIAddress());
+		}
+
+		for (int i=0; i<linkContractsTable.getModel().getRowCount(); i++) {
+
+			XdiEntity linkContractXdiEntity = (XdiEntity) linkContractsTable.getModel().getValueAt(i, 0);
+			if (State.agentLinkContract.equals(linkContractXdiEntity.getXDIAddress())) continue;
+			messageAgentToYou.createDelOperation(linkContractXdiEntity.getXDIAddress());
+		}
+
+		Xdi.signMessage(messageAgentToYou);
+		Xdi.sendMessage(messageAgentToYou);
+
+		Util.info("All link contracts and deferred messages deleted.");
+	}
+
 	private void deleteLinkContract() throws Exception {
 
-		XdiEntity linkContractXdiEntity = (XdiEntity) linkContractsTable.getModel().getValueAt(linkContractsTable.getSelectedRow(), linkContractsTable.getSelectedColumn());
+		XdiEntity linkContractXdiEntity = (XdiEntity) linkContractsTable.getModel().getValueAt(linkContractsTable.getSelectedRow(), 0);
 
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
 		messageAgentToYou.createDelOperation(linkContractXdiEntity.getXDIAddress());
@@ -218,7 +251,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 	private void viewLinkContract() throws Exception {
 
-		XdiEntity linkContractXdiEntity = (XdiEntity) linkContractsTable.getModel().getValueAt(linkContractsTable.getSelectedRow(), linkContractsTable.getSelectedColumn());
+		XdiEntity linkContractXdiEntity = (XdiEntity) linkContractsTable.getModel().getValueAt(linkContractsTable.getSelectedRow(), 0);
 		GenericLinkContract linkContract = GenericLinkContract.fromXdiEntity(linkContractXdiEntity);
 
 		StringBuffer buffer = new StringBuffer();
@@ -236,7 +269,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 	private void deleteDeferredMessage() throws Exception {
 
-		XdiEntity deferredMessageXdiEntity = (XdiEntity) deferredMessagesTable.getModel().getValueAt(deferredMessagesTable.getSelectedRow(), deferredMessagesTable.getSelectedColumn());
+		XdiEntity deferredMessageXdiEntity = (XdiEntity) deferredMessagesTable.getModel().getValueAt(deferredMessagesTable.getSelectedRow(), 0);
 
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
 		messageAgentToYou.createDelOperation(deferredMessageXdiEntity.getXDIAddress());
@@ -248,7 +281,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 	private void viewDeferredMessage() throws Exception {
 
-		XdiEntity deferredMessageXdiEntity = (XdiEntity) deferredMessagesTable.getModel().getValueAt(deferredMessagesTable.getSelectedRow(), deferredMessagesTable.getSelectedColumn());
+		XdiEntity deferredMessageXdiEntity = (XdiEntity) deferredMessagesTable.getModel().getValueAt(deferredMessagesTable.getSelectedRow(), 0);
 		Message deferredMessage = Message.fromXdiEntity(deferredMessageXdiEntity);
 
 		StringBuffer buffer = new StringBuffer();
@@ -263,7 +296,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 	private void approveDeferredMessage() throws Exception {
 
-		XdiEntity deferredMessageXdiEntity = (XdiEntity) deferredMessagesTable.getModel().getValueAt(deferredMessagesTable.getSelectedRow(), deferredMessagesTable.getSelectedColumn());
+		XdiEntity deferredMessageXdiEntity = (XdiEntity) deferredMessagesTable.getModel().getValueAt(deferredMessagesTable.getSelectedRow(), 0);
 		Message deferredMessage = Message.fromXdiEntity(deferredMessageXdiEntity);
 
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();

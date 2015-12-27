@@ -35,10 +35,10 @@ public class XDINinjaMain extends XDINinjaMainUI {
 				frame.setVisible(true);
 			} });
 
-		this.wallButton.addActionListener(new ActionListener() {
+		this.webSocketButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				JFrame frame = new XDINinjaWall();
+				JFrame frame = new XDINinjaWebSocket();
 				frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 				frame.setVisible(true);
 			} });
@@ -49,12 +49,6 @@ public class XDINinjaMain extends XDINinjaMainUI {
 				JFrame frame = new XDINinjaProfile();
 				frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 				frame.setVisible(true);
-			} });
-
-		this.chatButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-
 			} });
 	}
 
