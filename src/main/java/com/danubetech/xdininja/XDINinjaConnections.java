@@ -145,8 +145,10 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 		Message messageYouToOther = Xdi.createMessageYouToOther(otherCloudNumber, null, ConnectLinkContract.class);
 		messageYouToOther.setParameter(XDIMessagingConstants.XDI_ADD_MESSAGE_PARAMETER_MSG, Boolean.TRUE);
-		Operation connectOperation = messageYouToOther.createConnectOperation(XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE_ADDRESS);
-		connectOperation.setVariableValue(XDIArc.create("{$get}"), otherCloudNumber.getXDIAddress());
+		Operation connectOperation1 = messageYouToOther.createConnectOperation(XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE_ADDRESS);
+		Operation connectOperation2 = messageYouToOther.createConnectOperation(XDIBootstrap.PUSH_LINK_CONTRACT_TEMPLATE_ADDRESS);
+		connectOperation1.setVariableValue(XDIArc.create("{$get}"), otherCloudNumber.getXDIAddress());
+		connectOperation2.setVariableValue(XDIArc.create("{$push}"), otherCloudNumber.getXDIAddress());
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
 		messageAgentToYou.createSendOperation(messageYouToOther);
 		Xdi.signMessage(messageAgentToYou);
@@ -163,8 +165,10 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 		Message messageOtherToYou = Xdi.createMessageOtherToYou(otherCloudNumber, null, ConnectLinkContract.class);
 		messageOtherToYou.setParameter(XDIMessagingConstants.XDI_ADD_MESSAGE_PARAMETER_MSG, Boolean.TRUE);
-		Operation connectOperation = messageOtherToYou.createConnectOperation(XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE_ADDRESS);
-		connectOperation.setVariableValue(XDIArc.create("{$get}"), State.yourCloudNumber.getXDIAddress());
+		Operation connectOperation1 = messageOtherToYou.createConnectOperation(XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE_ADDRESS);
+		Operation connectOperation2 = messageOtherToYou.createConnectOperation(XDIBootstrap.PUSH_LINK_CONTRACT_TEMPLATE_ADDRESS);
+		connectOperation1.setVariableValue(XDIArc.create("{$get}"), State.yourCloudNumber.getXDIAddress());
+		connectOperation2.setVariableValue(XDIArc.create("{$push}"), State.yourCloudNumber.getXDIAddress());
 		Message messageYouToOther = Xdi.createMessageYouToOther(otherCloudNumber, null, SendLinkContract.class);
 		messageYouToOther.createSendOperation(messageOtherToYou);
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
