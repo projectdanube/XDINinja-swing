@@ -21,6 +21,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "requestProfileTextField"
 					"columns": 20
+					"text": "=yourfriend"
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "requestProfileButton"
@@ -33,6 +34,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "inviteProfileTextField"
 					"columns": 20
+					"text": "=yourfriend"
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "inviteProfileButton"
@@ -44,6 +46,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "requestInviteChatTextField"
+					"text": "=yourfriend"
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "requestInviteChatButton"

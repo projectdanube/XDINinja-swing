@@ -80,6 +80,7 @@ public class XDINinjaConnectionsUI extends JFrame {
 
 			//---- requestProfileTextField ----
 			requestProfileTextField.setColumns(20);
+			requestProfileTextField.setText("=yourfriend");
 			panel1.add(requestProfileTextField);
 
 			//---- requestProfileButton ----
@@ -92,6 +93,7 @@ public class XDINinjaConnectionsUI extends JFrame {
 
 			//---- inviteProfileTextField ----
 			inviteProfileTextField.setColumns(20);
+			inviteProfileTextField.setText("=yourfriend");
 			panel1.add(inviteProfileTextField);
 
 			//---- inviteProfileButton ----
@@ -101,6 +103,9 @@ public class XDINinjaConnectionsUI extends JFrame {
 			//---- label3 ----
 			label3.setText("Request Bi-Directional Chat");
 			panel1.add(label3);
+
+			//---- requestInviteChatTextField ----
+			requestInviteChatTextField.setText("=yourfriend");
 			panel1.add(requestInviteChatTextField);
 
 			//---- requestInviteChatButton ----

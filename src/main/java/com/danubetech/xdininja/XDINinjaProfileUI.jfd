@@ -7,6 +7,20 @@ new FormModel {
 			name: "this"
 			"title": "XDI Ninja! - Profile"
 			"$sizePolicy": 1
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+				name: "panel2"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "loadButton"
+					"text": "Load Your Profile"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "saveButton"
+					"text": "Save Your Profile"
+					"enabled": false
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "North"
+			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JTable" ) {
@@ -18,21 +32,13 @@ new FormModel {
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
 				name: "panel1"
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "loadButton"
-					"text": "Load Your Profile"
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "saveButton"
-					"text": "Save Your Profile"
-					"enabled": false
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "loadConnectionButton"
-					"text": "Load Friend Profile:"
+					"text": "Load Connection Profile:"
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "loadConnectionTextField"
 					"columns": 10
+					"text": "=friendname"
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "South"

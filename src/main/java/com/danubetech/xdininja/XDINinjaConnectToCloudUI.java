@@ -30,7 +30,7 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
+		// Generated using JFormDesigner Evaluation license - wert wretwert
 		panel5 = new JPanel();
 		label10 = new JLabel();
 		label5 = new JLabel();
@@ -157,7 +157,7 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 
 					//---- yourXDINameNumberTextField ----
 					yourXDINameNumberTextField.setColumns(60);
-					yourXDINameNumberTextField.setText("=alice");
+					yourXDINameNumberTextField.setText("=yourname");
 					panel3.add(yourXDINameNumberTextField, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 5, 0), 0, 0));
@@ -251,7 +251,7 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
+	// Generated using JFormDesigner Evaluation license - wert wretwert
 	protected JPanel panel5;
 	protected JLabel label10;
 	protected JLabel label5;

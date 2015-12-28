@@ -43,11 +43,11 @@ public class XDINinjaWebSocket extends XDINinjaWebSocketUI implements Callback {
 				}
 			} });
 
-		this.connectButton.addActionListener(new ActionListener() {
+		this.openButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					connect();
+					open();
 				} catch (Exception ex) {
 					Util.error(ex);
 				}
@@ -63,7 +63,7 @@ public class XDINinjaWebSocket extends XDINinjaWebSocketUI implements Callback {
 		}
 	}
 
-	private void connect() throws Exception {
+	private void open() throws Exception {
 
 		xdiWebSocketClient = Xdi.xdiWebSocketClientToYou();
 
@@ -75,7 +75,7 @@ public class XDINinjaWebSocket extends XDINinjaWebSocketUI implements Callback {
 		Xdi.signMessage(messageAgentToYou);
 		Xdi.sendMessage(xdiWebSocketClient, messageAgentToYou);
 
-		connectButton.setEnabled(false);
+		openButton.setEnabled(false);
 
 		Util.info("Successfully connected.");
 	}

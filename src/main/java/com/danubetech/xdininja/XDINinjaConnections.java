@@ -20,6 +20,7 @@ import xdi2.core.util.iterators.IteratorListMaker;
 import xdi2.discovery.XDIDiscoveryClient;
 import xdi2.discovery.XDIDiscoveryResult;
 import xdi2.messaging.Message;
+import xdi2.messaging.constants.XDIMessagingConstants;
 import xdi2.messaging.operations.Operation;
 import xdi2.messaging.response.MessagingResponse;
 
@@ -143,6 +144,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		CloudNumber otherCloudNumber = result.getCloudNumber();
 
 		Message messageYouToOther = Xdi.createMessageYouToOther(otherCloudNumber, null, ConnectLinkContract.class);
+		messageYouToOther.setParameter(XDIMessagingConstants.XDI_ADD_MESSAGE_PARAMETER_MSG, Boolean.TRUE);
 		Operation connectOperation = messageYouToOther.createConnectOperation(XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE_ADDRESS);
 		connectOperation.setVariableValue(XDIArc.create("{$get}"), otherCloudNumber.getXDIAddress());
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
@@ -160,6 +162,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		CloudNumber otherCloudNumber = result.getCloudNumber();
 
 		Message messageOtherToYou = Xdi.createMessageOtherToYou(otherCloudNumber, null, ConnectLinkContract.class);
+		messageOtherToYou.setParameter(XDIMessagingConstants.XDI_ADD_MESSAGE_PARAMETER_MSG, Boolean.TRUE);
 		Operation connectOperation = messageOtherToYou.createConnectOperation(XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE_ADDRESS);
 		connectOperation.setVariableValue(XDIArc.create("{$get}"), State.yourCloudNumber.getXDIAddress());
 		Message messageYouToOther = Xdi.createMessageYouToOther(otherCloudNumber, null, SendLinkContract.class);
@@ -192,7 +195,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		DefaultTableModel linkContractsModel = new DefaultTableModel();
 		DefaultTableModel deferredMessagesModel = new DefaultTableModel();
 		linkContractsModel.addColumn("Link Contract");
-		deferredMessagesModel.addColumn("Message");
+		deferredMessagesModel.addColumn("Deferred Message");
 
 		if (linkContractsEntityCollection != null) {
 

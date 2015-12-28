@@ -17,26 +17,50 @@ new FormModel {
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "North"
 			} )
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
-				name: "panel2"
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "connectButton"
-					"text": "Connect"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+				name: "panel4"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+					name: "panel1"
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "openButton"
+						"text": "Open"
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "North"
 				} )
-			}, new FormLayoutConstraints( class java.lang.String ) {
-				"value": "South"
-			} )
-			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-				name: "scrollPane1"
-				add( new FormComponent( "javax.swing.JList" ) {
-					name: "wallList"
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JList" ) {
+						name: "wallList"
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "Center"
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "Center"
 			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+				name: "panel2"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "chatButton"
+					"text": "Chat:"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "chatConnectionTextField"
+					"columns": 10
+					"text": "=friendname"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "chatMessageTextField"
+					"columns": 10
+					"text": "Hi there!"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "South"
+			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 530, 435 )
+			"size": new java.awt.Dimension( 735, 475 )
 		} )
 	}
 }

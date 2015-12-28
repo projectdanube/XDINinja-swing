@@ -98,7 +98,7 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JTextField" ) {
 							name: "yourXDINameNumberTextField"
 							"columns": 60
-							"text": "=alice"
+							"text": "=yourname"
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 							"gridx": 1
 						} )

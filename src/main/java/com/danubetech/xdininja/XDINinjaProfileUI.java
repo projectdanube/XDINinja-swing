@@ -27,11 +27,12 @@ public class XDINinjaProfileUI extends JFrame {
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
 		// Generated using JFormDesigner Evaluation license - wert wretwert
+		panel2 = new JPanel();
+		loadButton = new JButton();
+		saveButton = new JButton();
 		scrollPane1 = new JScrollPane();
 		profileTable = new JTable();
 		panel1 = new JPanel();
-		loadButton = new JButton();
-		saveButton = new JButton();
 		loadConnectionButton = new JButton();
 		loadConnectionTextField = new JTextField();
 
@@ -39,6 +40,29 @@ public class XDINinjaProfileUI extends JFrame {
 		setTitle("XDI Ninja! - Profile");
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
+
+		//======== panel2 ========
+		{
+
+			// JFormDesigner evaluation mark
+			panel2.setBorder(new javax.swing.border.CompoundBorder(
+				new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+					"JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
+					javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+					java.awt.Color.red), panel2.getBorder())); panel2.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
+
+			panel2.setLayout(new FlowLayout());
+
+			//---- loadButton ----
+			loadButton.setText("Load Your Profile");
+			panel2.add(loadButton);
+
+			//---- saveButton ----
+			saveButton.setText("Save Your Profile");
+			saveButton.setEnabled(false);
+			panel2.add(saveButton);
+		}
+		contentPane.add(panel2, BorderLayout.NORTH);
 
 		//======== scrollPane1 ========
 		{
@@ -48,31 +72,15 @@ public class XDINinjaProfileUI extends JFrame {
 
 		//======== panel1 ========
 		{
-
-			// JFormDesigner evaluation mark
-			panel1.setBorder(new javax.swing.border.CompoundBorder(
-				new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-					"JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-					javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-					java.awt.Color.red), panel1.getBorder())); panel1.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
-
 			panel1.setLayout(new FlowLayout());
 
-			//---- loadButton ----
-			loadButton.setText("Load Your Profile");
-			panel1.add(loadButton);
-
-			//---- saveButton ----
-			saveButton.setText("Save Your Profile");
-			saveButton.setEnabled(false);
-			panel1.add(saveButton);
-
 			//---- loadConnectionButton ----
-			loadConnectionButton.setText("Load Friend Profile:");
+			loadConnectionButton.setText("Load Connection Profile:");
 			panel1.add(loadConnectionButton);
 
 			//---- loadConnectionTextField ----
 			loadConnectionTextField.setColumns(10);
+			loadConnectionTextField.setText("=friendname");
 			panel1.add(loadConnectionTextField);
 		}
 		contentPane.add(panel1, BorderLayout.SOUTH);
@@ -83,11 +91,12 @@ public class XDINinjaProfileUI extends JFrame {
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 	// Generated using JFormDesigner Evaluation license - wert wretwert
+	protected JPanel panel2;
+	protected JButton loadButton;
+	protected JButton saveButton;
 	protected JScrollPane scrollPane1;
 	protected JTable profileTable;
 	protected JPanel panel1;
-	protected JButton loadButton;
-	protected JButton saveButton;
 	protected JButton loadConnectionButton;
 	protected JTextField loadConnectionTextField;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables

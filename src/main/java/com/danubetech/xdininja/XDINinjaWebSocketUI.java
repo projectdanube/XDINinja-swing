@@ -33,10 +33,15 @@ public class XDINinjaWebSocketUI extends JFrame {
 		// Generated using JFormDesigner Evaluation license - wert wretwert
 		panel3 = new JPanel();
 		label1 = new JLabel();
-		panel2 = new JPanel();
-		connectButton = new JButton();
+		panel4 = new JPanel();
+		panel1 = new JPanel();
+		openButton = new JButton();
 		scrollPane1 = new JScrollPane();
 		wallList = new JList();
+		panel2 = new JPanel();
+		chatButton = new JButton();
+		chatConnectionTextField = new JTextField();
+		chatMessageTextField = new JTextField();
 
 		//======== this ========
 		setTitle("XDI Ninja! - WebSocket");
@@ -62,22 +67,48 @@ public class XDINinjaWebSocketUI extends JFrame {
 		}
 		contentPane.add(panel3, BorderLayout.NORTH);
 
+		//======== panel4 ========
+		{
+			panel4.setLayout(new BorderLayout());
+
+			//======== panel1 ========
+			{
+				panel1.setLayout(new FlowLayout());
+
+				//---- openButton ----
+				openButton.setText("Open");
+				panel1.add(openButton);
+			}
+			panel4.add(panel1, BorderLayout.NORTH);
+
+			//======== scrollPane1 ========
+			{
+				scrollPane1.setViewportView(wallList);
+			}
+			panel4.add(scrollPane1, BorderLayout.CENTER);
+		}
+		contentPane.add(panel4, BorderLayout.CENTER);
+
 		//======== panel2 ========
 		{
 			panel2.setLayout(new FlowLayout());
 
-			//---- connectButton ----
-			connectButton.setText("Connect");
-			panel2.add(connectButton);
+			//---- chatButton ----
+			chatButton.setText("Chat:");
+			panel2.add(chatButton);
+
+			//---- chatConnectionTextField ----
+			chatConnectionTextField.setColumns(10);
+			chatConnectionTextField.setText("=friendname");
+			panel2.add(chatConnectionTextField);
+
+			//---- chatMessageTextField ----
+			chatMessageTextField.setColumns(10);
+			chatMessageTextField.setText("Hi there!");
+			panel2.add(chatMessageTextField);
 		}
 		contentPane.add(panel2, BorderLayout.SOUTH);
-
-		//======== scrollPane1 ========
-		{
-			scrollPane1.setViewportView(wallList);
-		}
-		contentPane.add(scrollPane1, BorderLayout.CENTER);
-		setSize(530, 435);
+		setSize(735, 475);
 		setLocationRelativeTo(getOwner());
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}
@@ -86,9 +117,14 @@ public class XDINinjaWebSocketUI extends JFrame {
 	// Generated using JFormDesigner Evaluation license - wert wretwert
 	protected JPanel panel3;
 	protected JLabel label1;
-	protected JPanel panel2;
-	protected JButton connectButton;
+	protected JPanel panel4;
+	protected JPanel panel1;
+	protected JButton openButton;
 	protected JScrollPane scrollPane1;
 	protected JList wallList;
+	protected JPanel panel2;
+	protected JButton chatButton;
+	protected JTextField chatConnectionTextField;
+	protected JTextField chatMessageTextField;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 }
