@@ -2,8 +2,8 @@ package com.danubetech.xdininja;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowStateListener;
 
 import javax.swing.DefaultListModel;
 
@@ -33,15 +33,17 @@ public class XDINinjaWebSocket extends XDINinjaWebSocketUI implements Callback {
 
 		wallList.setModel(new DefaultListModel());
 
-		this.addWindowStateListener(new WindowStateListener() {
+		this.addWindowListener(new WindowAdapter() {
+
 			@Override
-			public void windowStateChanged(WindowEvent arg0) {
+			public void windowClosing(WindowEvent arg0) {
 				try {
-					if (arg0.getID() == WindowEvent.WINDOW_CLOSED) windowClosed();
+					onWindowClosing();
 				} catch (Exception ex) {
 					Util.error(ex);
 				}
-			} });
+			}
+		});
 
 		this.openButton.addActionListener(new ActionListener() {
 			@Override
@@ -54,7 +56,7 @@ public class XDINinjaWebSocket extends XDINinjaWebSocketUI implements Callback {
 			} });
 	}
 
-	private void windowClosed() throws Exception {
+	private void onWindowClosing() throws Exception {
 
 		if (xdiWebSocketClient != null) {
 
