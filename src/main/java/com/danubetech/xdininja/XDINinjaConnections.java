@@ -308,6 +308,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
 		messageAgentToYou.createSendOperation(deferredMessage);
+		messageAgentToYou.createDelOperation(deferredMessageXdiEntity.getXDIAddress());
 		Xdi.signMessage(messageAgentToYou);
 		Xdi.sendMessage(messageAgentToYou);
 
