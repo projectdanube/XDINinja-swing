@@ -203,7 +203,7 @@ public class XDINinjaConnectionsUI extends JFrame {
 			panel6.add(deleteAllButton);
 		}
 		contentPane.add(panel6, BorderLayout.SOUTH);
-		setSize(700, 390);
+		setSize(1000, 390);
 		setLocationRelativeTo(getOwner());
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}
