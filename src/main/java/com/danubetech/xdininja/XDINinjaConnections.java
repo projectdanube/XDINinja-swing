@@ -5,9 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.table.DefaultTableModel;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import xdi2.core.ContextNode;
 import xdi2.core.bootstrap.XDIBootstrap;
 import xdi2.core.features.digests.SHADigest;
@@ -33,8 +30,6 @@ import xdi2.messaging.operations.Operation;
 import xdi2.messaging.response.MessagingResponse;
 
 public class XDINinjaConnections extends XDINinjaConnectionsUI {
-
-	private static Logger log = LoggerFactory.getLogger(XDINinjaConnections.class.getName());
 
 	public XDINinjaConnections() {
 
@@ -220,8 +215,6 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		XDIArc digestLinkContractXDIArc = XdiEntityInstanceUnordered.createXDIArc();
 		XDIAddress digestLinkContractXDIAddress = GenericLinkContract.createGenericLinkContractXDIAddress(State.yourCloudNumber.getXDIAddress(), otherCloudNumber.getXDIAddress(), LinkContractTemplate.getTemplateAuthorityAndId(XDIBootstrap.MSG_DIGEST_LINK_CONTRACT_TEMPLATE_ADDRESS), digestLinkContractXDIArc);
 		messageOtherToYouCONNECT.setLinkContractXDIAddress(digestLinkContractXDIAddress);
-
-		log.warn("--->  " + messageOtherToYouCONNECT.getContextNode().getGraph());
 
 		SHADigest digest = new SHABasicDigestCreator().createDigest(messageOtherToYouCONNECT.getContextNode());
 		String digestString = digest.getXdiAttribute().getLiteralDataString();
