@@ -38,13 +38,13 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>webstart-maven-plugin</artifactId>
 				<version>1.0-beta-6</version>
-				<executions>
+<!--				<executions>
 					<execution>
 						<goals>
 							<goal>jnlp</goal>
 						</goals>
 					</execution>
-				</executions>
+				</executions>-->
 				<dependencies>
 					<dependency>
 						<groupId>org.codehaus.mojo</groupId>
