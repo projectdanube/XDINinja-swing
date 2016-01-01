@@ -11,9 +11,17 @@ import xdi2.client.impl.websocket.XDIWebSocketClient;
 import xdi2.client.impl.websocket.XDIWebSocketClient.Callback;
 import xdi2.core.bootstrap.XDIBootstrap;
 import xdi2.core.constants.XDIConstants;
+import xdi2.core.features.linkcontracts.instance.ConnectLinkContract;
+import xdi2.core.syntax.CloudNumber;
+import xdi2.core.syntax.XDIAddress;
 import xdi2.core.syntax.XDIArc;
+import xdi2.core.syntax.XDIStatement;
+import xdi2.core.util.XDIAddressUtil;
+import xdi2.discovery.XDIDiscoveryClient;
+import xdi2.discovery.XDIDiscoveryResult;
 import xdi2.messaging.Message;
 import xdi2.messaging.MessageEnvelope;
+import xdi2.messaging.constants.XDIMessagingConstants;
 import xdi2.messaging.operations.Operation;
 import xdi2.messaging.response.TransportMessagingResponse;
 
@@ -54,6 +62,16 @@ public class XDINinjaWebSocket extends XDINinjaWebSocketUI implements Callback {
 					Util.error(ex);
 				}
 			} });
+
+		this.chatButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					chat();
+				} catch (Exception ex) {
+					Util.error(ex);
+				}
+			} });
 	}
 
 	private void onWindowClosing() throws Exception {
@@ -80,6 +98,29 @@ public class XDINinjaWebSocket extends XDINinjaWebSocketUI implements Callback {
 		openButton.setEnabled(false);
 
 		Util.info("Successfully connected.");
+	}
+
+	private void chat() throws Exception {
+
+		String otherXDINameNumber = this.chatConnectionTextField.getText();
+		String message = this.chatMessageTextField.getText();
+		XDIDiscoveryResult result = XDIDiscoveryClient.DEFAULT_DISCOVERY_CLIENT.discoverFromRegistry(XDIAddress.create(otherXDINameNumber));
+		CloudNumber otherCloudNumber = result.getCloudNumber();
+
+		Message messageYouToOtherSET = Xdi.createMessageYouToOther(otherCloudNumber, null, ConnectLinkContract.class);
+		messageYouToOtherSET.setParameter(XDIMessagingConstants.XDI_ADD_MESSAGE_PARAMETER_MSG, Boolean.TRUE);
+		messageYouToOtherSET.createSetOperation(
+				XDIStatement.fromLiteralComponents(
+						XDIAddressUtil.concatXDIAddresses(
+								otherCloudNumber.getXDIAddress(), 
+								XDIAddress.create("#chat$channel[<$msg>]<*!:uuid:1234>")),
+						message));
+		Message messageAgentToYouSEND = Xdi.createMessageAgentToYou();
+		messageAgentToYouSEND.createSendOperation(messageYouToOtherSET);
+		Xdi.signMessage(messageAgentToYouSEND);
+		Xdi.sendMessage(messageAgentToYouSEND);
+
+		Util.info("Chat has been sent.");
 	}
 
 	@Override

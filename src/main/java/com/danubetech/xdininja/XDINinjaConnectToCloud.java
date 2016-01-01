@@ -22,7 +22,6 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebEvent;
 import javafx.scene.web.WebView;
 import xdi2.client.constants.XDIClientConstants;
-import xdi2.client.impl.http.XDIHttpClient;
 import xdi2.core.bootstrap.XDIBootstrap;
 import xdi2.core.constants.XDIConstants;
 import xdi2.core.features.linkcontracts.instance.ConnectLinkContract;
@@ -47,6 +46,8 @@ public class XDINinjaConnectToCloud extends XDINinjaConnectToCloudUI {
 
 		Util.initJFrame(this);
 
+		this.discoveryServiceTextField.setText(XDIDiscoveryClient.DEFAULT_XDI_CLIENT.getXdiEndpointUri().toString());
+		
 		this.createButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -97,7 +98,7 @@ public class XDINinjaConnectToCloud extends XDINinjaConnectToCloudUI {
 
 		String yourXDINameNumber = yourXDINameNumberTextField.getText();
 
-		XDIDiscoveryResult result = XDIDiscoveryClient.DEFAULT_DISCOVERY_CLIENT.discover(XDIAddress.create(yourXDINameNumber), new XDIAddress[] { XDIClientConstants.WEBSOCKET_ENDPOINT_URI_TYPE, XDIClientConstants.CONNECT_ENDPOINT_URI_TYPE });
+		XDIDiscoveryResult result = new XDIDiscoveryClient(discoveryServiceTextField.getText()).discover(XDIAddress.create(yourXDINameNumber), new XDIAddress[] { XDIClientConstants.WEBSOCKET_ENDPOINT_URI_TYPE, XDIClientConstants.CONNECT_ENDPOINT_URI_TYPE });
 		yourXDINumberLabel.setText(result.getCloudNumber().toString());
 		yourXDIEndpointLabel.setText(result.getXdiEndpointUri().toString());
 		yourXDIWebSocketEndpointLabel.setText(result.getXdiWebSocketEndpointUri().toString());
@@ -130,7 +131,7 @@ public class XDINinjaConnectToCloud extends XDINinjaConnectToCloudUI {
 		requestUri.append(State.yourXdiConnectEndpointUri);
 		requestUri.append("?xdi=" + connectRequest);
 		requestUri.append("&key=" + State.yourXDINameNumber);
-		requestUri.append("&discovery=" + ((XDIHttpClient) XDIDiscoveryClient.DEFAULT_DISCOVERY_CLIENT.getRegistryXdiClient()).getXdiEndpointUri().toString());
+		requestUri.append("&discovery=" + discoveryServiceTextField.getText());
 
 		SwingUtilities.invokeLater(new Runnable() {
 

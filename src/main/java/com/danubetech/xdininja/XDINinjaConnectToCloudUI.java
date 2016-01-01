@@ -30,7 +30,7 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - wert wretwert
+		// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
 		panel5 = new JPanel();
 		label10 = new JLabel();
 		label5 = new JLabel();
@@ -46,6 +46,8 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 		panel3 = new JPanel();
 		label6 = new JLabel();
 		yourXDINameNumberTextField = new JTextField();
+		label8 = new JLabel();
+		discoveryServiceTextField = new JTextField();
 		discoverButton = new JButton();
 		label2 = new JLabel();
 		yourXDINumberLabel = new JLabel();
@@ -145,9 +147,9 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 				{
 					panel3.setLayout(new GridBagLayout());
 					((GridBagLayout)panel3.getLayout()).columnWidths = new int[] {0, 0, 0};
-					((GridBagLayout)panel3.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0};
+					((GridBagLayout)panel3.getLayout()).rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 					((GridBagLayout)panel3.getLayout()).columnWeights = new double[] {1.0, 1.0, 1.0E-4};
-					((GridBagLayout)panel3.getLayout()).rowWeights = new double[] {1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
+					((GridBagLayout)panel3.getLayout()).rowWeights = new double[] {1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
 
 					//---- label6 ----
 					label6.setText("Your XDI Name/Number:");
@@ -162,75 +164,88 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 5, 0), 0, 0));
 
+					//---- label8 ----
+					label8.setText("Discovery Service:");
+					panel3.add(label8, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
+						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+						new Insets(0, 0, 5, 5), 0, 0));
+
+					//---- discoveryServiceTextField ----
+					discoveryServiceTextField.setColumns(60);
+					discoveryServiceTextField.setText("...");
+					panel3.add(discoveryServiceTextField, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
+						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+						new Insets(0, 0, 5, 0), 0, 0));
+
 					//---- discoverButton ----
 					discoverButton.setText("Discover");
-					panel3.add(discoverButton, new GridBagConstraints(0, 1, 2, 1, 0.0, 0.0,
+					panel3.add(discoverButton, new GridBagConstraints(0, 2, 2, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 5, 0), 0, 0));
 
 					//---- label2 ----
 					label2.setText("Your XDI Number:");
-					panel3.add(label2, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
+					panel3.add(label2, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 5, 5), 0, 0));
 
 					//---- yourXDINumberLabel ----
 					yourXDINumberLabel.setText("-");
-					panel3.add(yourXDINumberLabel, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
+					panel3.add(yourXDINumberLabel, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 5, 0), 0, 0));
 
 					//---- label7 ----
 					label7.setText("Your XDI Endpoint:");
-					panel3.add(label7, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,
+					panel3.add(label7, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 5, 5), 0, 0));
 
 					//---- yourXDIEndpointLabel ----
 					yourXDIEndpointLabel.setText("-");
-					panel3.add(yourXDIEndpointLabel, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
+					panel3.add(yourXDIEndpointLabel, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 5, 0), 0, 0));
 
 					//---- label12 ----
 					label12.setText("Your XDI WebSocket Endpoint:");
-					panel3.add(label12, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0,
+					panel3.add(label12, new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 5, 5), 0, 0));
 
 					//---- yourXDIWebSocketEndpointLabel ----
 					yourXDIWebSocketEndpointLabel.setText("-");
-					panel3.add(yourXDIWebSocketEndpointLabel, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
+					panel3.add(yourXDIWebSocketEndpointLabel, new GridBagConstraints(1, 5, 1, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 5, 0), 0, 0));
 
 					//---- label9 ----
 					label9.setText("Your XDI Connect Endpoint:");
-					panel3.add(label9, new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0,
+					panel3.add(label9, new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 5, 5), 0, 0));
 
 					//---- yourXDIConnectEndpointLabel ----
 					yourXDIConnectEndpointLabel.setText("-");
-					panel3.add(yourXDIConnectEndpointLabel, new GridBagConstraints(1, 5, 1, 1, 0.0, 0.0,
+					panel3.add(yourXDIConnectEndpointLabel, new GridBagConstraints(1, 6, 1, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 5, 0), 0, 0));
 
 					//---- connectButton ----
 					connectButton.setText("Connect To Cloud");
-					panel3.add(connectButton, new GridBagConstraints(0, 6, 2, 1, 0.0, 0.0,
+					panel3.add(connectButton, new GridBagConstraints(0, 7, 2, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 5, 0), 0, 0));
 
 					//---- label4 ----
 					label4.setText("Link Contract:");
-					panel3.add(label4, new GridBagConstraints(0, 7, 1, 1, 0.0, 0.0,
+					panel3.add(label4, new GridBagConstraints(0, 8, 1, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 0, 5), 0, 0));
 
 					//---- linkContractLabel ----
 					linkContractLabel.setText("-");
-					panel3.add(linkContractLabel, new GridBagConstraints(1, 7, 1, 1, 0.0, 0.0,
+					panel3.add(linkContractLabel, new GridBagConstraints(1, 8, 1, 1, 0.0, 0.0,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 						new Insets(0, 0, 0, 0), 0, 0));
 				}
@@ -251,7 +266,7 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - wert wretwert
+	// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
 	protected JPanel panel5;
 	protected JLabel label10;
 	protected JLabel label5;
@@ -267,6 +282,8 @@ public class XDINinjaConnectToCloudUI extends JFrame {
 	protected JPanel panel3;
 	protected JLabel label6;
 	protected JTextField yourXDINameNumberTextField;
+	protected JLabel label8;
+	protected JTextField discoveryServiceTextField;
 	protected JButton discoverButton;
 	protected JLabel label2;
 	protected JLabel yourXDINumberLabel;

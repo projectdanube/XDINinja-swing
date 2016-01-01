@@ -21,6 +21,7 @@ import xdi2.core.security.digest.create.SHABasicDigestCreator;
 import xdi2.core.syntax.CloudNumber;
 import xdi2.core.syntax.XDIAddress;
 import xdi2.core.syntax.XDIArc;
+import xdi2.core.util.XDIAddressUtil;
 import xdi2.core.util.iterators.IteratorListMaker;
 import xdi2.discovery.XDIDiscoveryClient;
 import xdi2.discovery.XDIDiscoveryResult;
@@ -161,9 +162,9 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		Message messageYouToOtherCONNECT = Xdi.createMessageYouToOther(otherCloudNumber, null, ConnectLinkContract.class);
 		messageYouToOtherCONNECT.setParameter(XDIMessagingConstants.XDI_ADD_MESSAGE_PARAMETER_MSG, Boolean.TRUE);
 		Operation operationYouToOtherCONNECT1 = messageYouToOtherCONNECT.createConnectOperation(XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE_ADDRESS);
-		//		Operation operationYouToOtherCONNECT2 = messageYouToOtherCONNECT.createConnectOperation(XDIBootstrap.PUSH_LINK_CONTRACT_TEMPLATE_ADDRESS);
+		Operation operationYouToOtherCONNECT2 = messageYouToOtherCONNECT.createConnectOperation(XDIBootstrap.PUSH_LINK_CONTRACT_TEMPLATE_ADDRESS);
 		operationYouToOtherCONNECT1.setVariableValue(XDIArc.create("{$get}"), otherCloudNumber.getXDIAddress());
-		//		operationYouToOtherCONNECT2.setVariableValue(XDIArc.create("{$push}"), otherCloudNumber.getXDIAddress());
+		operationYouToOtherCONNECT2.setVariableValue(XDIArc.create("{$push}"), otherCloudNumber.getXDIAddress());
 
 		Message messageAgentToYouSEND = Xdi.createMessageAgentToYou();
 		messageAgentToYouSEND.createSendOperation(messageYouToOtherCONNECT);
@@ -182,9 +183,9 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		Message messageOtherToYouCONNECT = Xdi.createMessageOtherToYou(otherCloudNumber, null, ConnectLinkContract.class);
 		messageOtherToYouCONNECT.setParameter(XDIMessagingConstants.XDI_ADD_MESSAGE_PARAMETER_MSG, Boolean.TRUE);
 		Operation operationOtherToYouCONNECT1 = messageOtherToYouCONNECT.createConnectOperation(XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE_ADDRESS);
-		//		Operation operationOtherToYouCONNECT2 = messageOtherToYouCONNECT.createConnectOperation(XDIBootstrap.PUSH_LINK_CONTRACT_TEMPLATE_ADDRESS);
+		Operation operationOtherToYouCONNECT2 = messageOtherToYouCONNECT.createConnectOperation(XDIBootstrap.PUSH_LINK_CONTRACT_TEMPLATE_ADDRESS);
 		operationOtherToYouCONNECT1.setVariableValue(XDIArc.create("{$get}"), State.yourCloudNumber.getXDIAddress());
-		//		operationOtherToYouCONNECT2.setVariableValue(XDIArc.create("{$push}"), State.yourCloudNumber.getXDIAddress());
+		operationOtherToYouCONNECT2.setVariableValue(XDIArc.create("{$push}"), State.yourCloudNumber.getXDIAddress());
 
 		Message messageYouToOtherSEND = Xdi.createMessageYouToOther(otherCloudNumber, null, SendLinkContract.class);
 		messageYouToOtherSEND.createSendOperation(messageOtherToYouCONNECT);
@@ -207,10 +208,10 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		Operation operationOtherToYouDIGEST = messageOtherToYouDIGEST.createConnectOperation(XDIBootstrap.MSG_DIGEST_LINK_CONTRACT_TEMPLATE_ADDRESS);
 		Message messageOtherToYouCONNECT = Xdi.createMessageOtherToYou(otherCloudNumber, null, null);
 		messageOtherToYouCONNECT.setParameter(XDIMessagingConstants.XDI_ADD_MESSAGE_PARAMETER_MSG, Boolean.TRUE);
-		Operation messageOtherToYouCONNECT1 = messageOtherToYouCONNECT.createConnectOperation(XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE_ADDRESS);
-		//		Operation messageOtherToYouCONNECT2 = messageOtherToYou.createConnectOperation(XDIBootstrap.PUSH_LINK_CONTRACT_TEMPLATE_ADDRESS);
-		messageOtherToYouCONNECT1.setVariableValue(XDIArc.create("{$get}"), State.yourCloudNumber.getXDIAddress());
-		//		messageOtherToYouCONNECT2.setVariableValue(XDIArc.create("{$push}"), State.yourCloudNumber.getXDIAddress());
+		Operation operationOtherToYouCONNECT1 = messageOtherToYouCONNECT.createConnectOperation(XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE_ADDRESS);
+		Operation operationOtherToYouCONNECT2 = messageOtherToYouCONNECT.createConnectOperation(XDIBootstrap.PUSH_LINK_CONTRACT_TEMPLATE_ADDRESS);
+		operationOtherToYouCONNECT1.setVariableValue(XDIArc.create("{$get}"), State.yourCloudNumber.getXDIAddress());
+		operationOtherToYouCONNECT2.setVariableValue(XDIArc.create("{$push}"), State.yourCloudNumber.getXDIAddress());
 
 		XDIArc digestLinkContractXDIArc = XdiEntityInstanceUnordered.createXDIArc();
 		XDIAddress digestLinkContractXDIAddress = GenericLinkContract.createGenericLinkContractXDIAddress(State.yourCloudNumber.getXDIAddress(), otherCloudNumber.getXDIAddress(), LinkContractTemplate.getTemplateAuthorityAndId(XDIBootstrap.MSG_DIGEST_LINK_CONTRACT_TEMPLATE_ADDRESS), digestLinkContractXDIArc);
@@ -235,6 +236,42 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 	private void requestInviteChat() throws Exception {
 
+		String otherXDINameNumber = this.requestInviteChatTextField.getText();
+		XDIDiscoveryResult result = XDIDiscoveryClient.DEFAULT_DISCOVERY_CLIENT.discoverFromRegistry(XDIAddress.create(otherXDINameNumber));
+		CloudNumber otherCloudNumber = result.getCloudNumber();
+
+		Message messageYouToOtherCONNECT = Xdi.createMessageYouToOther(otherCloudNumber, null, ConnectLinkContract.class);
+		messageYouToOtherCONNECT.setParameter(XDIMessagingConstants.XDI_ADD_MESSAGE_PARAMETER_MSG, Boolean.TRUE);
+		Operation operationYouToOtherCONNECT = messageYouToOtherCONNECT.createConnectOperation(XDIBootstrap.SET_LINK_CONTRACT_TEMPLATE_ADDRESS);
+		operationYouToOtherCONNECT.setVariableValue(XDIArc.create("{$set}"), XDIAddressUtil.concatXDIAddresses(otherCloudNumber.getXDIAddress(), XDIAddress.create("#chat$channel")));
+
+		Message messageOtherToYouDIGEST = Xdi.createMessageOtherToYou(otherCloudNumber, null, null);
+		Operation operationOtherToYouDIGEST = messageOtherToYouDIGEST.createConnectOperation(XDIBootstrap.MSG_DIGEST_LINK_CONTRACT_TEMPLATE_ADDRESS);
+		Message messageOtherToYouCONNECT = Xdi.createMessageOtherToYou(otherCloudNumber, null, null);
+		messageOtherToYouCONNECT.setParameter(XDIMessagingConstants.XDI_ADD_MESSAGE_PARAMETER_MSG, Boolean.TRUE);
+		Operation operationOtherToYouCONNECT = messageOtherToYouCONNECT.createConnectOperation(XDIBootstrap.SET_LINK_CONTRACT_TEMPLATE_ADDRESS);
+		operationOtherToYouCONNECT.setVariableValue(XDIArc.create("{$set}"), XDIAddressUtil.concatXDIAddresses(State.yourCloudNumber.getXDIAddress(), XDIAddress.create("#chat$channel")));
+
+		XDIArc digestLinkContractXDIArc = XdiEntityInstanceUnordered.createXDIArc();
+		XDIAddress digestLinkContractXDIAddress = GenericLinkContract.createGenericLinkContractXDIAddress(State.yourCloudNumber.getXDIAddress(), otherCloudNumber.getXDIAddress(), LinkContractTemplate.getTemplateAuthorityAndId(XDIBootstrap.MSG_DIGEST_LINK_CONTRACT_TEMPLATE_ADDRESS), digestLinkContractXDIArc);
+		messageOtherToYouCONNECT.setLinkContractXDIAddress(digestLinkContractXDIAddress);
+
+		SHADigest digest = new SHABasicDigestCreator().createDigest(messageOtherToYouCONNECT.getContextNode());
+		String digestString = digest.getXdiAttribute().getLiteralDataString();
+		operationOtherToYouDIGEST.setVariableValue(XDIArc.create("{<$digest>}"), digestString);
+		operationOtherToYouDIGEST.setVariableValue(LinkContractInstantiation.XDI_ARC_INSTANCE_VARIABLE, digestLinkContractXDIArc);
+
+		Message messageYouToOtherSEND = Xdi.createMessageYouToOther(otherCloudNumber, null, SendLinkContract.class);
+		messageYouToOtherSEND.createSendOperation(messageOtherToYouCONNECT);
+
+		Message messageAgentToYouSEND = Xdi.createMessageAgentToYou();
+		messageAgentToYouSEND.createSendOperation(messageOtherToYouDIGEST);
+		messageAgentToYouSEND.createSendOperation(messageYouToOtherCONNECT);
+		messageAgentToYouSEND.createSendOperation(messageYouToOtherSEND);
+		Xdi.signMessage(messageAgentToYouSEND);
+		Xdi.sendMessage(messageAgentToYouSEND);
+
+		Util.info("Request and invitation have been sent.");
 	}
 
 	private void load() throws Exception {
