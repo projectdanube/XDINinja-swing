@@ -12,7 +12,7 @@ new FormModel {
 			"$sizePolicy": 1
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) {
 				"columns": 3
-				"rows": 3
+				"rows": 4
 			} ) {
 				name: "panel1"
 				add( new FormComponent( "javax.swing.JLabel" ) {
@@ -30,15 +30,31 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
-					"text": "Invite Connection to Profile"
+					"text": "Invite Connection to Profile (Manual)"
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "inviteProfileTextField"
+					name: "inviteProfileManualTextField"
 					"columns": 20
 					"text": "=yourfriend"
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "inviteProfileButton"
+					name: "inviteProfileManualButton"
+					"text": "Go"
+					auxiliary() {
+						"JavaCodeGenerator.variableName": "inviteProfileManualButton"
+					}
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label6"
+					"text": "Invite Connection to Profile (Auto)"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "inviteProfileAutoTextField"
+					"columns": 20
+					"text": "=yourfriend"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "inviteProfileAutoButton"
 					"text": "Go"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {

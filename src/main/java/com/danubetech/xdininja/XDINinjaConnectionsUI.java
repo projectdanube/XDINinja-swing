@@ -31,8 +31,11 @@ public class XDINinjaConnectionsUI extends JFrame {
 		requestProfileTextField = new JTextField();
 		requestProfileButton = new JButton();
 		label2 = new JLabel();
-		inviteProfileTextField = new JTextField();
-		inviteProfileButton = new JButton();
+		inviteProfileManualTextField = new JTextField();
+		inviteProfileManualButton = new JButton();
+		label6 = new JLabel();
+		inviteProfileAutoTextField = new JTextField();
+		inviteProfileAutoButton = new JButton();
 		label3 = new JLabel();
 		requestInviteChatTextField = new JTextField();
 		requestInviteChatButton = new JButton();
@@ -72,7 +75,7 @@ public class XDINinjaConnectionsUI extends JFrame {
 					javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
 					java.awt.Color.red), panel1.getBorder())); panel1.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
 
-			panel1.setLayout(new GridLayout(3, 3));
+			panel1.setLayout(new GridLayout(4, 3));
 
 			//---- label1 ----
 			label1.setText("Request Connection to Profile");
@@ -88,17 +91,30 @@ public class XDINinjaConnectionsUI extends JFrame {
 			panel1.add(requestProfileButton);
 
 			//---- label2 ----
-			label2.setText("Invite Connection to Profile");
+			label2.setText("Invite Connection to Profile (Manual)");
 			panel1.add(label2);
 
-			//---- inviteProfileTextField ----
-			inviteProfileTextField.setColumns(20);
-			inviteProfileTextField.setText("=yourfriend");
-			panel1.add(inviteProfileTextField);
+			//---- inviteProfileManualTextField ----
+			inviteProfileManualTextField.setColumns(20);
+			inviteProfileManualTextField.setText("=yourfriend");
+			panel1.add(inviteProfileManualTextField);
 
-			//---- inviteProfileButton ----
-			inviteProfileButton.setText("Go");
-			panel1.add(inviteProfileButton);
+			//---- inviteProfileManualButton ----
+			inviteProfileManualButton.setText("Go");
+			panel1.add(inviteProfileManualButton);
+
+			//---- label6 ----
+			label6.setText("Invite Connection to Profile (Auto)");
+			panel1.add(label6);
+
+			//---- inviteProfileAutoTextField ----
+			inviteProfileAutoTextField.setColumns(20);
+			inviteProfileAutoTextField.setText("=yourfriend");
+			panel1.add(inviteProfileAutoTextField);
+
+			//---- inviteProfileAutoButton ----
+			inviteProfileAutoButton.setText("Go");
+			panel1.add(inviteProfileAutoButton);
 
 			//---- label3 ----
 			label3.setText("Request Bi-Directional Chat");
@@ -215,8 +231,11 @@ public class XDINinjaConnectionsUI extends JFrame {
 	protected JTextField requestProfileTextField;
 	protected JButton requestProfileButton;
 	protected JLabel label2;
-	protected JTextField inviteProfileTextField;
-	protected JButton inviteProfileButton;
+	protected JTextField inviteProfileManualTextField;
+	protected JButton inviteProfileManualButton;
+	protected JLabel label6;
+	protected JTextField inviteProfileAutoTextField;
+	protected JButton inviteProfileAutoButton;
 	protected JLabel label3;
 	protected JTextField requestInviteChatTextField;
 	protected JButton requestInviteChatButton;

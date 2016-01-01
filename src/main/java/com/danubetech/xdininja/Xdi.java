@@ -67,6 +67,19 @@ public class Xdi {
 		return messageAgentToYou;
 	}
 
+	public static Message createMessageAgentToYou(long index) {
+
+		if (! State.ready()) throw new IllegalStateException("Not connected to cloud.");
+
+		Message messageAgentToYou = new MessageEnvelope().createMessage(State.agentCloudNumber.getXDIAddress(), index);
+		messageAgentToYou.setFromPeerRootXDIArc(State.agentCloudNumber.getPeerRootXDIArc());
+		messageAgentToYou.setToPeerRootXDIArc(State.yourCloudNumber.getPeerRootXDIArc());
+		messageAgentToYou.setLinkContractXDIAddress(State.agentLinkContract);
+		messageAgentToYou.setTimestamp(new Date());
+
+		return messageAgentToYou;
+	}
+
 	public static void signMessage(Message message) {
 
 		if (! State.ready()) throw new IllegalStateException("Not connected to cloud.");
