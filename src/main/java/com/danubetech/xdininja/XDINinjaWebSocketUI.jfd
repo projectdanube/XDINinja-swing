@@ -25,6 +25,18 @@ new FormModel {
 						name: "openButton"
 						"text": "Open"
 					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "sourceButton"
+						"text": "Source"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "interpretButton"
+						"text": "Interpret"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "clearButton"
+						"text": "Clear"
+					} )
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "North"
 				} )

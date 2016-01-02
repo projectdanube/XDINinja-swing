@@ -30,12 +30,15 @@ public class XDINinjaWebSocketUI extends JFrame {
 
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - wert wretwert
+		// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
 		panel3 = new JPanel();
 		label1 = new JLabel();
 		panel4 = new JPanel();
 		panel1 = new JPanel();
 		openButton = new JButton();
+		sourceButton = new JButton();
+		interpretButton = new JButton();
+		clearButton = new JButton();
 		scrollPane1 = new JScrollPane();
 		wallList = new JList();
 		panel2 = new JPanel();
@@ -78,6 +81,18 @@ public class XDINinjaWebSocketUI extends JFrame {
 				//---- openButton ----
 				openButton.setText("Open");
 				panel1.add(openButton);
+
+				//---- sourceButton ----
+				sourceButton.setText("Source");
+				panel1.add(sourceButton);
+
+				//---- interpretButton ----
+				interpretButton.setText("Interpret");
+				panel1.add(interpretButton);
+
+				//---- clearButton ----
+				clearButton.setText("Clear");
+				panel1.add(clearButton);
 			}
 			panel4.add(panel1, BorderLayout.NORTH);
 
@@ -114,12 +129,15 @@ public class XDINinjaWebSocketUI extends JFrame {
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - wert wretwert
+	// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
 	protected JPanel panel3;
 	protected JLabel label1;
 	protected JPanel panel4;
 	protected JPanel panel1;
 	protected JButton openButton;
+	protected JButton sourceButton;
+	protected JButton interpretButton;
+	protected JButton clearButton;
 	protected JScrollPane scrollPane1;
 	protected JList wallList;
 	protected JPanel panel2;

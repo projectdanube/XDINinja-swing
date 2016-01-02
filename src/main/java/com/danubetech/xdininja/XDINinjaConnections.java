@@ -17,10 +17,12 @@ import xdi2.core.features.linkcontracts.template.LinkContractTemplate;
 import xdi2.core.features.nodetypes.XdiEntity;
 import xdi2.core.features.nodetypes.XdiEntityCollection;
 import xdi2.core.features.nodetypes.XdiEntityInstanceUnordered;
+import xdi2.core.io.XDIWriterRegistry;
 import xdi2.core.security.digest.create.SHABasicDigestCreator;
 import xdi2.core.syntax.CloudNumber;
 import xdi2.core.syntax.XDIAddress;
 import xdi2.core.syntax.XDIArc;
+import xdi2.core.syntax.XDIStatement;
 import xdi2.core.util.XDIAddressUtil;
 import xdi2.core.util.iterators.IteratorListMaker;
 import xdi2.discovery.XDIDiscoveryClient;
@@ -112,11 +114,21 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 				}
 			} });
 
-		this.viewLinkContractButton.addActionListener(new ActionListener() {
+		this.sourceLinkContractButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					viewLinkContract();
+					sourceLinkContract();
+				} catch (Exception ex) {
+					Util.error(ex);
+				}
+			} });
+
+		this.interpretLinkContractButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					interpretLinkContract();
 				} catch (Exception ex) {
 					Util.error(ex);
 				}
@@ -132,11 +144,21 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 				}
 			} });
 
-		this.viewDeferredMessageButton.addActionListener(new ActionListener() {
+		this.sourceDeferredMessageButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					viewDeferredMessage();
+					sourceDeferredMessage();
+				} catch (Exception ex) {
+					Util.error(ex);
+				}
+			} });
+
+		this.interpretDeferredMessageButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					interpretDeferredMessage();
 				} catch (Exception ex) {
 					Util.error(ex);
 				}
@@ -347,7 +369,14 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		Util.info("Link contract " + linkContractXdiEntity + " deleted.");
 	}
 
-	private void viewLinkContract() throws Exception {
+	private void sourceLinkContract() throws Exception {
+
+		XdiEntity linkContractXdiEntity = (XdiEntity) linkContractsTable.getModel().getValueAt(linkContractsTable.getSelectedRow(), 0);
+
+		Util.info(linkContractXdiEntity.getGraph().toString("XDI/JSON/QUAD", XDIWriterRegistry.PROPERTIES_PRETTY));
+	}
+
+	private void interpretLinkContract() throws Exception {
 
 		XdiEntity linkContractXdiEntity = (XdiEntity) linkContractsTable.getModel().getValueAt(linkContractsTable.getSelectedRow(), 0);
 		GenericLinkContract linkContract = GenericLinkContract.fromXdiEntity(linkContractXdiEntity);
@@ -377,7 +406,14 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		Util.info("Deferred message " + deferredMessageXdiEntity + " deleted.");
 	}
 
-	private void viewDeferredMessage() throws Exception {
+	private void sourceDeferredMessage() throws Exception {
+
+		XdiEntity deferredMessageXdiEntity = (XdiEntity) deferredMessagesTable.getModel().getValueAt(deferredMessagesTable.getSelectedRow(), 0);
+
+		Util.info(deferredMessageXdiEntity.getGraph().toString("XDI/JSON/QUAD", XDIWriterRegistry.PROPERTIES_PRETTY));
+	}
+
+	private void interpretDeferredMessage() throws Exception {
 
 		XdiEntity deferredMessageXdiEntity = (XdiEntity) deferredMessagesTable.getModel().getValueAt(deferredMessagesTable.getSelectedRow(), 0);
 		Message deferredMessage = Message.fromXdiEntity(deferredMessageXdiEntity);
@@ -387,7 +423,22 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		buffer.append("From Peer: " + deferredMessage.getFromPeerRootXDIArc() + "\n");
 		buffer.append("To Peer: " + deferredMessage.getToPeerRootXDIArc() + "\n");
 		buffer.append("Link Contract: " + deferredMessage.getLinkContractXDIAddress() + "\n");
-		buffer.append("Operations: " + new IteratorListMaker<Operation> (deferredMessage.getOperations()).list() + "\n");
+
+		for (Operation operation : deferredMessage.getOperations()) {
+
+			XDIAddress targetXDIAddress = operation.getTargetXDIAddress();
+
+			if (targetXDIAddress != null) {
+
+				buffer.append("Operation: " + operation.getOperationXDIAddress() + " on " + targetXDIAddress + "\n");
+			} else {
+
+				for (XDIStatement targetXDIStatement : operation.getTargetXDIStatements()) {
+
+					buffer.append("Operation: " + operation.getOperationXDIAddress() + " on " + targetXDIStatement + "\n");
+				}
+			}
+		}
 
 		Util.info(buffer.toString());
 	}

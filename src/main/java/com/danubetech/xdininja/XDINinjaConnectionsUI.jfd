@@ -122,8 +122,12 @@ new FormModel {
 							"text": "Delete"
 						} )
 						add( new FormComponent( "javax.swing.JButton" ) {
-							name: "viewLinkContractButton"
-							"text": "View"
+							name: "sourceLinkContractButton"
+							"text": "Source"
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "interpretLinkContractButton"
+							"text": "Interpret"
 						} )
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
@@ -133,8 +137,12 @@ new FormModel {
 							"text": "Delete"
 						} )
 						add( new FormComponent( "javax.swing.JButton" ) {
-							name: "viewDeferredMessageButton"
-							"text": "View"
+							name: "sourceDeferredMessageButton"
+							"text": "Source"
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "interpretDeferredMessageButton"
+							"text": "Interpret"
 						} )
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "approveDeferredMessageButton"

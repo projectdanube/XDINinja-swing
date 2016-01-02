@@ -12,20 +12,25 @@ import xdi2.client.impl.websocket.XDIWebSocketClient.Callback;
 import xdi2.core.bootstrap.XDIBootstrap;
 import xdi2.core.constants.XDIConstants;
 import xdi2.core.features.linkcontracts.instance.ConnectLinkContract;
+import xdi2.core.features.nodetypes.XdiAttributeInstanceUnordered;
+import xdi2.core.io.XDIWriter;
+import xdi2.core.io.XDIWriterRegistry;
 import xdi2.core.syntax.CloudNumber;
 import xdi2.core.syntax.XDIAddress;
 import xdi2.core.syntax.XDIArc;
 import xdi2.core.syntax.XDIStatement;
-import xdi2.core.util.XDIAddressUtil;
 import xdi2.discovery.XDIDiscoveryClient;
 import xdi2.discovery.XDIDiscoveryResult;
 import xdi2.messaging.Message;
 import xdi2.messaging.MessageEnvelope;
 import xdi2.messaging.constants.XDIMessagingConstants;
 import xdi2.messaging.operations.Operation;
+import xdi2.messaging.response.FullMessagingResponse;
 import xdi2.messaging.response.TransportMessagingResponse;
 
 public class XDINinjaWebSocket extends XDINinjaWebSocketUI implements Callback {
+
+	public static XDIAddress XDI_ADD_CHAT_CHANNEL_MSG = XDIAddress.create("#chat$channel[<$msg>]");
 
 	private XDIWebSocketClient xdiWebSocketClient;
 
@@ -58,6 +63,36 @@ public class XDINinjaWebSocket extends XDINinjaWebSocketUI implements Callback {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					open();
+				} catch (Exception ex) {
+					Util.error(ex);
+				}
+			} });
+
+		this.clearButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					clear();
+				} catch (Exception ex) {
+					Util.error(ex);
+				}
+			} });
+
+		this.sourceButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					source();
+				} catch (Exception ex) {
+					Util.error(ex);
+				}
+			} });
+
+		this.interpretButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					interpret();
 				} catch (Exception ex) {
 					Util.error(ex);
 				}
@@ -100,6 +135,27 @@ public class XDINinjaWebSocket extends XDINinjaWebSocketUI implements Callback {
 		Util.info("Successfully connected.");
 	}
 
+	private void clear() throws Exception {
+
+		DefaultListModel listModel = (DefaultListModel) wallList.getModel();
+		listModel.clear();
+	}
+
+	private void source() throws Exception {
+
+		TransportMessagingResponse transportMessagingResponse = (TransportMessagingResponse) wallList.getSelectedValue();
+
+		Util.info(transportMessagingResponse.getGraph().toString("XDI/JSON/QUAD", XDIWriterRegistry.PROPERTIES_PRETTY));
+	}
+
+	private void interpret() throws Exception {
+
+		TransportMessagingResponse messagingResponse = (TransportMessagingResponse) wallList.getSelectedValue();
+		FullMessagingResponse fullMessagingResponse = (FullMessagingResponse) messagingResponse;
+		
+//		fullMessagingResponse.getMessageEnvelope().getOperationResults()
+	}
+
 	private void chat() throws Exception {
 
 		String otherXDINameNumber = this.chatConnectionTextField.getText();
@@ -107,14 +163,12 @@ public class XDINinjaWebSocket extends XDINinjaWebSocketUI implements Callback {
 		XDIDiscoveryResult result = XDIDiscoveryClient.DEFAULT_DISCOVERY_CLIENT.discoverFromRegistry(XDIAddress.create(otherXDINameNumber));
 		CloudNumber otherCloudNumber = result.getCloudNumber();
 
+		XDIArc messageXDIArc = XdiAttributeInstanceUnordered.createXDIArc();
+		XDIAddress messageXDIAddress = otherCloudNumber.getXDIAddress().concatXDIAddress(XDI_ADD_CHAT_CHANNEL_MSG).concatXDIAddress(messageXDIArc);
+
 		Message messageYouToOtherSET = Xdi.createMessageYouToOther(otherCloudNumber, null, ConnectLinkContract.class);
 		messageYouToOtherSET.setParameter(XDIMessagingConstants.XDI_ADD_MESSAGE_PARAMETER_MSG, Boolean.TRUE);
-		messageYouToOtherSET.createSetOperation(
-				XDIStatement.fromLiteralComponents(
-						XDIAddressUtil.concatXDIAddresses(
-								otherCloudNumber.getXDIAddress(), 
-								XDIAddress.create("#chat$channel[<$msg>]<*!:uuid:1234>")),
-						message));
+		messageYouToOtherSET.createSetOperation(XDIStatement.fromLiteralComponents(messageXDIAddress, message));
 		Message messageAgentToYouSEND = Xdi.createMessageAgentToYou();
 		messageAgentToYouSEND.createSendOperation(messageYouToOtherSET);
 		Xdi.signMessage(messageAgentToYouSEND);

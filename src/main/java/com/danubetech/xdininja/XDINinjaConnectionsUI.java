@@ -25,7 +25,7 @@ public class XDINinjaConnectionsUI extends JFrame {
 
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - wert wretwert
+		// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
 		panel1 = new JPanel();
 		label1 = new JLabel();
 		requestProfileTextField = new JTextField();
@@ -51,10 +51,12 @@ public class XDINinjaConnectionsUI extends JFrame {
 		panel5 = new JPanel();
 		panel7 = new JPanel();
 		deleteLinkContractButton = new JButton();
-		viewLinkContractButton = new JButton();
+		sourceLinkContractButton = new JButton();
+		interpretLinkContractButton = new JButton();
 		panel8 = new JPanel();
 		deleteDeferredMessageButton = new JButton();
-		viewDeferredMessageButton = new JButton();
+		sourceDeferredMessageButton = new JButton();
+		interpretDeferredMessageButton = new JButton();
 		approveDeferredMessageButton = new JButton();
 		panel6 = new JPanel();
 		loadButton = new JButton();
@@ -178,9 +180,13 @@ public class XDINinjaConnectionsUI extends JFrame {
 					deleteLinkContractButton.setText("Delete");
 					panel7.add(deleteLinkContractButton);
 
-					//---- viewLinkContractButton ----
-					viewLinkContractButton.setText("View");
-					panel7.add(viewLinkContractButton);
+					//---- sourceLinkContractButton ----
+					sourceLinkContractButton.setText("Source");
+					panel7.add(sourceLinkContractButton);
+
+					//---- interpretLinkContractButton ----
+					interpretLinkContractButton.setText("Interpret");
+					panel7.add(interpretLinkContractButton);
 				}
 				panel5.add(panel7);
 
@@ -192,9 +198,13 @@ public class XDINinjaConnectionsUI extends JFrame {
 					deleteDeferredMessageButton.setText("Delete");
 					panel8.add(deleteDeferredMessageButton);
 
-					//---- viewDeferredMessageButton ----
-					viewDeferredMessageButton.setText("View");
-					panel8.add(viewDeferredMessageButton);
+					//---- sourceDeferredMessageButton ----
+					sourceDeferredMessageButton.setText("Source");
+					panel8.add(sourceDeferredMessageButton);
+
+					//---- interpretDeferredMessageButton ----
+					interpretDeferredMessageButton.setText("Interpret");
+					panel8.add(interpretDeferredMessageButton);
 
 					//---- approveDeferredMessageButton ----
 					approveDeferredMessageButton.setText("Approve");
@@ -225,7 +235,7 @@ public class XDINinjaConnectionsUI extends JFrame {
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - wert wretwert
+	// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
 	protected JPanel panel1;
 	protected JLabel label1;
 	protected JTextField requestProfileTextField;
@@ -251,10 +261,12 @@ public class XDINinjaConnectionsUI extends JFrame {
 	protected JPanel panel5;
 	protected JPanel panel7;
 	protected JButton deleteLinkContractButton;
-	protected JButton viewLinkContractButton;
+	protected JButton sourceLinkContractButton;
+	protected JButton interpretLinkContractButton;
 	protected JPanel panel8;
 	protected JButton deleteDeferredMessageButton;
-	protected JButton viewDeferredMessageButton;
+	protected JButton sourceDeferredMessageButton;
+	protected JButton interpretDeferredMessageButton;
 	protected JButton approveDeferredMessageButton;
 	protected JPanel panel6;
 	protected JButton loadButton;
