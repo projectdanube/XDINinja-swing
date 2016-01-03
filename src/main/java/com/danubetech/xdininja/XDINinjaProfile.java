@@ -7,20 +7,24 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import xdi2.core.ContextNode;
+import xdi2.core.constants.XDIDictionaryConstants;
 import xdi2.core.features.nodetypes.XdiAbstractEntity;
 import xdi2.core.features.nodetypes.XdiAttribute;
 import xdi2.core.features.nodetypes.XdiEntity;
 import xdi2.core.syntax.CloudNumber;
 import xdi2.core.syntax.XDIAddress;
 import xdi2.core.syntax.XDIStatement;
-import xdi2.core.util.XDIAddressUtil;
 import xdi2.discovery.XDIDiscoveryClient;
 import xdi2.discovery.XDIDiscoveryResult;
 import xdi2.messaging.Message;
+import xdi2.messaging.constants.XDIMessagingConstants;
+import xdi2.messaging.operations.Operation;
 import xdi2.messaging.response.MessagingResponse;
 
 public class XDINinjaProfile extends XDINinjaProfileUI {
 
+	public static final XDIAddress XDI_ADD_CARD = XDIAddress.create("$card");
+	
 	public XDINinjaProfile() {
 
 		super();
@@ -65,7 +69,8 @@ public class XDINinjaProfile extends XDINinjaProfileUI {
 	private void load() throws Exception {
 
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
-		messageAgentToYou.createGetOperation(State.yourCloudNumber.getXDIAddress());
+		Operation operationAgentToYou = messageAgentToYou.createGetOperation(State.yourCloudNumber.getXDIAddress());
+		operationAgentToYou.setParameter(XDIMessagingConstants.XDI_ADD_OPERATION_PARAMETER_DEREF, Boolean.TRUE);
 		Xdi.signMessage(messageAgentToYou);
 		MessagingResponse response = Xdi.sendMessage(messageAgentToYou);
 
@@ -99,10 +104,13 @@ public class XDINinjaProfile extends XDINinjaProfileUI {
 
 		for (int i=0; i<model.getRowCount(); i++) {
 
-			XDIAddress attribute = XDIAddressUtil.concatXDIAddresses(State.yourCloudNumber.getXDIAddress(), XDIAddress.create(model.getValueAt(i, 0).toString()));
+			XDIAddress attributeXDIAddress = XDIAddress.create(model.getValueAt(i, 0).toString());
+			XDIAddress entityCardAttributeXDIAddress = State.yourCloudNumber.getXDIAddress().concatXDIAddress(XDI_ADD_CARD).concatXDIAddress(attributeXDIAddress);
+			XDIAddress entityAttributeXDIAddress = State.yourCloudNumber.getXDIAddress().concatXDIAddress(attributeXDIAddress);
 			Object literalData = model.getValueAt(i, 1);
 
-			messageAgentToYou.createSetOperation(XDIStatement.fromLiteralComponents(attribute, literalData));
+			messageAgentToYou.createSetOperation(XDIStatement.fromRelationComponents(entityCardAttributeXDIAddress, XDIDictionaryConstants.XDI_ADD_REF, entityAttributeXDIAddress));
+			messageAgentToYou.createSetOperation(XDIStatement.fromLiteralComponents(entityAttributeXDIAddress, literalData));
 		}
 
 		Xdi.signMessage(messageAgentToYou);
@@ -118,7 +126,7 @@ public class XDINinjaProfile extends XDINinjaProfileUI {
 		CloudNumber otherCloudNumber = result.getCloudNumber();
 
 		Message messageYouToOther = Xdi.createMessageYouToOther(otherCloudNumber, Xdi.profileLinkContractAddress(otherCloudNumber.getXDIAddress(), State.yourCloudNumber.getXDIAddress()), null);
-		messageYouToOther.createGetOperation(otherCloudNumber.getXDIAddress());
+		messageYouToOther.createGetOperation(otherCloudNumber.getXDIAddress().concatXDIAddress(XDI_ADD_CARD));
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
 		messageAgentToYou.createSendOperation(messageYouToOther);
 		Xdi.signMessage(messageAgentToYou);

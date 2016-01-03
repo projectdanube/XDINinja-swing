@@ -2,6 +2,7 @@ package com.danubetech.xdininja;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.StringWriter;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -33,6 +34,8 @@ import xdi2.messaging.operations.Operation;
 import xdi2.messaging.response.MessagingResponse;
 
 public class XDINinjaConnections extends XDINinjaConnectionsUI {
+
+	public static final XDIAddress XDI_ADD_CARD = XDIAddress.create("$card");
 
 	public XDINinjaConnections() {
 
@@ -185,8 +188,8 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		messageYouToOtherCONNECT.setParameter(XDIMessagingConstants.XDI_ADD_MESSAGE_PARAMETER_MSG, Boolean.TRUE);
 		Operation operationYouToOtherCONNECT1 = messageYouToOtherCONNECT.createConnectOperation(XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE_ADDRESS);
 		Operation operationYouToOtherCONNECT2 = messageYouToOtherCONNECT.createConnectOperation(XDIBootstrap.PUSH_LINK_CONTRACT_TEMPLATE_ADDRESS);
-		operationYouToOtherCONNECT1.setVariableValue(XDIArc.create("{$get}"), otherCloudNumber.getXDIAddress());
-		operationYouToOtherCONNECT2.setVariableValue(XDIArc.create("{$push}"), otherCloudNumber.getXDIAddress());
+		operationYouToOtherCONNECT1.setVariableValue(XDIArc.create("{$get}"), otherCloudNumber.getXDIAddress().concatXDIAddress(XDI_ADD_CARD));
+		operationYouToOtherCONNECT2.setVariableValue(XDIArc.create("{$push}"), otherCloudNumber.getXDIAddress().concatXDIAddress(XDI_ADD_CARD));
 
 		Message messageAgentToYouSEND = Xdi.createMessageAgentToYou();
 		messageAgentToYouSEND.createSendOperation(messageYouToOtherCONNECT);
@@ -206,8 +209,8 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		messageOtherToYouCONNECT.setParameter(XDIMessagingConstants.XDI_ADD_MESSAGE_PARAMETER_MSG, Boolean.TRUE);
 		Operation operationOtherToYouCONNECT1 = messageOtherToYouCONNECT.createConnectOperation(XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE_ADDRESS);
 		Operation operationOtherToYouCONNECT2 = messageOtherToYouCONNECT.createConnectOperation(XDIBootstrap.PUSH_LINK_CONTRACT_TEMPLATE_ADDRESS);
-		operationOtherToYouCONNECT1.setVariableValue(XDIArc.create("{$get}"), State.yourCloudNumber.getXDIAddress());
-		operationOtherToYouCONNECT2.setVariableValue(XDIArc.create("{$push}"), State.yourCloudNumber.getXDIAddress());
+		operationOtherToYouCONNECT1.setVariableValue(XDIArc.create("{$get}"), State.yourCloudNumber.getXDIAddress().concatXDIAddress(XDI_ADD_CARD));
+		operationOtherToYouCONNECT2.setVariableValue(XDIArc.create("{$push}"), State.yourCloudNumber.getXDIAddress().concatXDIAddress(XDI_ADD_CARD));
 
 		Message messageYouToOtherSEND = Xdi.createMessageYouToOther(otherCloudNumber, null, SendLinkContract.class);
 		messageYouToOtherSEND.createSendOperation(messageOtherToYouCONNECT);
@@ -232,8 +235,8 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		messageOtherToYouCONNECT.setParameter(XDIMessagingConstants.XDI_ADD_MESSAGE_PARAMETER_MSG, Boolean.TRUE);
 		Operation operationOtherToYouCONNECT1 = messageOtherToYouCONNECT.createConnectOperation(XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE_ADDRESS);
 		Operation operationOtherToYouCONNECT2 = messageOtherToYouCONNECT.createConnectOperation(XDIBootstrap.PUSH_LINK_CONTRACT_TEMPLATE_ADDRESS);
-		operationOtherToYouCONNECT1.setVariableValue(XDIArc.create("{$get}"), State.yourCloudNumber.getXDIAddress());
-		operationOtherToYouCONNECT2.setVariableValue(XDIArc.create("{$push}"), State.yourCloudNumber.getXDIAddress());
+		operationOtherToYouCONNECT1.setVariableValue(XDIArc.create("{$get}"), State.yourCloudNumber.getXDIAddress().concatXDIAddress(XDI_ADD_CARD));
+		operationOtherToYouCONNECT2.setVariableValue(XDIArc.create("{$push}"), State.yourCloudNumber.getXDIAddress().concatXDIAddress(XDI_ADD_CARD));
 
 		XDIArc digestLinkContractXDIArc = XdiEntityInstanceUnordered.createXDIArc();
 		XDIAddress digestLinkContractXDIAddress = GenericLinkContract.createGenericLinkContractXDIAddress(State.yourCloudNumber.getXDIAddress(), otherCloudNumber.getXDIAddress(), LinkContractTemplate.getTemplateAuthorityAndId(XDIBootstrap.MSG_DIGEST_LINK_CONTRACT_TEMPLATE_ADDRESS), digestLinkContractXDIArc);
@@ -373,7 +376,9 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 		XdiEntity linkContractXdiEntity = (XdiEntity) linkContractsTable.getModel().getValueAt(linkContractsTable.getSelectedRow(), 0);
 
-		Util.info(linkContractXdiEntity.getGraph().toString("XDI/JSON/QUAD", XDIWriterRegistry.PROPERTIES_PRETTY));
+		StringWriter stringWriter = new StringWriter();
+		XDIWriterRegistry.forFormat("XDI DISPLAY", null).write(linkContractXdiEntity.getContextNode(), stringWriter);
+		Util.info(stringWriter.toString());
 	}
 
 	private void interpretLinkContract() throws Exception {
@@ -410,7 +415,9 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 		XdiEntity deferredMessageXdiEntity = (XdiEntity) deferredMessagesTable.getModel().getValueAt(deferredMessagesTable.getSelectedRow(), 0);
 
-		Util.info(deferredMessageXdiEntity.getGraph().toString("XDI/JSON/QUAD", XDIWriterRegistry.PROPERTIES_PRETTY));
+		StringWriter stringWriter = new StringWriter();
+		XDIWriterRegistry.forFormat("XDI DISPLAY", null).write(deferredMessageXdiEntity.getContextNode(), stringWriter);
+		Util.info(stringWriter.toString());
 	}
 
 	private void interpretDeferredMessage() throws Exception {

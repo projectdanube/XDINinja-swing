@@ -30,7 +30,7 @@ public class XDINinjaWebSocketUI extends JFrame {
 
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
+		// Generated using JFormDesigner Evaluation license - wert wretwert
 		panel3 = new JPanel();
 		label1 = new JLabel();
 		panel4 = new JPanel();
@@ -123,13 +123,13 @@ public class XDINinjaWebSocketUI extends JFrame {
 			panel2.add(chatMessageTextField);
 		}
 		contentPane.add(panel2, BorderLayout.SOUTH);
-		setSize(735, 475);
+		setSize(735, 290);
 		setLocationRelativeTo(getOwner());
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - zezrtaz bjhbkjhbk
+	// Generated using JFormDesigner Evaluation license - wert wretwert
 	protected JPanel panel3;
 	protected JLabel label1;
 	protected JPanel panel4;

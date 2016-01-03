@@ -16,7 +16,16 @@ public class Util {
 
 		((JComponent) jframe.getContentPane()).setBorder(new EmptyBorder(10, 10, 10, 10));
 
+		setTitle(jframe);
 		removeEval(jframe.getContentPane());
+	}
+
+	private static void setTitle(JFrame jframe) {
+
+		if (State.yourXDINameNumber != null) {
+
+			jframe.setTitle(jframe.getTitle() + " (" + State.yourXDINameNumber + ")");
+		}
 	}
 
 	private static void removeEval(Container container) {

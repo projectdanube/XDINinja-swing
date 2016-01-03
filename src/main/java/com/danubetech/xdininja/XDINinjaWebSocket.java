@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.StringWriter;
 
 import javax.swing.DefaultListModel;
 
@@ -13,7 +14,6 @@ import xdi2.core.bootstrap.XDIBootstrap;
 import xdi2.core.constants.XDIConstants;
 import xdi2.core.features.linkcontracts.instance.ConnectLinkContract;
 import xdi2.core.features.nodetypes.XdiAttributeInstanceUnordered;
-import xdi2.core.io.XDIWriter;
 import xdi2.core.io.XDIWriterRegistry;
 import xdi2.core.syntax.CloudNumber;
 import xdi2.core.syntax.XDIAddress;
@@ -145,15 +145,17 @@ public class XDINinjaWebSocket extends XDINinjaWebSocketUI implements Callback {
 
 		TransportMessagingResponse transportMessagingResponse = (TransportMessagingResponse) wallList.getSelectedValue();
 
-		Util.info(transportMessagingResponse.getGraph().toString("XDI/JSON/QUAD", XDIWriterRegistry.PROPERTIES_PRETTY));
+		StringWriter stringWriter = new StringWriter();
+		XDIWriterRegistry.forFormat("XDI DISPLAY", null).write(transportMessagingResponse.getGraph(), stringWriter);
+		Util.info(stringWriter.toString());
 	}
 
 	private void interpret() throws Exception {
 
 		TransportMessagingResponse messagingResponse = (TransportMessagingResponse) wallList.getSelectedValue();
 		FullMessagingResponse fullMessagingResponse = (FullMessagingResponse) messagingResponse;
-		
-//		fullMessagingResponse.getMessageEnvelope().getOperationResults()
+
+		//		fullMessagingResponse.getMessageEnvelope().getOperationResults()
 	}
 
 	private void chat() throws Exception {
