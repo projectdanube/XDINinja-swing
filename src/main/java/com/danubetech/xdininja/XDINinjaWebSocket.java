@@ -12,7 +12,6 @@ import xdi2.client.impl.websocket.XDIWebSocketClient;
 import xdi2.client.impl.websocket.XDIWebSocketClient.Callback;
 import xdi2.core.bootstrap.XDIBootstrap;
 import xdi2.core.constants.XDIConstants;
-import xdi2.core.features.linkcontracts.instance.ConnectLinkContract;
 import xdi2.core.features.nodetypes.XdiAttributeInstanceUnordered;
 import xdi2.core.io.XDIWriterRegistry;
 import xdi2.core.syntax.CloudNumber;
@@ -168,7 +167,7 @@ public class XDINinjaWebSocket extends XDINinjaWebSocketUI implements Callback {
 		XDIArc messageXDIArc = XdiAttributeInstanceUnordered.createXDIArc();
 		XDIAddress messageXDIAddress = otherCloudNumber.getXDIAddress().concatXDIAddress(XDI_ADD_CHAT_CHANNEL_MSG).concatXDIAddress(messageXDIArc);
 
-		Message messageYouToOtherSET = Xdi.createMessageYouToOther(otherCloudNumber, null, ConnectLinkContract.class);
+		Message messageYouToOtherSET = Xdi.createMessageYouToOther(otherCloudNumber, Xdi.chatLinkContractAddress(otherCloudNumber.getXDIAddress(), State.yourCloudNumber.getXDIAddress()), null);
 		messageYouToOtherSET.setParameter(XDIMessagingConstants.XDI_ADD_MESSAGE_PARAMETER_MSG, Boolean.TRUE);
 		messageYouToOtherSET.createSetOperation(XDIStatement.fromLiteralComponents(messageXDIAddress, message));
 		Message messageAgentToYouSEND = Xdi.createMessageAgentToYou();

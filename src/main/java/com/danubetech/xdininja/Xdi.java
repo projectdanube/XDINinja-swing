@@ -26,6 +26,13 @@ public class Xdi {
 		return GenericLinkContract.createGenericLinkContractXDIAddress(authorizingAuthority, requestingAuthority, XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE.getTemplateAuthorityAndId());
 	}
 
+	public static XDIAddress chatLinkContractAddress(XDIAddress authorizingAuthority, XDIAddress requestingAuthority) {
+
+		if (! State.ready()) throw new IllegalStateException("Not connected to cloud.");
+
+		return GenericLinkContract.createGenericLinkContractXDIAddress(authorizingAuthority, requestingAuthority, XDIBootstrap.SET_LINK_CONTRACT_TEMPLATE.getTemplateAuthorityAndId());
+	}
+
 	public static Message createMessageYouToOther(CloudNumber otherCloudNumber, XDIAddress linkContractXDIAddress, Class<? extends LinkContract> linkContractClass) {
 
 		if (! State.ready()) throw new IllegalStateException("Not connected to cloud.");

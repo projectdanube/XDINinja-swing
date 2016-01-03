@@ -7,7 +7,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import xdi2.core.ContextNode;
-import xdi2.core.constants.XDIDictionaryConstants;
 import xdi2.core.features.nodetypes.XdiAbstractEntity;
 import xdi2.core.features.nodetypes.XdiAttribute;
 import xdi2.core.features.nodetypes.XdiEntity;
@@ -24,7 +23,7 @@ import xdi2.messaging.response.MessagingResponse;
 public class XDINinjaProfile extends XDINinjaProfileUI {
 
 	public static final XDIAddress XDI_ADD_CARD = XDIAddress.create("$card");
-	
+
 	public XDINinjaProfile() {
 
 		super();
@@ -69,14 +68,13 @@ public class XDINinjaProfile extends XDINinjaProfileUI {
 	private void load() throws Exception {
 
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
-		Operation operationAgentToYou = messageAgentToYou.createGetOperation(State.yourCloudNumber.getXDIAddress());
+		Operation operationAgentToYou = messageAgentToYou.createGetOperation(State.yourCloudNumber.getXDIAddress().concatXDIAddress(XDI_ADD_CARD));
 		operationAgentToYou.setParameter(XDIMessagingConstants.XDI_ADD_OPERATION_PARAMETER_DEREF, Boolean.TRUE);
 		Xdi.signMessage(messageAgentToYou);
 		MessagingResponse response = Xdi.sendMessage(messageAgentToYou);
 
-		ContextNode contextNode = response.getResultGraph().getDeepContextNode(State.yourCloudNumber.getXDIAddress());
-		if (contextNode == null) throw new RuntimeException("No profile received.");
-		XdiEntity entity = XdiAbstractEntity.fromContextNode(contextNode);
+		ContextNode contextNode = response.getResultGraph().getDeepContextNode(State.yourCloudNumber.getXDIAddress().concatXDIAddress(XDI_ADD_CARD));
+		XdiEntity entity = contextNode == null ? null : XdiAbstractEntity.fromContextNode(contextNode);
 
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("Attribute");
@@ -84,7 +82,7 @@ public class XDINinjaProfile extends XDINinjaProfileUI {
 
 		for (XDIAddress address : Dictionary.DICTIONARY) {
 
-			XdiAttribute attribute = entity.getXdiAttribute(address, false);
+			XdiAttribute attribute = entity == null ? null : entity.getXdiAttribute(address, false);
 			Object value = attribute == null ? null : attribute.getLiteralData();
 
 			model.addRow(new Object[] { address.toString(), value });
@@ -109,8 +107,9 @@ public class XDINinjaProfile extends XDINinjaProfileUI {
 			XDIAddress entityAttributeXDIAddress = State.yourCloudNumber.getXDIAddress().concatXDIAddress(attributeXDIAddress);
 			Object literalData = model.getValueAt(i, 1);
 
-			messageAgentToYou.createSetOperation(XDIStatement.fromRelationComponents(entityCardAttributeXDIAddress, XDIDictionaryConstants.XDI_ADD_REF, entityAttributeXDIAddress));
-			messageAgentToYou.createSetOperation(XDIStatement.fromLiteralComponents(entityAttributeXDIAddress, literalData));
+			//			messageAgentToYou.createSetOperation(XDIStatement.fromRelationComponents(entityCardAttributeXDIAddress, XDIDictionaryConstants.XDI_ADD_REF, entityAttributeXDIAddress));
+			//			messageAgentToYou.createSetOperation(XDIStatement.fromLiteralComponents(entityAttributeXDIAddress, literalData));
+			messageAgentToYou.createSetOperation(XDIStatement.fromLiteralComponents(entityCardAttributeXDIAddress, literalData));
 		}
 
 		Xdi.signMessage(messageAgentToYou);
@@ -132,9 +131,8 @@ public class XDINinjaProfile extends XDINinjaProfileUI {
 		Xdi.signMessage(messageAgentToYou);
 		MessagingResponse response = Xdi.sendMessage(messageAgentToYou);
 
-		ContextNode contextNode = response.getResultGraph().getDeepContextNode(otherCloudNumber.getXDIAddress());
-		if (contextNode == null) throw new RuntimeException("No profile received.");
-		XdiEntity entity = XdiAbstractEntity.fromContextNode(contextNode);
+		ContextNode contextNode = response.getResultGraph().getDeepContextNode(otherCloudNumber.getXDIAddress().concatXDIAddress(XDI_ADD_CARD));
+		XdiEntity entity = contextNode == null ? null : XdiAbstractEntity.fromContextNode(contextNode);
 
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("Attribute");
@@ -142,7 +140,7 @@ public class XDINinjaProfile extends XDINinjaProfileUI {
 
 		for (XDIAddress address : Dictionary.DICTIONARY) {
 
-			XdiAttribute attribute = entity.getXdiAttribute(address, false);
+			XdiAttribute attribute = entity == null ? null : entity.getXdiAttribute(address, false);
 			Object value = attribute == null ? null : attribute.getLiteralData();
 
 			model.addRow(new Object[] { address.toString(), value });
