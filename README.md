@@ -22,9 +22,3 @@ Run:
  * [Invite Connection to Profile (Auto)](https://github.com/projectdanube/XDINinja-swing/wiki/Invite-Connection-to-Profile-(Auto))
  * [Request Bi-Directional Chat](https://github.com/projectdanube/XDINinja-swing/wiki/Request-Bi-Directional-Chat)
 
-Source Code of connection requests and approvals:
-
-[XDINinjaConnections.java](https://github.com/projectdanube/XDINinja-swing/blob/master/src/main/java/com/danubetech/xdininja/XDINinjaConnections.java)
- 
- 
- 
