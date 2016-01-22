@@ -1,6 +1,6 @@
 title XDI Ninja! - Invite Connection to Profile (Auto)
 
-note over =alice AGENT,=alice ENDPOINT,=bob ENDPOINT,=bob AGENT: ALICE REQUESTS CONNECTION
+note over =alice AGENT,=alice ENDPOINT,=bob ENDPOINT,=bob AGENT: ALICE INVITES CONNECTION
 
 =alice AGENT -> =alice ENDPOINT: XDI M1
 note right of =alice AGENT
