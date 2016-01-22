@@ -265,36 +265,48 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		XDIDiscoveryResult result = XDIDiscoveryClient.DEFAULT_DISCOVERY_CLIENT.discoverFromRegistry(XDIAddress.create(otherXDINameNumber));
 		CloudNumber otherCloudNumber = result.getCloudNumber();
 
+		// M3: connection request from =alice to =bob
 		Message messageYouToOtherCONNECT = Xdi.createMessageYouToOther(otherCloudNumber, null, ConnectLinkContract.class);
 		messageYouToOtherCONNECT.setParameter(XDIMessagingConstants.XDI_ADD_MESSAGE_PARAMETER_MSG, Boolean.TRUE);
 		Operation operationYouToOtherCONNECT = messageYouToOtherCONNECT.createConnectOperation(XDIBootstrap.SET_LINK_CONTRACT_TEMPLATE_ADDRESS);
 		operationYouToOtherCONNECT.setVariableValue(XDIArc.create("{$set}"), XDIAddressUtil.concatXDIAddresses(otherCloudNumber.getXDIAddress(), XDIAddress.create("#chat$channel")));
+		// END M3
 
+		// M2: create digest link contract for M5
 		Message messageOtherToYouDIGEST = Xdi.createMessageOtherToYou(otherCloudNumber, null, null);
 		Operation operationOtherToYouDIGEST = messageOtherToYouDIGEST.createConnectOperation(XDIBootstrap.MSG_DIGEST_LINK_CONTRACT_TEMPLATE_ADDRESS);
+		// END M2
+
+		// M5: connection request from =bob to =alice
 		Message messageOtherToYouCONNECT = Xdi.createMessageOtherToYou(otherCloudNumber, null, null);
 		messageOtherToYouCONNECT.setParameter(XDIMessagingConstants.XDI_ADD_MESSAGE_PARAMETER_MSG, Boolean.TRUE);
 		Operation operationOtherToYouCONNECT = messageOtherToYouCONNECT.createConnectOperation(XDIBootstrap.SET_LINK_CONTRACT_TEMPLATE_ADDRESS);
 		operationOtherToYouCONNECT.setVariableValue(XDIArc.create("{$set}"), XDIAddressUtil.concatXDIAddresses(State.yourCloudNumber.getXDIAddress(), XDIAddress.create("#chat$channel")));
+		// END M5
 
+		// M2: create digest link contract for M5
 		XDIArc digestLinkContractXDIArc = XdiEntityInstanceUnordered.createXDIArc();
 		XDIAddress digestLinkContractXDIAddress = GenericLinkContract.createGenericLinkContractXDIAddress(State.yourCloudNumber.getXDIAddress(), otherCloudNumber.getXDIAddress(), LinkContractTemplate.getTemplateAuthorityAndId(XDIBootstrap.MSG_DIGEST_LINK_CONTRACT_TEMPLATE_ADDRESS), digestLinkContractXDIArc);
 		messageOtherToYouCONNECT.setLinkContractXDIAddress(digestLinkContractXDIAddress);
-
 		SHADigest digest = new SHABasicDigestCreator().createDigest(messageOtherToYouCONNECT.getContextNode());
 		String digestString = digest.getXdiAttribute().getLiteralDataString();
 		operationOtherToYouDIGEST.setVariableValue(XDIArc.create("{<$digest>}"), digestString);
 		operationOtherToYouDIGEST.setVariableValue(LinkContractInstantiation.XDI_ARC_INSTANCE_VARIABLE, digestLinkContractXDIArc);
+		// END M2
 
+		// M4: connection invitation from =alice to =bob
 		Message messageYouToOtherSEND = Xdi.createMessageYouToOther(otherCloudNumber, null, SendLinkContract.class);
 		messageYouToOtherSEND.createSendOperation(messageOtherToYouCONNECT);
+		// END M4
 
+		// M1: =alice's agent sends M2, M3, and M4
 		Message messageAgentToYouSEND = Xdi.createMessageAgentToYou();
 		messageAgentToYouSEND.createSendOperation(messageOtherToYouDIGEST);
 		messageAgentToYouSEND.createSendOperation(messageYouToOtherCONNECT);
 		messageAgentToYouSEND.createSendOperation(messageYouToOtherSEND);
 		Xdi.signMessage(messageAgentToYouSEND);
 		Xdi.sendMessage(messageAgentToYouSEND);
+		// END M1
 
 		Util.info("Request and invitation have been sent.");
 	}
