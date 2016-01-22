@@ -1,0 +1,102 @@
+title XDI Ninja! - Request Bi-Directional Chat
+
+note over =alice AGENT,=alice ENDPOINT,=bob ENDPOINT,=bob AGENT: ALICE REQUESTS CONNECTION
+
+=alice AGENT -> =alice ENDPOINT: XDI M1
+note right of =alice AGENT
+    M1 / $send : M2
+    M1 / $send : M3
+    M1 / $send : M4
+end note
+note right of =alice ENDPOINT
+    M1 / $send is executed
+    and M2 is sent to =alice
+end note
+note right of =alice ENDPOINT
+    M1 / $send is executed
+    and M3 is sent to =bob
+end note
+note right of =alice ENDPOINT
+    M1 / $send is executed
+    and M4 is sent to =bob
+end note
+
+=alice ENDPOINT -> =alice ENDPOINT: XDI M2
+note right of =alice ENDPOINT
+    M2 / $connect : $msg$digest{$do}
+end note
+note right of =alice ENDPOINT
+    M2 / $connect is executed
+    and LC-1 is instantiated
+    from LCT $msg$digest{$do}
+end note
+
+=alice ENDPOINT -> =bob ENDPOINT: XDI M3
+note right of =alice ENDPOINT
+    M3 / $connect : $set{$do}
+    "connection request"
+end note
+note right of =bob ENDPOINT
+    M3 is deferred in =bob's graph
+    due to LC policy decision
+end note
+
+=alice ENDPOINT -> =bob ENDPOINT: XDI M4
+note right of =alice ENDPOINT
+    M4 / $send : M5
+    "connection invitation"
+end note
+note right of =bob ENDPOINT
+    M4 is deferred in =bob's graph
+    due to LC policy decision
+end note
+
+note over =alice AGENT,=alice ENDPOINT,=bob ENDPOINT,=bob AGENT: BOB APPROVES CONNECTION
+
+=bob AGENT -> =bob ENDPOINT: XDI M6
+note left of =bob AGENT
+    M6 / $send : M3
+    M6 / $send : M4
+    "approval"
+end note
+note right of =bob ENDPOINT
+    M6 / $send is executed
+    and M3 is sent to =bob
+end note
+note right of =bob ENDPOINT
+    M6 / $send is executed
+    and M4 is sent to =bob
+end note
+
+=bob ENDPOINT -> =bob ENDPOINT: XDI M3
+note right of =bob ENDPOINT
+    M3 / $connect : $set{$do}
+    "connection request"
+end note
+note right of =bob ENDPOINT
+    M3 / $connect is executed
+    and LC-2 is instantiated
+    from LCT $set{$do}
+end note
+
+=bob ENDPOINT -> =bob ENDPOINT: XDI M4
+note right of =bob ENDPOINT
+    M4 / $send : M5
+    "connection invitation"
+end note
+note right of =bob ENDPOINT
+    M4 / $send is executed
+    and M5 is sent to =alice
+end note
+
+=bob ENDPOINT -> =alice ENDPOINT: XDI M5
+note left of =bob ENDPOINT
+    M5 / $connect : $set{$do}
+    "connection request"
+end note
+note right of =alice ENDPOINT
+    M5 / $connect is executed
+    and LC-3 is instantiated
+    from LCT $set{$do}
+end note
+
