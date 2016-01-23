@@ -19,7 +19,7 @@
 	
 ## XDI M2 =alice ENDPOINT --> =alice ENDPOINT
 	
-	"create digest link contract LC-1 for M5"
+	"create digest link contract MD-LC-1 for M5"
 	
 ## XDI M3 =alice ENDPOINT --> =bob ENDPOINT
 	
@@ -78,7 +78,7 @@
 	"connection request from =bob to =alice"
 	
 	=bob[$msg]*!:uuid:m-5/$is()/(=alice)
-	=bob[$msg]*!:uuid:m-5/$do/$msg$digest[$do]*!:uuid:lc-1
+	=bob[$msg]*!:uuid:m-5/$do/$msg$digest[$do]*!:uuid:md-lc-1
 	=bob[$msg]*!:uuid:m-5$do/$connect/$set{$do}
 	=bob[$msg]*!:uuid:m-5$connect{$set}/$is/=alice#chat[$msg]
 	
@@ -97,20 +97,20 @@
 	
 # Link Contracts
 	
-## LINK CONTRACT INSTANCE LC-1 created by M2
+## LINK CONTRACT INSTANCE MD-LC-1 created by M2
 	
-	(=alice/=bob)$msg$digest[$do]*!:uuid:lc-1/$is#/$msg$digest{$do}
-	(=alice/=bob)$msg$digest[$do]*!:uuid:lc-1/$all/
-	(=alice/=bob)($msg$digest{$do}$if/$true){$msg}<$digest>/&/"... message digest ..."
+	(=alice/=bob)$msg$digest[$do]*!:uuid:md-lc-1/$is#/$msg$digest{$do}
+	(=alice/=bob)$msg$digest[$do]*!:uuid:md-lc-1/$all/
+	(=alice/=bob)($msg$digest[$do]*!:uuid:md-lc-1$if/$true){$msg}<$digest>/&/"... message digest ..."
 	
-## LINK CONTRACT INSTANCE LC-2 created by M3
+## LINK CONTRACT INSTANCE LC-1 created by M3
 	
 	(=bob/=alice)$set$do/$is#/$set{$do}
 	(=bob/=alice)$set$do/$set/=bob#chat[$msg]
 	(=bob/=alice)($set$do$if$and/$true){$from}/$is/=alice
 	(=bob/=alice)($set$do$if$and/$true){$msg}<$sig><$valid>/&/true
 	
-## LINK CONTRACT INSTANCE LC-3 created by M5
+## LINK CONTRACT INSTANCE LC-2 created by M5
 	
 	(=alice/=bob)$set$do/$is#/$set{$do}
 	(=alice/=bob)$set$do/$set/=alice#chat[$msg]

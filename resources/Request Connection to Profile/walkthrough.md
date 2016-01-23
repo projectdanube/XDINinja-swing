@@ -64,16 +64,16 @@
 	
 ## LINK CONTRACT INSTANCE LC-1 created by M2
 	
-	(=bob/=alice)$get{$do}/$is#/$get{$do}
-	(=bob/=alice)$get{$do}/$get/=bob$card
-	(=bob/=alice)($get{$do}$if$and/$true){$from}/$is/=alice
-	(=bob/=alice)($get{$do}$if$and/$true){$msg}<$sig><$valid>/&/true
+	(=bob/=alice)$get$do/$is#/$get{$do}
+	(=bob/=alice)$get$do/$get/=bob$card
+	(=bob/=alice)($get$do$if$and/$true){$from}/$is/=alice
+	(=bob/=alice)($get$do$if$and/$true){$msg}<$sig><$valid>/&/true
 	
 ## LINK CONTRACT INSTANCE LC-2 created by M2
 	
-	(=bob/=alice)$push{$do}/$is#/$push{$do}
-	(=bob/=alice)$push{$do}/$push/=bob$card
-	(=bob/=alice)$push{$do}/$is()/(=alice)
-	(=bob/=alice)($push{$do}$if$and/$true){$from}/$is/=bob
-	(=bob/=alice)($push{$do}$if$and/$true){$msg}<$sig><$valid>/&/true
+	(=bob/=alice)$push$do/$is#/$push{$do}
+	(=bob/=alice)$push$do/$push/=bob$card
+	(=bob/=alice)$push$do/$is()/(=alice)
+	(=bob/=alice)($push$do$if$and/$true){$from}/$is/=bob
+	(=bob/=alice)($push$do$if$and/$true){$msg}<$sig><$valid>/&/true
 	

@@ -22,7 +22,7 @@ note right of =alice ENDPOINT
 end note
 note right of =alice ENDPOINT
     M2 / $connect is executed
-    and LC-1 is instantiated
+    and MD-LC-1 is instantiated
     from LCT $msg$digest{$do}
 end note
 
@@ -66,11 +66,11 @@ note left of =bob ENDPOINT
 end note
 note right of =alice ENDPOINT
     M4 / $connect is executed
-    and LC-2 is instantiated
+    and LC-1 is instantiated
     from LCT $get{$do}
 end note
 note right of =alice ENDPOINT
     M4 / $connect is executed
-    and LC-3 is instantiated
+    and LC-2 is instantiated
     from LCT $push{$do}
 end note
