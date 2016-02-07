@@ -35,6 +35,8 @@ import xdi2.messaging.response.MessagingResponse;
 
 public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
+	private static final long serialVersionUID = 2001968151587272403L;
+
 	public static final XDIAddress XDI_ADD_CARD = XDIAddress.create("$card");
 
 	public XDINinjaConnections() {
@@ -341,27 +343,27 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 		ContextNode linkContractsContextNode = response.getResultGraph().getDeepContextNode(XDIAddress.create("[$do]"));
 		ContextNode deferredMessagesContextNode = response.getResultGraph().getDeepContextNode(XDIAddress.create("[$msg]"));
-		XdiEntityCollection linkContractsEntityCollection = linkContractsContextNode == null ? null : XdiEntityCollection.fromContextNode(linkContractsContextNode);
-		XdiEntityCollection deferredMessagesEntityCollection = deferredMessagesContextNode == null ? null : XdiEntityCollection.fromContextNode(deferredMessagesContextNode);
+		XdiEntityCollection linkContractsXdiEntityCollection = linkContractsContextNode == null ? null : XdiEntityCollection.fromContextNode(linkContractsContextNode);
+		XdiEntityCollection deferredMessagesXdiEntityCollection = deferredMessagesContextNode == null ? null : XdiEntityCollection.fromContextNode(deferredMessagesContextNode);
 
 		DefaultTableModel linkContractsModel = new DefaultTableModel();
 		DefaultTableModel deferredMessagesModel = new DefaultTableModel();
 		linkContractsModel.addColumn("Link Contract");
 		deferredMessagesModel.addColumn("Deferred Message");
 
-		if (linkContractsEntityCollection != null) {
+		if (linkContractsXdiEntityCollection != null) {
 
-			for (XdiEntity linkContractEntity : Index.getEntityIndexAggregations(linkContractsEntityCollection)) {
+			for (XdiEntity linkContractXdiEntity : Index.getEntityIndexAggregations(linkContractsXdiEntityCollection)) {
 
-				linkContractsModel.addRow(new Object[] { linkContractEntity == null ? null : linkContractEntity });
+				linkContractsModel.addRow(new Object[] { linkContractXdiEntity == null ? null : linkContractXdiEntity });
 			}
 		}
 
-		if (deferredMessagesEntityCollection != null) {
+		if (deferredMessagesXdiEntityCollection != null) {
 
-			for (XdiEntity deferredMessageEntity : Index.getEntityIndexAggregations(deferredMessagesEntityCollection)) {
+			for (XdiEntity deferredMessageXdiEntity : Index.getEntityIndexAggregations(deferredMessagesXdiEntityCollection)) {
 
-				deferredMessagesModel.addRow(new Object[] { deferredMessageEntity == null ? null : deferredMessageEntity });
+				deferredMessagesModel.addRow(new Object[] { deferredMessageXdiEntity == null ? null : deferredMessageXdiEntity });
 			}
 		}
 
