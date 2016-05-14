@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -125,7 +126,7 @@ public class XDINinjaConnectToCloud extends XDINinjaConnectToCloudUI {
 		m.setParameter(XDI_ADD_RETURN_URI, CALLBACK);
 		m.setParameter(XDI_ADD_SHORT, Boolean.TRUE);
 		m.createConnectOperation(XDIBootstrap.ALL_LINK_CONTRACT_TEMPLATE_ADDRESS);
-		String connectRequest = URLEncoder.encode(me.getGraph().toString("XDI/JSON/QUAD"), "UTF-8");
+		String connectRequest = URLEncoder.encode(me.getGraph().toString("XDI/JSON/QUAD"), StandardCharsets.UTF_8);
 
 		StringBuffer requestUri = new StringBuffer();
 		requestUri.append(State.yourXdiConnectEndpointUri);
@@ -205,7 +206,7 @@ public class XDINinjaConnectToCloud extends XDINinjaConnectToCloudUI {
 
 				try {
 
-					agentLinkContract = URLDecoder.decode(responseUri.substring(CALLBACK.length() + "?xdi=".length(), responseUri.indexOf('&')), "UTF-8");
+					agentLinkContract = URLDecoder.decode(responseUri.substring(CALLBACK.length() + "?xdi=".length(), responseUri.indexOf('&')), StandardCharsets.UTF_8);
 					State.agentLinkContract = XDIAddress.create(agentLinkContract);
 				} catch (UnsupportedEncodingException e) {
 

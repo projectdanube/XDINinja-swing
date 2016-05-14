@@ -1,16 +1,17 @@
 package com.danubetech.xdininja;
 
-import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.FlowLayout;
-import javax.swing.*;
+import java.awt.Font;
 
+import javax.swing.ImageIcon;
 /*
  * Created by JFormDesigner on Tue Dec 15 11:37:03 CET 2015
  */
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
