@@ -112,7 +112,7 @@ public class XDINinjaConnectToCloud extends XDINinjaConnectToCloudUI {
 		State.yourXdiConnectEndpointUri = result.getXdiConnectEndpointUri();
 	}
 
-	private static final XDIAddress XDI_ADD_RETURN_URI = XDIAddress.create("<#return><$uri>");
+	private static final XDIAddress XDI_ADD_RETURN_URI = XDIAddress.create("<$return><$uri>");
 	private static final XDIAddress XDI_ADD_SHORT = XDIAddress.create("<#short>");
 	private static final String CALLBACK = "http://127.0.0.1/jfx-callback";
 
@@ -126,7 +126,7 @@ public class XDINinjaConnectToCloud extends XDINinjaConnectToCloudUI {
 		m.setParameter(XDI_ADD_RETURN_URI, CALLBACK);
 		m.setParameter(XDI_ADD_SHORT, Boolean.TRUE);
 		m.createConnectOperation(XDIBootstrap.ALL_LINK_CONTRACT_TEMPLATE_ADDRESS);
-		String connectRequest = URLEncoder.encode(me.getGraph().toString("XDI/JSON/QUAD"), StandardCharsets.UTF_8);
+		String connectRequest = URLEncoder.encode(me.getGraph().toString("XDI/JSON/QUAD"), "UTF-8");
 
 		StringBuffer requestUri = new StringBuffer();
 		requestUri.append(State.yourXdiConnectEndpointUri);
@@ -206,7 +206,7 @@ public class XDINinjaConnectToCloud extends XDINinjaConnectToCloudUI {
 
 				try {
 
-					agentLinkContract = URLDecoder.decode(responseUri.substring(CALLBACK.length() + "?xdi=".length(), responseUri.indexOf('&')), StandardCharsets.UTF_8);
+					agentLinkContract = URLDecoder.decode(responseUri.substring(CALLBACK.length() + "?xdi=".length(), responseUri.indexOf('&')), "UTF-8");
 					State.agentLinkContract = XDIAddress.create(agentLinkContract);
 				} catch (UnsupportedEncodingException e) {
 
