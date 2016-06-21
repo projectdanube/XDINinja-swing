@@ -173,7 +173,7 @@ public class XDINinjaWebSocket extends XDINinjaWebSocketUI implements Callback {
 		Message messageAgentToYouSEND = Xdi.createMessageAgentToYou();
 		messageAgentToYouSEND.createSendOperation(messageYouToOtherSET);
 		Xdi.signMessage(messageAgentToYouSEND);
-		Xdi.sendMessage(messageAgentToYouSEND);
+		Xdi.sendMessageToYou(messageAgentToYouSEND);
 
 		Util.info("Chat has been sent.");
 	}

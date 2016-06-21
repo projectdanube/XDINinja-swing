@@ -199,7 +199,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		Message messageAgentToYouSEND = Xdi.createMessageAgentToYou();
 		messageAgentToYouSEND.createSendOperation(messageYouToOtherCONNECT);
 		Xdi.signMessage(messageAgentToYouSEND);
-		Xdi.sendMessage(messageAgentToYouSEND);
+		Xdi.sendMessageToYou(messageAgentToYouSEND);
 		// END M1
 
 		Util.info("Request has been sent.");
@@ -229,7 +229,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		Message messageAgentToYouSEND = Xdi.createMessageAgentToYou();
 		messageAgentToYouSEND.createSendOperation(messageYouToOtherSEND);
 		Xdi.signMessage(messageAgentToYouSEND);
-		Xdi.sendMessage(messageAgentToYouSEND);
+		Xdi.sendMessageToYou(messageAgentToYouSEND);
 		// END M1
 
 		Util.info("Invitation has been sent.");
@@ -275,7 +275,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		messageAgentToYouSEND.createSendOperation(messageOtherToYouDIGEST);
 		messageAgentToYouSEND.createSendOperation(messageYouToOtherSEND);
 		Xdi.signMessage(messageAgentToYouSEND);
-		Xdi.sendMessage(messageAgentToYouSEND);
+		Xdi.sendMessageToYou(messageAgentToYouSEND);
 		// END M1
 
 		Util.info("Invitation has been sent.");
@@ -327,7 +327,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		messageAgentToYouSEND.createSendOperation(messageYouToOtherCONNECT);
 		messageAgentToYouSEND.createSendOperation(messageYouToOtherSEND);
 		Xdi.signMessage(messageAgentToYouSEND);
-		Xdi.sendMessage(messageAgentToYouSEND);
+		Xdi.sendMessageToYou(messageAgentToYouSEND);
 		// END M1
 
 		Util.info("Request and invitation have been sent.");
@@ -339,7 +339,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		messageAgentToYou.createGetOperation(XDIAddress.create("[$do]"));
 		messageAgentToYou.createGetOperation(XDIAddress.create("[$msg]"));
 		Xdi.signMessage(messageAgentToYou);
-		MessagingResponse response = Xdi.sendMessage(messageAgentToYou);
+		MessagingResponse response = Xdi.sendMessageToYou(messageAgentToYou);
 
 		ContextNode linkContractsContextNode = response.getResultGraph().getDeepContextNode(XDIAddress.create("[$do]"));
 		ContextNode deferredMessagesContextNode = response.getResultGraph().getDeepContextNode(XDIAddress.create("[$msg]"));
@@ -389,7 +389,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		}
 
 		Xdi.signMessage(messageAgentToYou);
-		Xdi.sendMessage(messageAgentToYou);
+		Xdi.sendMessageToYou(messageAgentToYou);
 
 		Util.info("All link contracts and deferred messages deleted.");
 	}
@@ -401,7 +401,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
 		messageAgentToYou.createDelOperation(linkContractXdiEntity.getXDIAddress());
 		Xdi.signMessage(messageAgentToYou);
-		Xdi.sendMessage(messageAgentToYou);
+		Xdi.sendMessageToYou(messageAgentToYou);
 
 		Util.info("Link contract " + linkContractXdiEntity + " deleted.");
 	}
@@ -440,7 +440,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
 		messageAgentToYou.createDelOperation(deferredMessageXdiEntity.getXDIAddress());
 		Xdi.signMessage(messageAgentToYou);
-		Xdi.sendMessage(messageAgentToYou);
+		Xdi.sendMessageToYou(messageAgentToYou);
 
 		Util.info("Deferred message " + deferredMessageXdiEntity + " deleted.");
 	}
@@ -493,7 +493,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 		messageAgentToYou.createSendOperation(deferredMessage);
 		messageAgentToYou.createDelOperation(deferredMessageXdiEntity.getXDIAddress());
 		Xdi.signMessage(messageAgentToYou);
-		Xdi.sendMessage(messageAgentToYou);
+		Xdi.sendMessageToYou(messageAgentToYou);
 
 		Util.info("Deferred message " + deferredMessageXdiEntity + " approved.");
 	}

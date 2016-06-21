@@ -71,7 +71,7 @@ public class XDINinjaProfile extends XDINinjaProfileUI {
 		Operation operationAgentToYou = messageAgentToYou.createGetOperation(State.yourCloudNumber.getXDIAddress().concatXDIAddress(XDI_ADD_CARD));
 		operationAgentToYou.setParameter(XDIMessagingConstants.XDI_ADD_OPERATION_PARAMETER_DEREF, Boolean.TRUE);
 		Xdi.signMessage(messageAgentToYou);
-		MessagingResponse response = Xdi.sendMessage(messageAgentToYou);
+		MessagingResponse response = Xdi.sendMessageToYou(messageAgentToYou);
 
 		ContextNode contextNode = response.getResultGraph().getDeepContextNode(State.yourCloudNumber.getXDIAddress().concatXDIAddress(XDI_ADD_CARD));
 		XdiEntity entity = contextNode == null ? null : XdiAbstractEntity.fromContextNode(contextNode);
@@ -113,7 +113,7 @@ public class XDINinjaProfile extends XDINinjaProfileUI {
 		}
 
 		Xdi.signMessage(messageAgentToYou);
-		Xdi.sendMessage(messageAgentToYou);
+		Xdi.sendMessageToYou(messageAgentToYou);
 
 		Util.info("Profile saved.");
 	}
@@ -129,7 +129,7 @@ public class XDINinjaProfile extends XDINinjaProfileUI {
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
 		messageAgentToYou.createSendOperation(messageYouToOther);
 		Xdi.signMessage(messageAgentToYou);
-		MessagingResponse response = Xdi.sendMessage(messageAgentToYou);
+		MessagingResponse response = Xdi.sendMessageToYou(messageAgentToYou);
 
 		ContextNode contextNode = response.getResultGraph().getDeepContextNode(otherCloudNumber.getXDIAddress().concatXDIAddress(XDI_ADD_CARD));
 		XdiEntity entity = contextNode == null ? null : XdiAbstractEntity.fromContextNode(contextNode);

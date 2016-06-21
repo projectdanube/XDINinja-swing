@@ -100,7 +100,7 @@ public class Xdi {
 		}
 	}
 
-	public static MessagingResponse sendMessage(Message message) {
+	public static MessagingResponse sendMessageToYou(Message message) {
 
 		XDIHttpClient client = null;
 
