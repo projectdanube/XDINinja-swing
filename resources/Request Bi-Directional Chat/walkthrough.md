@@ -2,8 +2,8 @@
 	
 ## XDI M1 =alice AGENT --> =alice ENDPOINT
 	
-	*!:cid-1:aa[$msg]*!:uuid:m-1/$is()/(=alice)
-	*!:cid-1:aa[$msg]*!:uuid:m-1/$do/(=alice/*!:cid-1:aa)$do
+	*!:cid-1:aa[$msg]*!:uuid:m-1/$to/(=alice)
+	*!:cid-1:aa[$msg]*!:uuid:m-1/$contract/(=alice/*!:cid-1:aa)$contract
 	(*!:cid-1:aa[$msg]*!:uuid:m-1$do/$send)....
 	(*!:cid-1:aa[$msg]*!:uuid:m-1$do/$send).... see below XDI M2
 	(*!:cid-1:aa[$msg]*!:uuid:m-1$do/$send)....
@@ -25,17 +25,17 @@
 	
 	"connection request from =alice to =bob"
 	
-	=alice[$msg]*!:uuid:m-3/$is()/(=bob)
-	=alice[$msg]*!:uuid:m-3/$do/(=bob/$connect)$do
-	=alice[$msg]*!:uuid:m-3$do/$connect/$set{$do}
+	=alice[$msg]*!:uuid:m-3/$to/(=bob)
+	=alice[$msg]*!:uuid:m-3/$contract/(=bob/$connect)$contract
+	=alice[$msg]*!:uuid:m-3$do/$connect/$set{$contract}
 	=alice[$msg]*!:uuid:m-3$connect{$set}/$is/=bob#chat[$msg]
 	
 ## XDI M4 =alice ENDPOINT --> =bob ENDPOINT
 	
 	"connection invitation from =alice to =bob"
 	
-	=alice[$msg]*!:uuid:m-4/$is()/(=bob)
-	=alice[$msg]*!:uuid:m-4/$do/(=bob/$send)$do
+	=alice[$msg]*!:uuid:m-4/$to/(=bob)
+	=alice[$msg]*!:uuid:m-4/$contract/(=bob/$send)$contract
 	(=alice[$msg]*!:uuid:m-4$do/$send)....
 	(=alice[$msg]*!:uuid:m-4$do/$send).... see below XDI M5
 	(=alice[$msg]*!:uuid:m-4$do/$send)....
@@ -57,8 +57,8 @@
 	note: M3 and M4 are re-sent by =bob AGENT to =bob ENDPOINT
 	note: the LC of the outer message M6 "overrides" the LCs of the nested messages M3 and M4
 	
-	*!:cid-1:ba[$msg]*!:uuid:m-6/$is()/(=bob)
-	*!:cid-1:ba[$msg]*!:uuid:m-6/$do/(=bob/*!:cid-1:ba)$do
+	*!:cid-1:ba[$msg]*!:uuid:m-6/$to/(=bob)
+	*!:cid-1:ba[$msg]*!:uuid:m-6/$contract/(=bob/*!:cid-1:ba)$contract
 	(*!:cid-1:ba[$msg]*!:uuid:m-6$do/$send)....
 	(*!:cid-1:ba[$msg]*!:uuid:m-6$do/$send).... see above XDI M3
 	(*!:cid-1:ba[$msg]*!:uuid:m-6$do/$send)....
@@ -77,43 +77,43 @@
 	
 	"connection request from =bob to =alice"
 	
-	=bob[$msg]*!:uuid:m-5/$is()/(=alice)
-	=bob[$msg]*!:uuid:m-5/$do/$msg$digest[$do]*!:uuid:md-lc-1
-	=bob[$msg]*!:uuid:m-5$do/$connect/$set{$do}
+	=bob[$msg]*!:uuid:m-5/$to/(=alice)
+	=bob[$msg]*!:uuid:m-5/$do/$msg$digest[$contract]*!:uuid:md-lc-1
+	=bob[$msg]*!:uuid:m-5$do/$connect/$set{$contract}
 	=bob[$msg]*!:uuid:m-5$connect{$set}/$is/=alice#chat[$msg]
 	
 # Link Contract Templates
 	
-## STANDARD LINK CONTRACT TEMPLATE $msg$digest{$do}
+## STANDARD LINK CONTRACT TEMPLATE $msg$digest{$contract}
 	
-	$msg$digest{$do}/$all/
-	($msg$digest{$do}$if/$true){{$msg}}<$digest>/{&}/{<$digest>}
+	$msg$digest{$contract}/$all/
+	($msg$digest{$contract}$if/$true){{$msg}}<$digest>/{&}/{<$digest>}
 	
-## STANDARD LINK CONTRACT TEMPLATE $set{$do}
+## STANDARD LINK CONTRACT TEMPLATE $set{$contract}
 	
-	$set{$do}/$set/{$set}
-	($set{$do}$if$and/$true){{$from}}/$is/{$from}
-	($set{$do}$if$and/$true){{$msg}}<$sig><$valid>/&/true
+	$set{$contract}/$set/{$set}
+	($set{$contract}$if$and/$true){{$from}}/$is/{$from}
+	($set{$contract}$if$and/$true){{$msg}}<$sig><$valid>/&/true
 	
 # Link Contracts
 	
 ## LINK CONTRACT INSTANCE MD-LC-1 created by M2
 	
-	(=alice/=bob)$msg$digest[$do]*!:uuid:md-lc-1/$is#/$msg$digest{$do}
-	(=alice/=bob)$msg$digest[$do]*!:uuid:md-lc-1/$all/
-	(=alice/=bob)($msg$digest[$do]*!:uuid:md-lc-1$if/$true){$msg}<$digest>/&/"... message digest ..."
+	(=alice/=bob)$msg$digest[$contract]*!:uuid:md-lc-1/$is#/$msg$digest{$contract}
+	(=alice/=bob)$msg$digest[$contract]*!:uuid:md-lc-1/$all/
+	(=alice/=bob)($msg$digest[$contract]*!:uuid:md-lc-1$if/$true){$msg}<$digest>/&/"... message digest ..."
 	
 ## LINK CONTRACT INSTANCE LC-1 created by M3
 	
-	(=bob/=alice)$set$do/$is#/$set{$do}
+	(=bob/=alice)$set$do/$is#/$set{$contract}
 	(=bob/=alice)$set$do/$set/=bob#chat[$msg]
-	(=bob/=alice)($set$do$if$and/$true){$from}/$is/=alice
-	(=bob/=alice)($set$do$if$and/$true){$msg}<$sig><$valid>/&/true
+	(=bob/=alice)($set$contract$if$and/$true){$from}/$is/=alice
+	(=bob/=alice)($set$contract$if$and/$true){$msg}<$sig><$valid>/&/true
 	
 ## LINK CONTRACT INSTANCE LC-2 created by M5
 	
-	(=alice/=bob)$set$do/$is#/$set{$do}
+	(=alice/=bob)$set$do/$is#/$set{$contract}
 	(=alice/=bob)$set$do/$set/=alice#chat[$msg]
-	(=alice/=bob)($set$do$if$and/$true){$from}/$is/=bob
-	(=alice/=bob)($set$do$if$and/$true){$msg}<$sig><$valid>/&/true
+	(=alice/=bob)($set$contract$if$and/$true){$from}/$is/=bob
+	(=alice/=bob)($set$contract$if$and/$true){$msg}<$sig><$valid>/&/true
 	

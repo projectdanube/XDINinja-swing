@@ -23,17 +23,17 @@ end note
 
 =alice ENDPOINT -> =alice ENDPOINT: XDI M2
 note right of =alice ENDPOINT
-    M2 / $connect : $msg$digest{$do}
+    M2 / $connect : $msg$digest{$contract}
 end note
 note right of =alice ENDPOINT
     M2 / $connect is executed
     and MD-LC-1 is instantiated
-    from LCT $msg$digest{$do}
+    from LCT $msg$digest{$contract}
 end note
 
 =alice ENDPOINT -> =bob ENDPOINT: XDI M3
 note right of =alice ENDPOINT
-    M3 / $connect : $set{$do}
+    M3 / $connect : $set{$contract}
     "connection request"
 end note
 note right of =bob ENDPOINT
@@ -70,13 +70,13 @@ end note
 
 =bob ENDPOINT -> =bob ENDPOINT: XDI M3
 note right of =bob ENDPOINT
-    M3 / $connect : $set{$do}
+    M3 / $connect : $set{$contract}
     "connection request"
 end note
 note right of =bob ENDPOINT
     M3 / $connect is executed
     and LC-1 is instantiated
-    from LCT $set{$do}
+    from LCT $set{$contract}
 end note
 
 =bob ENDPOINT -> =bob ENDPOINT: XDI M4
@@ -91,12 +91,12 @@ end note
 
 =bob ENDPOINT -> =alice ENDPOINT: XDI M5
 note left of =bob ENDPOINT
-    M5 / $connect : $set{$do}
+    M5 / $connect : $set{$contract}
     "connection request"
 end note
 note right of =alice ENDPOINT
     M5 / $connect is executed
     and LC-2 is instantiated
-    from LCT $set{$do}
+    from LCT $set{$contract}
 end note
 

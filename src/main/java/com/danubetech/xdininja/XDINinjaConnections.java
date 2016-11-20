@@ -11,7 +11,7 @@ import xdi2.core.bootstrap.XDIBootstrap;
 import xdi2.core.features.digests.SHADigest;
 import xdi2.core.features.index.Index;
 import xdi2.core.features.linkcontracts.instance.ConnectLinkContract;
-import xdi2.core.features.linkcontracts.instance.GenericLinkContract;
+import xdi2.core.features.linkcontracts.instance.RelationshipLinkContract;
 import xdi2.core.features.linkcontracts.instance.SendLinkContract;
 import xdi2.core.features.linkcontracts.instantiation.LinkContractInstantiation;
 import xdi2.core.features.linkcontracts.template.LinkContractTemplate;
@@ -257,12 +257,12 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 		// M2: create digest link contract for M4
 		XDIArc digestLinkContractXDIArc = XdiEntityInstanceUnordered.createXDIArc();
-		XDIAddress digestLinkContractXDIAddress = GenericLinkContract.createGenericLinkContractXDIAddress(State.yourCloudNumber.getXDIAddress(), otherCloudNumber.getXDIAddress(), LinkContractTemplate.getTemplateAuthorityAndId(XDIBootstrap.MSG_DIGEST_LINK_CONTRACT_TEMPLATE_ADDRESS), digestLinkContractXDIArc);
+		XDIAddress digestLinkContractXDIAddress = RelationshipLinkContract.createRelationshipLinkContractXDIAddress(State.yourCloudNumber.getXDIAddress(), otherCloudNumber.getXDIAddress(), LinkContractTemplate.getTemplateAuthorityAndId(XDIBootstrap.MSG_DIGEST_LINK_CONTRACT_TEMPLATE_ADDRESS), digestLinkContractXDIArc);
 		messageOtherToYouCONNECT.setLinkContractXDIAddress(digestLinkContractXDIAddress);
 		SHADigest digest = new SHABasicDigestCreator().createDigest(messageOtherToYouCONNECT.getContextNode());
 		String digestString = digest.getXdiAttribute().getLiteralDataString();
 		operationOtherToYouDIGEST.setVariableValue(XDIArc.create("{<$digest>}"), digestString);
-		operationOtherToYouDIGEST.setVariableValue(LinkContractInstantiation.XDI_ARC_INSTANCE_VARIABLE, digestLinkContractXDIArc);
+		operationOtherToYouDIGEST.setVariableValue(LinkContractInstantiation.XDI_ARC_V_INSTANCE, digestLinkContractXDIArc);
 		// END M2
 
 		// M3: connection invitation from =alice to =bob
@@ -308,12 +308,12 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 
 		// M2: create digest link contract for M5
 		XDIArc digestLinkContractXDIArc = XdiEntityInstanceUnordered.createXDIArc();
-		XDIAddress digestLinkContractXDIAddress = GenericLinkContract.createGenericLinkContractXDIAddress(State.yourCloudNumber.getXDIAddress(), otherCloudNumber.getXDIAddress(), LinkContractTemplate.getTemplateAuthorityAndId(XDIBootstrap.MSG_DIGEST_LINK_CONTRACT_TEMPLATE_ADDRESS), digestLinkContractXDIArc);
+		XDIAddress digestLinkContractXDIAddress = RelationshipLinkContract.createRelationshipLinkContractXDIAddress(State.yourCloudNumber.getXDIAddress(), otherCloudNumber.getXDIAddress(), LinkContractTemplate.getTemplateAuthorityAndId(XDIBootstrap.MSG_DIGEST_LINK_CONTRACT_TEMPLATE_ADDRESS), digestLinkContractXDIArc);
 		messageOtherToYouCONNECT.setLinkContractXDIAddress(digestLinkContractXDIAddress);
 		SHADigest digest = new SHABasicDigestCreator().createDigest(messageOtherToYouCONNECT.getContextNode());
 		String digestString = digest.getXdiAttribute().getLiteralDataString();
 		operationOtherToYouDIGEST.setVariableValue(XDIArc.create("{<$digest>}"), digestString);
-		operationOtherToYouDIGEST.setVariableValue(LinkContractInstantiation.XDI_ARC_INSTANCE_VARIABLE, digestLinkContractXDIArc);
+		operationOtherToYouDIGEST.setVariableValue(LinkContractInstantiation.XDI_ARC_V_INSTANCE, digestLinkContractXDIArc);
 		// END M2
 
 		// M4: connection invitation from =alice to =bob
@@ -336,12 +336,12 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 	private void load() throws Exception {
 
 		Message messageAgentToYou = Xdi.createMessageAgentToYou();
-		messageAgentToYou.createGetOperation(XDIAddress.create("[$do]"));
+		messageAgentToYou.createGetOperation(XDIAddress.create("[$contract]"));
 		messageAgentToYou.createGetOperation(XDIAddress.create("[$msg]"));
 		Xdi.signMessage(messageAgentToYou);
 		MessagingResponse response = Xdi.sendMessageToYou(messageAgentToYou);
 
-		ContextNode linkContractsContextNode = response.getResultGraph().getDeepContextNode(XDIAddress.create("[$do]"));
+		ContextNode linkContractsContextNode = response.getResultGraph().getDeepContextNode(XDIAddress.create("[$contract]"));
 		ContextNode deferredMessagesContextNode = response.getResultGraph().getDeepContextNode(XDIAddress.create("[$msg]"));
 		XdiEntityCollection linkContractsXdiEntityCollection = linkContractsContextNode == null ? null : XdiEntityCollection.fromContextNode(linkContractsContextNode);
 		XdiEntityCollection deferredMessagesXdiEntityCollection = deferredMessagesContextNode == null ? null : XdiEntityCollection.fromContextNode(deferredMessagesContextNode);
@@ -418,7 +418,7 @@ public class XDINinjaConnections extends XDINinjaConnectionsUI {
 	private void interpretLinkContract() throws Exception {
 
 		XdiEntity linkContractXdiEntity = (XdiEntity) linkContractsTable.getModel().getValueAt(linkContractsTable.getSelectedRow(), 0);
-		GenericLinkContract linkContract = GenericLinkContract.fromXdiEntity(linkContractXdiEntity);
+		RelationshipLinkContract linkContract = RelationshipLinkContract.fromXdiEntity(linkContractXdiEntity);
 
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("Link contract: " + linkContract.getXdiEntity().getXDIAddress() + "\n");

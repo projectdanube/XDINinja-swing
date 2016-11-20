@@ -8,7 +8,8 @@ import xdi2.client.exceptions.Xdi2ClientException;
 import xdi2.client.impl.http.XDIHttpClient;
 import xdi2.client.impl.websocket.XDIWebSocketClient;
 import xdi2.core.bootstrap.XDIBootstrap;
-import xdi2.core.features.linkcontracts.instance.GenericLinkContract;
+import xdi2.core.features.linkcontracts.instance.RelationshipLinkContract;
+import xdi2.core.features.linkcontracts.template.LinkContractTemplate;
 import xdi2.core.features.linkcontracts.instance.LinkContract;
 import xdi2.core.security.ec25519.signature.create.EC25519StaticPrivateKeySignatureCreator;
 import xdi2.core.syntax.CloudNumber;
@@ -23,14 +24,14 @@ public class Xdi {
 
 		if (! State.ready()) throw new IllegalStateException("Not connected to cloud.");
 
-		return GenericLinkContract.createGenericLinkContractXDIAddress(authorizingAuthority, requestingAuthority, XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE.getTemplateAuthorityAndId());
+		return RelationshipLinkContract.createRelationshipLinkContractXDIAddress(authorizingAuthority, requestingAuthority, LinkContractTemplate.fromXdiEntitySingletonVariable(XDIBootstrap.GET_LINK_CONTRACT_TEMPLATE).getTemplateAuthorityAndId());
 	}
 
 	public static XDIAddress chatLinkContractAddress(XDIAddress authorizingAuthority, XDIAddress requestingAuthority) {
 
 		if (! State.ready()) throw new IllegalStateException("Not connected to cloud.");
 
-		return GenericLinkContract.createGenericLinkContractXDIAddress(authorizingAuthority, requestingAuthority, XDIBootstrap.SET_LINK_CONTRACT_TEMPLATE.getTemplateAuthorityAndId());
+		return RelationshipLinkContract.createRelationshipLinkContractXDIAddress(authorizingAuthority, requestingAuthority, LinkContractTemplate.fromXdiEntitySingletonVariable(XDIBootstrap.SET_LINK_CONTRACT_TEMPLATE).getTemplateAuthorityAndId());
 	}
 
 	public static Message createMessageYouToOther(CloudNumber otherCloudNumber, XDIAddress linkContractXDIAddress, Class<? extends LinkContract> linkContractClass) {
