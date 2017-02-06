@@ -87,13 +87,13 @@
 ## STANDARD LINK CONTRACT TEMPLATE $msg$digest{$contract}
 	
 	$msg$digest{$contract}/$all/
-	($msg$digest{$contract}$if/$true){{$msg}}<$digest>/{&}/{<$digest>}
+	($msg$digest{$contract}$do$if/$true){{$msg}}<$digest>/{&}/{<$digest>}
 	
 ## STANDARD LINK CONTRACT TEMPLATE $set{$contract}
 	
 	$set{$contract}/$set/{$set}
-	($set{$contract}$if$and/$true){{$from}}/$is/{$from}
-	($set{$contract}$if$and/$true){{$msg}}<$sig><$valid>/&/true
+	($set{$contract}$do$if$and/$true){{$from}}/$is/{$from}
+	($set{$contract}$do$if$and/$true){{$msg}}<$sig><$valid>/&/true
 	
 # Link Contracts
 	
@@ -107,13 +107,13 @@
 	
 	(=bob/=alice)$set$do/$is#/$set{$contract}
 	(=bob/=alice)$set$do/$set/=bob#chat[$msg]
-	(=bob/=alice)($set$contract$if$and/$true){$from}/$is/=alice
-	(=bob/=alice)($set$contract$if$and/$true){$msg}<$sig><$valid>/&/true
+	(=bob/=alice)($set$contract$do$if$and/$true){$from}/$is/=alice
+	(=bob/=alice)($set$contract$do$if$and/$true){$msg}<$sig><$valid>/&/true
 	
 ## LINK CONTRACT INSTANCE LC-2 created by M5
 	
 	(=alice/=bob)$set$do/$is#/$set{$contract}
 	(=alice/=bob)$set$do/$set/=alice#chat[$msg]
-	(=alice/=bob)($set$contract$if$and/$true){$from}/$is/=bob
-	(=alice/=bob)($set$contract$if$and/$true){$msg}<$sig><$valid>/&/true
+	(=alice/=bob)($set$contract$do$if$and/$true){$from}/$is/=bob
+	(=alice/=bob)($set$contract$do$if$and/$true){$msg}<$sig><$valid>/&/true
 	

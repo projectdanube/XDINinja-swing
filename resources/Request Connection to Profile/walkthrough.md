@@ -50,15 +50,15 @@
 ## STANDARD LINK CONTRACT TEMPLATE $get{$contract}
 	
 	$get{$contract}/$get/{$get}
-	($get{$contract}$if$and/$true){{$from}}/$is/{$from}
-	($get{$contract}$if$and/$true){{$msg}}<$sig><$valid>/&/true
+	($get{$contract}$do$if$and/$true){{$from}}/$is/{$from}
+	($get{$contract}$do$if$and/$true){{$msg}}<$sig><$valid>/&/true
 	
 ## STANDARD LINK CONTRACT TEMPLATE $push{$contract}
 	
 	$push{$contract}/$push/{$push}
 	$push{$contract}/$to/{($from)}
-	($push{$contract}$if$and/$true){{$from}}/$is/{$to}
-	($push{$contract}$if$and/$true){{$msg}}<$sig><$valid>/&/true
+	($push{$contract}$do$if$and/$true){{$from}}/$is/{$to}
+	($push{$contract}$do$if$and/$true){{$msg}}<$sig><$valid>/&/true
 	
 # Link Contracts
 	
@@ -66,14 +66,14 @@
 	
 	(=bob/=alice)$get$do/$is#/$get{$contract}
 	(=bob/=alice)$get$do/$get/=bob$card
-	(=bob/=alice)($get$contract$if$and/$true){$from}/$is/=alice
-	(=bob/=alice)($get$contract$if$and/$true){$msg}<$sig><$valid>/&/true
+	(=bob/=alice)($get$contract$do$if$and/$true){$from}/$is/=alice
+	(=bob/=alice)($get$contract$do$if$and/$true){$msg}<$sig><$valid>/&/true
 	
 ## LINK CONTRACT INSTANCE LC-2 created by M2
 	
 	(=bob/=alice)$push$do/$is#/$push{$contract}
 	(=bob/=alice)$push$do/$push/=bob$card
 	(=bob/=alice)$push$do/$to/(=alice)
-	(=bob/=alice)($push$contract$if$and/$true){$from}/$is/=bob
-	(=bob/=alice)($push$contract$if$and/$true){$msg}<$sig><$valid>/&/true
+	(=bob/=alice)($push$contract$do$if$and/$true){$from}/$is/=bob
+	(=bob/=alice)($push$contract$do$if$and/$true){$msg}<$sig><$valid>/&/true
 	
